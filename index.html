@@ -1873,8 +1873,89 @@
 
       <!-- Banner Status Garansi Nonton Di Tempat -->
       <div id="tab-info-banner" class="tab-status-banner">
-        <span id="tab-info-title">🔒 GARANSI TONTON DI TEMPAT: Embed Resmi Terkunci di Halaman Web</span>
-        <span class="tag-pill cyan">AMAN & RESMI</span>
+        <span id="tab-info-title">🔒 GARANSI TONTON DI TEMPAT: Video YouTube Asli Sesuai Pilihan (Bukan Duplikasi)</span>
+        <span class="tag-pill cyan">100% YOUTUBE RESMI</span>
+      </div>
+
+      <!-- MASTER CINEMA PLAYER (PANGGUNG BIOSKOP YOUTUBE REAL-TIME TANPA DUPLIKASI) -->
+      <div id="master-cinema-section" style="background: linear-gradient(135deg, #0c181f 0%, #15252e 100%); border: 2px solid var(--neon-cyan); border-radius: 14px; padding: 14px; margin-bottom: 18px; box-shadow: 0 0 24px rgba(0, 240, 255, 0.2);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid rgba(0,240,255,0.25); padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">🎬</span>
+            <div>
+              <h3 style="font-size:14px; font-weight:900; color:#fff; margin:0; letter-spacing:0.5px;">
+                BIOSKOP STREAM YOUTUBE TEGUH <span style="font-size:11px; color:var(--neon-cyan); font-weight:700;">(Real-Time & Bebas Duplikasi)</span>
+              </h3>
+              <div style="font-size:10px; color:#94a3b8; margin-top:2px;">
+                Semua 148+ video memutar video YouTube asli sesuai judulnya, tanpa kloningan 4 lagu lagi!
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="display:inline-flex; align-items:center; gap:5px; background:rgba(239,68,68,0.2); border:1px solid #ef4444; color:#ef4444; font-size:10px; font-weight:800; padding:3px 8px; border-radius:4px;">
+              <span style="width:6px; height:6px; background:#ef4444; border-radius:50%; display:inline-block;"></span>
+              SEDANG AKTIF
+            </span>
+            <button type="button" onclick="playRandomVideoFromCatalog()" style="background:#1e293b; border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-size:11px; font-weight:800; padding:4px 10px; border-radius:6px; cursor:pointer;">
+              🔀 Putar Acak
+            </button>
+          </div>
+        </div>
+
+        <!-- LAYAR UTAMA PEMUTAR VIDEO 16:9 -->
+        <div class="player-frame-container ratio-16-9" style="border-radius:10px; overflow:hidden; border:1px solid rgba(0,240,255,0.4); background:#000; box-shadow:0 6px 18px rgba(0,0,0,0.6);">
+          <iframe 
+            id="master-cinema-iframe" 
+            src="https://www.youtube.com/embed?listType=search&list=drag+ninja+bore+up+300cc+dyno+test+drag+bike+201m&autoplay=0&rel=0&modestbranding=1" 
+            title="Bioskop Stream YouTube Teguh" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- DETAIL VIDEO YANG SEDANG DIPUTAR & AKSI CEPAT -->
+        <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+          <div style="flex:1; min-width:260px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span id="master-cinema-tag" class="tag-pill cyan">RACING TUNING</span>
+              <span id="master-cinema-sub" style="font-size:10px; color:var(--gold-accent); font-weight:700;">Streaming YouTube Asli (100% Sesuai Judul)</span>
+            </div>
+            <h4 id="master-cinema-title" style="font-size:14px; font-weight:800; color:#fff; line-height:1.3; margin:0;">
+              🏁 Drag Ninja Bore Up 300cc Seting Dyno Test Tembus 12.000 RPM
+            </h4>
+          </div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <button type="button" onclick="addCurrentCinemaToPlaylist()" style="background:#15242b; border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-size:11px; font-weight:800; padding:6px 10px; border-radius:6px; cursor:pointer;">
+              ➕ Playlist
+            </button>
+            <button type="button" onclick="saveCurrentCinemaToFav()" style="background:#1e2418; border:1px solid #22c55e; color:#22c55e; font-size:11px; font-weight:800; padding:6px 10px; border-radius:6px; cursor:pointer;">
+              ⭐ Simpan
+            </button>
+            <button type="button" onclick="playNextVideoFromCatalog()" style="background:linear-gradient(135deg, #00f0ff, #0284c7); border:none; color:#0b1215; font-size:11px; font-weight:900; padding:6px 12px; border-radius:6px; cursor:pointer;">
+              ⏭️ Video Lain
+            </button>
+          </div>
+        </div>
+
+        <!-- KOTAK PENCARIAN FILM BEBAS CEPAT DI DALAM BIOSKOP -->
+        <div style="margin-top:12px; background:#0e171b; border:1px dashed rgba(245,158,11,0.5); border-radius:8px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <div style="font-size:11px; font-weight:800; color:var(--gold-accent); display:flex; align-items:center; gap:6px;">
+            <span>🔍</span>
+            <span>Mau Nonton Film / Video YouTube Lain? Ketik Bebas:</span>
+          </div>
+          <div style="display:flex; gap:6px; flex:1; min-width:240px; justify-content:flex-end;">
+            <input 
+              type="text" 
+              id="cinema-quick-search-input" 
+              placeholder="Contoh: Film Warkop DKI, Drag Herex, Murottal, Drakor..." 
+              style="flex:1; max-width:320px; background:#182830; border:1px solid var(--neon-cyan); border-radius:6px; color:#fff; font-size:11px; padding:6px 10px; outline:none;"
+              onkeydown="if(event.key==='Enter') playCustomFilmNow(this.value)"
+            />
+            <button type="button" onclick="playCustomFilmNow(document.getElementById('cinema-quick-search-input').value)" style="background:var(--gold-accent); color:#0b1215; border:none; border-radius:6px; font-size:11px; font-weight:900; padding:6px 12px; cursor:pointer; white-space:nowrap;">
+              ▶️ Tonton Film
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- GRID VIDEO UTAMA -->
@@ -4963,6 +5044,168 @@
     ]
 };
 
+    // ========================================================================
+    // OTENTIFIKASI EMBED YOUTUBE BEBAS DUPLIKASI (REAL YOUTUBE SEARCH & STREAM)
+    // ========================================================================
+    function getAuthenticVideoUrl(itemOrUrl, optTitle, optCategory) {
+      let rawUrl = typeof itemOrUrl === "string" ? itemOrUrl : (itemOrUrl ? (itemOrUrl.embedUrl || "") : "");
+      let title = (itemOrUrl && itemOrUrl.title) ? itemOrUrl.title : (optTitle || "");
+      let cat = (itemOrUrl && itemOrUrl.category) ? itemOrUrl.category : (optCategory || "");
+
+      // Daftar ID duplikasi dummy yang sebelumnya terulang (Gangnam, Despacito, Rickroll, Lofi, Queen)
+      const dummyRepeatedIds = ["9bZkp7q19f0", "5qap5aO4i9A", "kJQP7kiw5Fk", "dQw4w9WgXcQ", "fJ9rUzIMcZQ", "6718335390845095173"];
+      const isDummy = dummyRepeatedIds.some(function(id) { return rawUrl.includes(id); }) || !rawUrl;
+
+      if (isDummy && title) {
+        // Buat query pencarian YouTube autentik yang 100% pas dengan judul konten
+        let cleanQuery = title.replace(/[\u{1F300}-\u{1F6FF}|\u{2600}-\u{26FF}|\u{2700}-\u{27BF}]/gu, '').replace(/[()"]/g, ' ').trim();
+        if (cat === "drakor") {
+          cleanQuery += " official trailer sub indo";
+        } else if (cat === "india") {
+          cleanQuery += " official movie trailer hindi";
+        } else if (cat === "balap") {
+          cleanQuery += " drag bike 201m";
+        } else if (cat === "mekanik") {
+          cleanQuery += " tutorial bengkel motor";
+        } else if (cat === "santri") {
+          cleanQuery += " santri merdu";
+        } else if (cat === "shorts" || cat === "tiktok") {
+          cleanQuery += " viral";
+        }
+        return "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(cleanQuery) + "&autoplay=1&modestbranding=1&rel=0";
+      }
+
+      return rawUrl;
+    }
+
+    // Inisialisasi Otomatis: Normalisasi seluruh 148+ video agar masing-masing memiliki embed unik asli
+    (function initializeAuthenticVideoDatabase() {
+      const allCatKeys = Object.keys(VIDEO_DATABASE);
+      allCatKeys.forEach(function (cat) {
+        const list = VIDEO_DATABASE[cat] || [];
+        list.forEach(function (item) {
+          item.category = item.category || cat;
+          item.embedUrl = getAuthenticVideoUrl(item.embedUrl, item.title, item.category);
+        });
+      });
+    })();
+
+    // State & Controller Bioskop Master
+    let currentCinemaVideo = {
+      id: "master-init",
+      title: "🏁 Drag Ninja Bore Up 300cc Seting Dyno Test Tembus 12.000 RPM",
+      tag: "RACING TUNING",
+      tagColor: "cyan",
+      category: "balap",
+      embedUrl: "https://www.youtube.com/embed?listType=search&list=drag+ninja+bore+up+300cc+dyno+test+drag+bike+201m&autoplay=1"
+    };
+
+    function playInMasterCinema(videoOrId) {
+      let target = null;
+      if (typeof videoOrId === "string") {
+        const allCatKeys = Object.keys(VIDEO_DATABASE);
+        for (let i = 0; i < allCatKeys.length; i++) {
+          const list = VIDEO_DATABASE[allCatKeys[i]];
+          const found = list.find(function(it) { return it.id === videoOrId; });
+          if (found) { target = found; break; }
+        }
+      } else if (typeof videoOrId === "object") {
+        target = videoOrId;
+      }
+
+      if (!target) return;
+
+      currentCinemaVideo = target;
+      const iframe = document.getElementById("master-cinema-iframe");
+      const titleEl = document.getElementById("master-cinema-title");
+      const tagEl = document.getElementById("master-cinema-tag");
+      const cinemaWrapper = document.getElementById("master-cinema-section");
+
+      const realEmbed = getAuthenticVideoUrl(target);
+
+      if (iframe) {
+        iframe.src = realEmbed;
+      }
+      if (titleEl) {
+        titleEl.innerText = target.title;
+      }
+      if (tagEl) {
+        tagEl.innerText = target.tag || "YOUTUBE STREAM";
+        tagEl.className = "tag-pill " + (target.tagColor || "cyan");
+      }
+
+      if (cinemaWrapper) {
+        cinemaWrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+
+    function playCustomFilmNow(query) {
+      if (!query || !query.trim()) return;
+      const cleanQ = query.trim();
+      let embedUrl = "";
+      if (cleanQ.includes("youtube.com/watch?v=")) {
+        const vidId = cleanQ.split("v=")[1].split("&")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else if (cleanQ.includes("youtu.be/")) {
+        const vidId = cleanQ.split("youtu.be/")[1].split("?")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else if (cleanQ.includes("youtube.com/shorts/")) {
+        const vidId = cleanQ.split("shorts/")[1].split("?")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else {
+        embedUrl = "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(cleanQ) + "&autoplay=1";
+      }
+
+      currentCinemaVideo = {
+        id: "custom-" + Date.now(),
+        title: "🎬 " + cleanQ,
+        tag: "FILM PILIHAN ANDA",
+        tagColor: "gold",
+        category: "film",
+        embedUrl: embedUrl
+      };
+
+      const iframe = document.getElementById("master-cinema-iframe");
+      const titleEl = document.getElementById("master-cinema-title");
+      const tagEl = document.getElementById("master-cinema-tag");
+      const cinemaWrapper = document.getElementById("master-cinema-section");
+
+      if (iframe) iframe.src = embedUrl;
+      if (titleEl) titleEl.innerText = "🎬 " + cleanQ;
+      if (tagEl) {
+        tagEl.innerText = "PILIHAN ANDA";
+        tagEl.className = "tag-pill gold";
+      }
+
+      if (cinemaWrapper) {
+        cinemaWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function playRandomVideoFromCatalog() {
+      const allCatKeys = ["shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india"];
+      const randomCat = allCatKeys[Math.floor(Math.random() * allCatKeys.length)];
+      const list = VIDEO_DATABASE[randomCat] || [];
+      if (list.length > 0) {
+        const randomItem = list[Math.floor(Math.random() * list.length)];
+        playInMasterCinema(randomItem);
+      }
+    }
+
+    function playNextVideoFromCatalog() {
+      playRandomVideoFromCatalog();
+    }
+
+    function addCurrentCinemaToPlaylist() {
+      if (!currentCinemaVideo) return;
+      openAddToPlaylistModal(currentCinemaVideo.id || "c1", currentCinemaVideo.title, currentCinemaVideo.tag, currentCinemaVideo.embedUrl);
+    }
+
+    function saveCurrentCinemaToFav() {
+      if (!currentCinemaVideo) return;
+      toggleBookmark(currentCinemaVideo.id || "c1", currentCinemaVideo.title, currentCinemaVideo.tag, currentCinemaVideo.embedUrl);
+    }
+
     // State Video
     let currentVideoTab = "all";
     let currentSearchQuery = "";
@@ -5386,6 +5629,7 @@
       const isDrama = v.category === "drakor" || v.category === "india";
       const isTikTok = v.category === "tiktok";
       const isShorts = v.category === "shorts" || v.ratio === "9-16";
+      const authenticUrl = getAuthenticVideoUrl(v);
 
       if (isDrama) {
         return `
@@ -5405,6 +5649,14 @@
               <h3 class="video-title">${v.title}</h3>
               <p class="synopsis-text">${v.synopsis || ''}</p>
 
+              <!-- Tombol Putar di Bioskop Utama -->
+              <div style="margin-bottom:8px;">
+                <button type="button" onclick="playInMasterCinema('${v.id}')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:8px 10px; border:none; border-radius:6px; cursor:pointer; box-shadow:0 0 10px rgba(0,240,255,0.25);">
+                  <span>▶️</span>
+                  <span>PUTAR DI BIOSKOP TEGUH</span>
+                </button>
+              </div>
+
               <!-- Tombol Ganda: Keranjang Oranye Afiliasi & Pintu Doraemon Legal -->
               <div class="drama-actions">
                 <a href="${buildShopeeAffiliateUrl(v.affiliateText || v.title, 'keranjang_oranye')}" target="_blank" rel="noopener noreferrer" class="btn-orange-affiliate" title="Beli camilan / merchandise di Shopee">
@@ -5418,8 +5670,8 @@
               </div>
 
               <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; margin-top:8px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.08);">
-                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.officialUrl}', '${v.poster || ''}')">➕ Playlist</span>
-                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.officialUrl}')">⭐ Simpan</span>
+                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}', '${v.poster || ''}')">➕ Playlist</span>
+                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">⭐ Simpan</span>
                 <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
               </div>
             </div>
@@ -5432,7 +5684,7 @@
           <div class="video-card">
             <div class="player-frame-container ratio-9-16">
               <iframe 
-                src="${v.embedUrl}" 
+                src="${authenticUrl}" 
                 title="${v.title}" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 sandbox="allow-scripts allow-same-origin allow-popups"
@@ -5446,11 +5698,20 @@
                 <span style="font-size: 10px; color: var(--neon-cyan); font-weight: 700;">${v.views}</span>
               </div>
               <h3 class="video-title">${v.title}</h3>
+
+              <!-- Tombol Putar di Bioskop Utama -->
+              <div style="margin-top:6px; margin-bottom:8px;">
+                <button type="button" onclick="playInMasterCinema('${v.id}')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:7px 10px; border:none; border-radius:6px; cursor:pointer; box-shadow:0 0 10px rgba(0,240,255,0.25);">
+                  <span>▶️</span>
+                  <span>Tonton di Layar Bioskop Atas</span>
+                </button>
+              </div>
+
               <div class="video-meta-sub">
-                <span>🎵 TikTok Stream Web</span>
+                <span>🎵 TikTok Stream</span>
                 <div style="display:flex; gap:8px;">
-                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
-                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">➕ Playlist</span>
+                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">⭐ Simpan</span>
                   <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
                 </div>
               </div>
@@ -5464,7 +5725,7 @@
           <div class="video-card">
             <div class="player-frame-container ratio-9-16">
               <iframe 
-                src="${v.embedUrl}" 
+                src="${authenticUrl}" 
                 title="${v.title}" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                 allowfullscreen
@@ -5477,11 +5738,20 @@
                 <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.views}</span>
               </div>
               <h3 class="video-title">${v.title}</h3>
+
+              <!-- Tombol Putar di Bioskop Utama -->
+              <div style="margin-top:6px; margin-bottom:8px;">
+                <button type="button" onclick="playInMasterCinema('${v.id}')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:7px 10px; border:none; border-radius:6px; cursor:pointer; box-shadow:0 0 10px rgba(0,240,255,0.25);">
+                  <span>▶️</span>
+                  <span>Tonton di Layar Bioskop Atas</span>
+                </button>
+              </div>
+
               <div class="video-meta-sub">
-                <span>🔒 Terkunci di Halaman</span>
+                <span>⚡ Shorts YouTube Resmi</span>
                 <div style="display:flex; gap:8px;">
-                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
-                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">➕ Playlist</span>
+                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">⭐ Simpan</span>
                   <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
                 </div>
               </div>
@@ -5495,7 +5765,7 @@
         <div class="video-card">
           <div class="player-frame-container ratio-16-9">
             <iframe 
-              src="${v.embedUrl}" 
+              src="${authenticUrl}" 
               title="${v.title}" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               allowfullscreen
@@ -5508,11 +5778,20 @@
               <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.views}</span>
             </div>
             <h3 class="video-title">${v.title}</h3>
+
+            <!-- Tombol Putar di Bioskop Utama -->
+            <div style="margin-top:6px; margin-bottom:8px;">
+              <button type="button" onclick="playInMasterCinema('${v.id}')" style="width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:7px 10px; border:none; border-radius:6px; cursor:pointer; box-shadow:0 0 10px rgba(0,240,255,0.25);">
+                <span>▶️</span>
+                <span>Tonton di Layar Bioskop Atas</span>
+              </button>
+            </div>
+
             <div class="video-meta-sub">
-              <span>▶️ YouTube Player Resmi</span>
+              <span>▶️ YouTube Streaming Asli</span>
               <div style="display:flex; gap:8px;">
-                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
-                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">➕ Playlist</span>
+                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${authenticUrl}')">⭐ Simpan</span>
                 <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
               </div>
             </div>
@@ -5553,23 +5832,32 @@
           <!-- PILIHAN PRESET VIDEO VIRAL CEPAT -->
           <div style="margin-bottom: 14px;">
             <div style="font-size:12px; font-weight:700; color:var(--neon-cyan); margin-bottom:6px;">
-              ⚡ Pilih Playlist Cepat Streaming Sekali Klik:
+              ⚡ Pilih Playlist Cepat Streaming Sekali Klik (Video YouTube Asli):
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/5qap5aO4i9A', 'Drag Bike 201m Sentul Final FFA')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('drag bike 201m idc kawahara indonesia')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
                 🏁 Drag Bike 201m
               </button>
-              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/kJQP7kiw5Fk', 'Seting Karbu Sudco & Klep Balap 300cc')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('tutorial setting karbu pe pwk klep bore up motor')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
                 ⚙️ Seting Karbu & Klep
               </button>
-              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/9bZkp7q19f0', 'Tutorial Servis CVT Anti Gredek Bengkel')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('servis cvt matic anti gredek beat vario nmax')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
                 🛠️ Servis CVT Gredek
               </button>
-              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Cinematic RX King Knalpot Garing Kolong')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('rx king modifikasi knalpot kolong garing suara helikopter')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
                 👑 RX King 2-Tak
               </button>
-              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/fJ9rUzIMcZQ', 'Murottal Al-Quran Surat Ar-Rahman Syahdu')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(212,175,55,0.4);">
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('murottal surat ar rahman merdu muzammil hasballah')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(212,175,55,0.4);">
                 🕌 Murottal Merdu
+              </button>
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('film warkop dki full movie komedi')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(245,158,11,0.4);">
+                🎬 Film Warkop DKI
+              </button>
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('drama korea sub indo episode 1 trailer')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(236,72,153,0.4);">
+                👑 Drakor Populer
+              </button>
+              <button type="button" class="action-btn" onclick="searchYouTubeUnlimited('film india action blockbuster sub indo')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(249,115,22,0.4);">
+                🇮🇳 Bollywood Action
               </button>
             </div>
           </div>
@@ -5687,10 +5975,32 @@
 
       if (isGlobalSearch) {
         html += `
+          <!-- KARTU FILM / VIDEO PILIHAN KUSTOM PENGGUNA (YOUTUBE BEBAS) -->
+          <div style="grid-column: 1 / -1; background: linear-gradient(135deg, #1b261b 0%, #112028 100%); border: 2px solid var(--gold-accent); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+              <span style="background:var(--gold-accent); color:#0b1215; font-size:10px; font-weight:900; padding:2px 8px; border-radius:4px;">
+                🎬 PILIH FILM / VIDEO ANDA SENDIRI
+              </span>
+              <span style="font-size:11px; color:#22c55e; font-weight:800;">
+                ✅ 100% Video Asli YouTube (Bukan Duplikasi)
+              </span>
+            </div>
+            <h3 style="font-size:15px; font-weight:900; color:#fff; margin:4px 0;">
+              "${escapeHTML(currentSearchQuery)}"
+            </h3>
+            <p style="font-size:11px; color:#cbd5e1; margin-bottom:10px;">
+              Putar langsung film atau video YouTube <strong>"${escapeHTML(currentSearchQuery)}"</strong> di Layar Bioskop Teguh Stream sekarang juga!
+            </p>
+            <button type="button" onclick="playCustomFilmNow('${escapeQuotes(currentSearchQuery)}')" style="background:linear-gradient(135deg, #f59e0b, #d97706); color:#0b1215; font-weight:900; font-size:12px; padding:8px 18px; border:none; border-radius:6px; cursor:pointer; box-shadow:0 0 12px rgba(245,158,11,0.4); display:inline-flex; align-items:center; gap:6px;">
+              <span>▶️</span>
+              <span>PUTAR FILM "${escapeHTML(currentSearchQuery)}" SEKARANG DI BIOSKOP</span>
+            </button>
+          </div>
+
           <div style="grid-column: 1 / -1; background:#0f1d24; border:1px solid var(--neon-cyan); border-radius:8px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <div>
               <span style="font-size:14px; font-weight:800; color:#fff;">
-                🎯 Ditemukan <span style="color:var(--neon-cyan);">${itemsToRender.length} video</span> dari pencarian: <span style="color:var(--gold-accent);">"${escapeHTML(currentSearchQuery)}"</span>
+                🎯 Ditemukan <span style="color:var(--neon-cyan);">${itemsToRender.length} video</span> dari koleksi: <span style="color:var(--gold-accent);">"${escapeHTML(currentSearchQuery)}"</span>
               </span>
               <div style="font-size:11px; color:#94a3b8; margin-top:2px;">
                 Hasil pencarian cerdas di seluruh koleksi (Shorts, Drag Balap, Mesin SMK, Santri, TikTok, Drakor & Bollywood)
@@ -5812,28 +6122,38 @@
       let html = `
         <div class="video-card">
           <div class="player-frame-container ratio-9-16">
-            <iframe src="${shorts1.embedUrl}" title="${shorts1.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <iframe src="${getAuthenticVideoUrl(shorts1)}" title="${shorts1.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="video-details">
             <span class="tag-pill cyan">${shorts1.tag}</span>
             <h4 class="video-title">${shorts1.title}</h4>
+            <div style="margin-top:6px;">
+              <button type="button" onclick="switchRoom('video'); playInMasterCinema('${shorts1.id}')" style="width:100%; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:6px 10px; border:none; border-radius:6px; cursor:pointer;">
+                ▶️ Putar di Bioskop
+              </button>
+            </div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
-              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${shorts1.embedUrl}')">➕ Playlist</span>
-              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${shorts1.embedUrl}')">⭐ Simpan</span>
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${getAuthenticVideoUrl(shorts1)}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${getAuthenticVideoUrl(shorts1)}')">⭐ Simpan</span>
             </div>
           </div>
         </div>
 
         <div class="video-card">
           <div class="player-frame-container ratio-9-16">
-            <iframe src="${shorts2.embedUrl}" title="${shorts2.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            <iframe src="${getAuthenticVideoUrl(shorts2)}" title="${shorts2.title}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="video-details">
             <span class="tag-pill gold">${shorts2.tag}</span>
             <h4 class="video-title">${shorts2.title}</h4>
+            <div style="margin-top:6px;">
+              <button type="button" onclick="switchRoom('video'); playInMasterCinema('${shorts2.id}')" style="width:100%; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:6px 10px; border:none; border-radius:6px; cursor:pointer;">
+                ▶️ Putar di Bioskop
+              </button>
+            </div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
-              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${shorts2.embedUrl}')">➕ Playlist</span>
-              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${shorts2.embedUrl}')">⭐ Simpan</span>
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${getAuthenticVideoUrl(shorts2)}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${getAuthenticVideoUrl(shorts2)}')">⭐ Simpan</span>
             </div>
           </div>
         </div>
@@ -5845,13 +6165,18 @@
           <div class="video-details">
             <span class="tag-pill gold">${drama1.tag}</span>
             <h4 class="video-title">${drama1.title}</h4>
+            <div style="margin-top:6px; margin-bottom:6px;">
+              <button type="button" onclick="switchRoom('video'); playInMasterCinema('${drama1.id}')" style="width:100%; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:11px; padding:6px 10px; border:none; border-radius:6px; cursor:pointer;">
+                ▶️ Putar di Bioskop
+              </button>
+            </div>
             <div class="drama-actions">
               <a href="${drama1.affiliateUrl}" target="_blank" rel="noopener noreferrer" class="btn-orange-affiliate">🛒 Shopee</a>
               <a href="${drama1.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn-doraemon-legal">🚪 Tonton</a>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
-              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${drama1.officialUrl}', '${drama1.poster || ''}')">➕ Playlist</span>
-              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${drama1.officialUrl}')">⭐ Simpan</span>
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${getAuthenticVideoUrl(drama1)}', '${drama1.poster || ''}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${getAuthenticVideoUrl(drama1)}')">⭐ Simpan</span>
             </div>
           </div>
         </div>
@@ -6604,14 +6929,14 @@
             title: "🏁 Aksi Joki Drag Bike 201m Settingan Karbu Sudco & Klep Lebar",
             tag: "DRAG 201M",
             tagColor: "gold",
-            embedUrl: "https://www.youtube.com/embed/5qap5aO4i9A"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=drag+bike+201m+settingan+karbu+sudco&autoplay=1"
           },
           {
             id: "v_drag_2",
             title: "🚀 Final FFA 4-Tak 250cc Suara Knalpot Menggelegar",
             tag: "BALAP 4T",
             tagColor: "cyan",
-            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=final+ffa+4-tak+250cc+drag+bike&autoplay=1"
           }
         ]
       },
@@ -6626,14 +6951,14 @@
             title: "⚙️ Tutorial Servis CVT Matic Bersihkan Pulley & Pasang Roller Silang",
             tag: "CVT MATIC",
             tagColor: "cyan",
-            embedUrl: "https://www.youtube.com/embed/9bZkp7q19f0"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=tutorial+servis+cvt+matic+bersihkan+pulley&autoplay=1"
           },
           {
             id: "v_boreup_1",
             title: "⚡ Panduan Lengkap Bore Up Mesin 4-Tak Balap SMK",
             tag: "BORE UP",
             tagColor: "gold",
-            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=panduan+bore+up+mesin+4-tak+balap+smk&autoplay=1"
           }
         ]
       },
@@ -6648,14 +6973,14 @@
             title: "Surah Al-Kahfi Merdu Santri - Pelindung dari Fitnah Dajjal",
             tag: "TILAWAH",
             tagColor: "gold",
-            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=surah+al+kahfi+merdu+santri&autoplay=1"
           },
           {
             id: "v_quran_2",
             title: "Murottal Al-Quran 30 Juz Nonstop Qari Merdu Nusantara",
             tag: "MUROTTAL",
             tagColor: "cyan",
-            embedUrl: "https://www.youtube.com/embed/5qap5aO4i9A"
+            embedUrl: "https://www.youtube.com/embed?listType=search&list=murottal+al+quran+30+juz+nonstop+merdu&autoplay=1"
           }
         ]
       }
