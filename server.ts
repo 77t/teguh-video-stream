@@ -31,6 +31,18 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
+// PWA Manifest & Service Worker Endpoints (MIME-Type Presisi)
+app.get(["/manifest.json", "/manifest.webmanifest"], (_req, res) => {
+  res.setHeader("Content-Type", "application/manifest+json; charset=utf-8");
+  res.sendFile(path.join(process.cwd(), "public", "manifest.json"));
+});
+
+app.get("/sw.js", (_req, res) => {
+  res.setHeader("Content-Type", "application/javascript; charset=utf-8");
+  res.setHeader("Service-Worker-Allowed", "/");
+  res.sendFile(path.join(process.cwd(), "public", "sw.js"));
+});
+
 // Endpoint Asisten AI Montir & Sahabat Santri 24 Jam
 app.post("/api/montir-ai", async (req, res) => {
   try {

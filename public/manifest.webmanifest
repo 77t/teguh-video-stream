@@ -1,0 +1,44 @@
+{
+  "id": "/",
+  "name": "TEGUH VIDEO STREAM CENTER",
+  "short_name": "TeguhStream",
+  "description": "Pusat streaming video, radio multi-level folder, simulator MIL injeksi, dan kalkulator tuning pro untuk santri & montir SMK.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#00f0ff",
+  "background_color": "#111a1e",
+  "categories": [
+    "entertainment",
+    "music",
+    "education",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

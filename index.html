@@ -10,12 +10,19 @@
   <meta property="og:description" content="Pusat streaming video, radio multi-level folder, dan agregator konten dengan tema carbon racing." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#111a1e" />
+  <meta name="theme-color" content="#00f0ff" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="TEGUH VIDEO" />
+  <meta name="apple-mobile-web-app-title" content="TeguhStream" />
   <meta name="application-name" content="TEGUH VIDEO STREAM" />
+
+  <!-- PWA MANIFEST & ICONS RESMI -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/pwa-512x512.png" />
 
   <!-- PLACEHOLDER ADSENSE RESMI -->
   <script async src="https://googlesyndication.com" crossorigin="anonymous"></script>
@@ -636,6 +643,35 @@
       border-color: var(--neon-cyan);
       color: var(--neon-cyan);
       box-shadow: 0 0 12px var(--neon-cyan-glow);
+    }
+
+    
+    /* Quick Search Chips & Filter Populer */
+    .quick-chips-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    .quick-chip {
+      background: #101c23;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      color: #cbd5e1;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .quick-chip:hover {
+      background: rgba(0, 240, 255, 0.2);
+      border-color: var(--neon-cyan);
+      color: #fff;
     }
 
     /* Banner Status Tab */
@@ -1714,6 +1750,34 @@
         <!-- Render Video Pilihan Cepat -->
       </div>
 
+      <!-- KOLEKSI PLAYLIST VIDEO KUSTOM TAK TERBATAS (LOCALSTORAGE - SIMPAN SEPUASNYA) -->
+      <div id="custom-playlists-section" style="margin-top: 24px; margin-bottom: 24px; background: #0e171b; border: 1px solid rgba(0,240,255,0.3); border-radius: 12px; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span style="font-size:22px;">📑</span>
+              <h3 style="font-size: 16px; font-weight: 900; color: var(--neon-cyan); margin:0;">
+                Koleksi Playlist Video Kustom Tak Terbatas
+              </h3>
+              <span id="playlist-count-badge" class="tag-pill cyan">0 Playlist</span>
+            </div>
+            <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 0 0;">
+              Buat playlist sendiri sepuasnya tanpa batas! Simpan video balap, servis mesin, tilawah, dan drakor ke playlist favorit Anda secara permanen.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="action-btn" onclick="openCreatePlaylistModal()" style="background: linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color: #021017; font-weight: 900; font-size: 11px; padding: 8px 14px; border:none; border-radius:6px; cursor:pointer;">
+              ➕ Buat Playlist Baru
+            </button>
+          </div>
+        </div>
+
+        <!-- DAFTAR PLAYLIST KUSTOM (GRID) -->
+        <div id="custom-playlists-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;">
+          <!-- Diisi otomatis dari LocalStorage via renderCustomPlaylists() -->
+        </div>
+      </div>
+
       <!-- KOLEKSI FAVORIT PENGGUNA (LOCALSTORAGE - MODAL RP 0) -->
       <div id="favorites-container-section" style="margin-top: 20px; margin-bottom: 20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
@@ -1740,14 +1804,29 @@
             type="text" 
             id="video-search-input" 
             class="search-input" 
-            placeholder="Ketik judul video, oli, knalpot, sarung, drakor..." 
+            placeholder="Cari dari 148+ video: Drag Ninja, CVT, Murottal, Drakor, Bore Up, RX King..." 
             oninput="handleSearchInput(this.value)"
           />
           <button id="clear-search-btn" class="clear-search-btn" onclick="clearSearchInput()">✕</button>
         </div>
 
+        <!-- Tag Pencarian Cepat Populer (148+ Koleksi Video) -->
+        <div class="quick-chips-wrapper">
+          <span style="font-size:11px; color:#94a3b8; font-weight:700;">🔥 Populer:</span>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('drag')">⚡ Drag Ninja</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('cvt')">🛵 Servis CVT</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('bore up')">🔥 Bore Up</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('rx king')">💨 RX King 2T</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('injeksi')">⚙️ Injeksi Brebet</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('porting')">🔧 Porting Polish</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('murottal')">🕌 Murottal Quran</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('sholawat')">🎧 Sholawat Santri</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('drakor')">👑 Drakor</button>
+          <button type="button" class="quick-chip" onclick="quickSearchTag('jawan')">🇮🇳 Bollywood Jawan</button>
+        </div>
+
         <!-- REKOMENDASI PINTAR AI AFILIASI SHOPEE & TIKTOK -->
-        <div id="ai-affiliate-banner" class="ai-affiliate-banner">
+        <div id="ai-affiliate-banner" class="ai-affiliate-banner" style="margin-top:10px;">
           <div class="ai-affiliate-head">
             <span class="ai-affiliate-title">🤖 Rekomendasi Pintar AI Teguh Stream: Produk Terkait</span>
             <span style="font-size: 10px; color: var(--gold-accent); font-weight: bold;">AFILIASI RESMI</span>
@@ -1760,20 +1839,35 @@
 
       <!-- TABS KATEGORI KONTEN VIDEO AGGREGATOR -->
       <div class="tabs-container">
-        <button class="tab-btn active" id="tab-btn-shorts" onclick="switchVideoTab('shorts')">
-          <span>⚡ YouTube Shorts</span>
+        <button class="tab-btn active" id="tab-btn-all" onclick="switchVideoTab('all')">
+          <span>🌟 Semua (148+)</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-shorts" onclick="switchVideoTab('shorts')">
+          <span>⚡ Shorts (28)</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-balap" onclick="switchVideoTab('balap')">
+          <span>🏁 Drag & Balap (26)</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-mekanik" onclick="switchVideoTab('mekanik')">
+          <span>⚙️ Servis Mesin (26)</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-santri" onclick="switchVideoTab('santri')">
+          <span>🕌 Santri & Tilawah (22)</span>
         </button>
         <button class="tab-btn" id="tab-btn-tiktok" onclick="switchVideoTab('tiktok')">
-          <span>🎵 Tren TikTok</span>
+          <span>🎵 Tren TikTok (18)</span>
         </button>
         <button class="tab-btn" id="tab-btn-drakor" onclick="switchVideoTab('drakor')">
-          <span>👑 Drakor Populer</span>
+          <span>👑 Drakor (14)</span>
         </button>
         <button class="tab-btn" id="tab-btn-india" onclick="switchVideoTab('india')">
-          <span>🕌 Sinema India</span>
+          <span>🕌 Sinema India (14)</span>
         </button>
         <button class="tab-btn" id="tab-btn-unlimited" onclick="switchVideoTab('unlimited')">
-          <span>♾️ Putar Bebas Sepuasnya</span>
+          <span>♾️ Putar Bebas</span>
+        </button>
+        <button class="tab-btn" id="tab-btn-myplaylists" onclick="switchVideoTab('myplaylists')">
+          <span>📑 Playlist Saya</span>
         </button>
       </div>
 
@@ -2455,17 +2549,47 @@
 
   <!-- MODAL PANDUAN PASANG DI LAYAR HP (PWA SHORTCUT MODAL RP 0) & BAGIKAN LINK -->
   <div id="install-modal" class="install-modal-overlay" onclick="closeInstallModal(event)">
-    <div class="install-modal-card" onclick="event.stopPropagation()" style="max-width:480px; border-color:var(--neon-cyan);">
+    <div class="install-modal-card" onclick="event.stopPropagation()" style="max-width:500px; border-color:var(--neon-cyan);">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--neon-cyan); padding-bottom:8px;">
-        <h3 style="font-size:16px; font-weight:800; color:var(--neon-cyan);">📲 Pasang Aplikasi HP (APK) & Bagikan Tautan</h3>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <img src="/pwa-192x192.png" alt="Logo Teguh Stream" style="width:28px; height:28px; border-radius:6px; border:1px solid var(--neon-cyan);" />
+          <h3 style="font-size:16px; font-weight:800; color:var(--neon-cyan);">📲 Pasang Aplikasi (PWA / APK)</h3>
+        </div>
         <button style="background:none; border:none; color:#fff; font-size:18px; cursor:pointer;" onclick="closeInstallModal()">✕</button>
+      </div>
+
+      <!-- TOMBOL INSTAL LANGSUNG (PROMPT OTOMATIS) -->
+      <div style="margin-bottom:14px;">
+        <button id="pwa-native-install-btn" onclick="triggerPWAInstall()" style="width:100%; display:flex; align-items:center; justify-content:center; gap:10px; background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; font-weight:900; font-size:14px; padding:12px 16px; border:none; border-radius:10px; cursor:pointer; box-shadow:0 0 16px rgba(0,240,255,0.4); transition:transform 0.15s;">
+          <span style="font-size:18px;">📲</span>
+          <span>PASANG KE LAYAR HP SEKARANG (INSTAL APLIKASI)</span>
+        </button>
+      </div>
+
+      <!-- STATUS FILE MANIFEST & SERVICE WORKER -->
+      <div style="background:#0c1519; border:1px solid rgba(0,240,255,0.3); border-radius:8px; padding:10px 12px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <div style="font-size:11px; font-weight:800; color:#22c55e; display:flex; align-items:center; gap:6px;">
+            <span>✅</span>
+            <span>File <code>manifest.json</code> & Ikon HD Siap 100%</span>
+          </div>
+          <p style="font-size:10px; color:#94a3b8; margin-top:2px;">Standar PWA Google Chrome, Edge, & Safari iOS</p>
+        </div>
+        <div style="display:flex; gap:6px;">
+          <a href="/manifest.json" target="_blank" rel="noopener noreferrer" style="background:#15252e; border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-size:10px; font-weight:700; padding:5px 10px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            <span>📄</span> Lihat manifest.json
+          </a>
+          <a href="/manifest.json" download="manifest.json" style="background:#162b22; border:1px solid #22c55e; color:#22c55e; font-size:10px; font-weight:700; padding:5px 10px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+            <span>⬇️</span> Unduh File
+          </a>
+        </div>
       </div>
 
       <!-- KOTAK LINK PUBLIK SIAP BAGIKAN -->
       <div style="background:#111a1e; border:1px solid rgba(0,240,255,0.4); border-radius:8px; padding:12px; margin-bottom:14px;">
         <div style="font-size:11px; font-weight:800; color:var(--gold-accent); margin-bottom:6px; display:flex; justify-content:space-between;">
-          <span>🌐 LINK WEB PUBLIK ANDA (SIAP DISEBAR):</span>
-          <span style="color:#22c55e;">● AKTIF 24 JAM ONLINE</span>
+          <span>🌐 LINK WEB PUBLIK RESMI (24 JAM ONLINE):</span>
+          <span style="color:#22c55e;">● AKTIF</span>
         </div>
         <div style="display:flex; gap:6px; margin-bottom:8px;">
           <input type="text" id="public-share-url-input" value="https://ais-pre-yeofrzjunavcv2rs2gu2mj-579430073853.asia-southeast1.run.app" readonly style="flex:1; background:#0b1215; border:1px solid #334155; color:#38bdf8; font-size:11px; padding:8px; border-radius:6px; font-family:monospace;" />
@@ -2475,34 +2599,28 @@
         </div>
         <div style="display:flex; gap:8px;">
           <button onclick="shareToWhatsApp()" style="flex:1; background:#22c55e; color:#0b1215; border:none; padding:8px; border-radius:6px; font-weight:800; font-size:11px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <span>🟢</span> Bagikan ke WhatsApp
+            <span>🟢</span> Bagikan ke WhatsApp Teman & Grup
           </button>
         </div>
       </div>
 
-      <!-- PANDUAN APK & CARA PASANG KE HP -->
-      <div style="background:#111a1e; border-left:3px solid var(--gold-accent); padding:10px; border-radius:6px; margin-bottom:10px; font-size:12px;">
-        <p style="font-weight:800; color:var(--gold-accent); margin-bottom:4px;">📱 Cara Pasang Jadi Aplikasi di HP (Model PWA - Layar Penuh):</p>
-        <ol style="margin-left:18px; line-height:1.6; color:#e2e8f0; font-size:11px;">
-          <li>Buka link di atas lewat browser <b>Google Chrome</b> di HP Anda.</li>
-          <li>Ketuk tombol titik tiga (<b>⋮</b>) di pojok kanan atas browser.</li>
-          <li>Pilih <b>"Tambahkan ke Layar Utama" (Add to Home screen)</b> atau <b>"Instal Aplikasi"</b>.</li>
-          <li>Ikon <b>TEGUH VIDEO</b> otomatis muncul di layar HP Anda persis seperti aplikasi APK Play Store tanpa memakan memori!</li>
-        </ol>
+      <!-- PANDUAN PASANG MANUAL JIKA TIDAK MUNCUL PROMPT -->
+      <div style="background:#111a1e; border-left:3px solid var(--gold-accent); padding:10px; border-radius:6px; margin-bottom:10px; font-size:11px; color:#e2e8f0; line-height:1.6;">
+        <p style="font-weight:800; color:var(--gold-accent); margin-bottom:4px;">📱 Panduan Manual untuk HP Android & iPhone:</p>
+        <ul style="margin-left:16px;">
+          <li><b>HP Android (Google Chrome):</b> Ketuk titik tiga (<b>⋮</b>) di pojok kanan atas browser ➡️ Pilih <b>"Tambahkan ke Layar Utama"</b> atau <b>"Instal Aplikasi"</b>.</li>
+          <li><b>iPhone / iPad (Safari):</b> Ketuk tombol <b>Share</b> (ikon kotak panah ke atas) di bilah bawah ➡️ Gulir dan ketuk <b>"Add to Home Screen"</b> (Tambahkan ke Layar Utama).</li>
+        </ul>
       </div>
 
-      <div style="background:#111a1e; border-left:3px solid #38bdf8; padding:10px; border-radius:6px; margin-bottom:10px; font-size:11px; color:#cbd5e1; line-height:1.5;">
-        <b style="color:#38bdf8;">📦 Butuh File .APK Asli untuk Dibagikan Offline?</b><br/>
-        Aplikasi ini sudah berstandar PWA modern. Anda bisa memasukkan link web Anda ke generator gratis seperti <b>PWABuilder.com</b> atau <b>Web2Apk</b> untuk langsung download file <code style="color:#f59e0b;">.apk</code> yang bisa di-install langsung di HP Android mana pun.
+      <!-- PANDUAN GENERATOR FILE APK MANDIRI -->
+      <div style="background:#111a1e; border-left:3px solid #38bdf8; padding:10px; border-radius:6px; margin-bottom:12px; font-size:11px; color:#cbd5e1; line-height:1.5;">
+        <b style="color:#38bdf8;">📦 Ingin Mengubah Jadi File .APK Offline?</b><br/>
+        Karena manifest.json dan icon PWA sudah lengkap 100%, Anda bisa memasukkan link web Anda ke website pembuat APK gratis seperti <b>PWABuilder.com</b> untuk langsung men-download installer <code style="color:#f59e0b;">.apk</code> tanpa error.
       </div>
 
-      <div style="background:#111a1e; border-left:3px solid #94a3b8; padding:8px 10px; border-radius:6px; margin-bottom:12px; font-size:11px; color:#94a3b8; line-height:1.5;">
-        <b style="color:#fff;">ℹ️ Apakah Perlu Deploy ke Vercel?</b><br/>
-        <b>TIDAK WAJIB!</b> Aplikasi ini sudah berjalan online dan gratis di server Google Cloud Run. Tidak perlu pusing setting Vercel kecuali jika nanti Anda ingin membeli dan memasang nama domain pribadi seperti <code style="color:#22c55e;">www.teguhusaha.com</code>.
-      </div>
-
-      <button onclick="closeInstallModal()" style="width:100%; background:var(--neon-cyan); color:#0b1215; font-weight:900; padding:10px; border:none; border-radius:8px; cursor:pointer; font-size:12px;">
-        SAYA PAHAM & SIAP BAGIKAN! 👍
+      <button onclick="closeInstallModal()" style="width:100%; background:#15252e; border:1px solid #334155; color:#fff; font-weight:800; padding:10px; border-radius:8px; cursor:pointer; font-size:12px;">
+        Tutup Jendela 👍
       </button>
     </div>
   </div>
@@ -2705,6 +2823,151 @@
       </form>
     </div>
   </div>
+
+  <!-- ========================================================================
+       MODAL 1: TAMBAH VIDEO KE PLAYLIST KUSTOM
+       ======================================================================== -->
+  <div id="add-to-playlist-modal" class="install-modal-overlay" onclick="closeAddToPlaylistModal(event)">
+    <div class="install-modal-card" onclick="event.stopPropagation()" style="max-width:460px; border-color:var(--neon-cyan);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">📑</span>
+          <h3 style="font-size:15px; font-weight:900; color:var(--neon-cyan); margin:0;">Tambah ke Playlist Kustom</h3>
+        </div>
+        <button type="button" onclick="closeAddToPlaylistModal()" style="background:transparent; border:none; color:#94a3b8; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Preview Video Terpilih -->
+      <div id="modal-video-preview" style="background:#0c1417; border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:10px; margin-bottom:14px;">
+        <!-- Diisi dinamis -->
+      </div>
+
+      <!-- Pilih Playlist Tujuan -->
+      <div style="font-size:11px; font-weight:800; color:var(--gold-accent); text-transform:uppercase; margin-bottom:6px;">
+        PILIH PLAYLIST TUJUAN:
+      </div>
+      <div id="modal-playlist-options-list" style="max-height:180px; overflow-y:auto; display:flex; flex-direction:column; gap:6px; margin-bottom:14px; padding-right:4px;">
+        <!-- Diisi daftar playlist pengguna -->
+      </div>
+
+      <!-- Atau Buat Playlist Baru -->
+      <div style="border-top:1px dashed rgba(255,255,255,0.12); padding-top:12px;">
+        <div style="font-size:11px; font-weight:800; color:#cbd5e1; margin-bottom:6px;">
+          ATAU BUAT PLAYLIST BARU SEKARANG:
+        </div>
+        <div style="display:flex; gap:6px;">
+          <input type="text" id="quick-new-playlist-title" class="calc-input" placeholder="Nama playlist baru (cth: Oprek Karbu)..." style="font-size:12px;" />
+          <button type="button" onclick="createPlaylistAndAddSelectedVideo()" class="action-btn" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:800; font-size:11px; white-space:nowrap; padding:0 12px; border:none;">
+            ➕ Buat & Simpan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: BUAT PLAYLIST BARU
+       ======================================================================== -->
+  <div id="create-playlist-modal" class="install-modal-overlay" onclick="closeCreatePlaylistModal(event)">
+    <div class="install-modal-card" onclick="event.stopPropagation()" style="max-width:440px; border-color:var(--neon-cyan);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">➕</span>
+          <h3 style="font-size:15px; font-weight:900; color:var(--neon-cyan); margin:0;">Buat Playlist Video Baru</h3>
+        </div>
+        <button type="button" onclick="closeCreatePlaylistModal()" style="background:transparent; border:none; color:#94a3b8; font-size:18px; cursor:pointer;">✕</button>
+      </div>
+      <form onsubmit="handleCreatePlaylistSubmit(event)">
+        <div style="margin-bottom:10px;">
+          <label style="font-size:11px; font-weight:700; color:#cbd5e1; display:block; margin-bottom:4px;">Nama / Judul Playlist:</label>
+          <input type="text" id="new-playlist-title-input" class="calc-input" placeholder="Contoh: Koleksi Porting Polish Balap" required style="font-size:12px;" />
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="font-size:11px; font-weight:700; color:#cbd5e1; display:block; margin-bottom:4px;">Deskripsi / Catatan (Opsional):</label>
+          <textarea id="new-playlist-desc-input" class="calc-input" rows="2" placeholder="Catatan panduan atau trik yang ingin dipelajari..." style="font-size:12px; resize:none;"></textarea>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:8px;">
+          <button type="button" onclick="closeCreatePlaylistModal()" style="background:#182830; border:1px solid rgba(255,255,255,0.2); color:#fff; font-weight:700; padding:8px 14px; border-radius:6px; cursor:pointer; font-size:11px;">
+            Batal
+          </button>
+          <button type="submit" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; padding:8px 18px; border:none; border-radius:6px; cursor:pointer; font-size:11px;">
+            Simpan Playlist
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: PEMUTAR PLAYLIST KUSTOM INTERAKTIF (SEKUANSIAL, AUTO-NEXT, KONTROL)
+       ======================================================================== -->
+  <div id="playlist-player-modal" class="install-modal-overlay" onclick="closePlaylistPlayerModal(event)">
+    <div class="install-modal-card" onclick="event.stopPropagation()" style="max-width:760px; width:95%; max-height:92vh; display:flex; flex-direction:column; padding:16px; border-color:var(--neon-cyan); background:#0c1418;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:8px; overflow:hidden;">
+          <span style="font-size:22px;">🎬</span>
+          <div style="overflow:hidden;">
+            <h3 id="playlist-player-title" style="font-size:15px; font-weight:900; color:var(--neon-cyan); margin:0; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+              Pemutar Playlist
+            </h3>
+            <span id="playlist-player-track-info" style="font-size:10px; color:var(--gold-accent); font-weight:700;">
+              Video 1 dari 5
+            </span>
+          </div>
+        </div>
+        <button type="button" onclick="closePlaylistPlayerModal()" style="background:transparent; border:none; color:#94a3b8; font-size:20px; cursor:pointer; padding:4px;">✕</button>
+      </div>
+
+      <!-- Frame Video 16:9 -->
+      <div class="player-frame-container ratio-16-9" style="border-radius:8px; overflow:hidden; background:#000; margin-bottom:10px; max-height:55vh;">
+        <iframe 
+          id="playlist-player-iframe" 
+          src="" 
+          title="Playlist Video Player" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- Navigation & Controls -->
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; background:#142127; padding:8px 12px; border-radius:8px;">
+        <div style="display:flex; gap:6px;">
+          <button type="button" onclick="playlistPlayerPrev()" class="action-btn" style="font-size:11px; padding:6px 12px; background:#1c2d35; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+            ⏮️ Sebelumnya
+          </button>
+          <button type="button" onclick="playlistPlayerNext()" class="action-btn" style="font-size:11px; padding:6px 12px; background:#1c2d35; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+            Berikutnya ⏭️
+          </button>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <label style="font-size:10px; color:#cbd5e1; display:flex; align-items:center; gap:4px; cursor:pointer;">
+            <input type="checkbox" id="playlist-autoplay-checkbox" checked />
+            Putar Otomatis Berikutnya
+          </label>
+        </div>
+      </div>
+
+      <!-- Quick Add by URL in Player -->
+      <form onsubmit="handleAddUrlToCurrentPlaylist(event)" style="display:flex; gap:6px; margin-bottom:10px;">
+        <input type="text" id="playlist-add-url-input" class="calc-input" placeholder="Tempel URL YouTube / Shorts untuk dimasukkan ke playlist ini..." style="font-size:11px; flex:1;" />
+        <button type="submit" class="action-btn" style="background:var(--neon-cyan); color:#021017; font-weight:800; font-size:11px; padding:0 12px; white-space:nowrap; border:none;">
+          ➕ Tambah URL
+        </button>
+      </form>
+
+      <!-- Tracklist / Daftar Video dalam Playlist -->
+      <div style="font-size:10px; font-weight:800; color:#94a3b8; text-transform:uppercase; margin-bottom:4px;">
+        DAFTAR ISI PLAYLIST INI:
+      </div>
+      <div id="playlist-player-queue" style="flex:1; max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:4px; padding-right:4px;">
+        <!-- Diisi daftar lagu/video antrean -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION FLOATING -->
+  <div id="tvs-toast-notification" style="position:fixed; bottom:70px; right:20px; z-index:9999; background:rgba(15,23,42,0.95); border:1px solid var(--neon-cyan); box-shadow:0 8px 24px rgba(0,240,255,0.3); color:#fff; padding:10px 16px; border-radius:8px; font-size:12px; font-weight:700; display:none; align-items:center; gap:8px; transform:translateY(20px); opacity:0; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); pointer-events:none;"></div>
 
   <!-- ========================================================================
        NAVIGASI BAWAH STATIS (PINTU DORAEMON BAR MELAYANG)
@@ -3092,185 +3355,1616 @@
     // DATABASE KONTEN VIDEO AGGREGATOR
     // ========================================================================
     const VIDEO_DATABASE = {
-      // 1. YouTube Shorts (Embed resmi, tonton di tempat)
-      shorts: [
+    "shorts": [
         {
-          id: "yt-1",
-          title: "Drag Ninja Bore Up 300cc Seting Dyno Test Tembus 12.000 RPM",
-          tag: "RACING TUNING",
-          tagColor: "cyan",
-          views: "340K views",
-          embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+            "id": "yt-1",
+            "title": "Drag Ninja Bore Up 300cc Seting Dyno Test Tembus 12.000 RPM",
+            "tag": "RACING TUNING",
+            "tagColor": "cyan",
+            "views": "340K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "yt-2",
-          title: "Merdu Banget! Santri Cilik Lantunkan Surat Ar-Rahman Viral",
-          tag: "SANTRI TILAWAH",
-          tagColor: "gold",
-          views: "890K views",
-          embedUrl: "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+            "id": "yt-2",
+            "title": "Merdu Banget! Santri Cilik Lantunkan Surat Ar-Rahman Viral",
+            "tag": "SANTRI TILAWAH",
+            "tagColor": "gold",
+            "views": "890K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "yt-3",
-          title: "Trik Rahasia Montir Servis Injeksi Motor Brebet Modal Cairan Rp 15 Ribu",
-          tag: "TIPS MONTIR",
-          tagColor: "cyan",
-          views: "215K views",
-          embedUrl: "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+            "id": "yt-3",
+            "title": "Trik Rahasia Montir Servis Injeksi Motor Brebet Modal Cairan Rp 15 Ribu",
+            "tag": "TIPS MONTIR",
+            "tagColor": "cyan",
+            "views": "215K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "yt-4",
-          title: "Cinematic RX King Carbon Racing Liar Suara Garing Knalpot Udang",
-          tag: "MOTOR 2 TAK",
-          tagColor: "orange",
-          views: "520K views",
-          embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+            "id": "yt-4",
+            "title": "Cinematic RX King Carbon Racing Liar Suara Garing Knalpot Udang",
+            "tag": "MOTOR 2 TAK",
+            "tagColor": "orange",
+            "views": "520K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-5",
+            "title": "Tes Top Speed Satria FU 200cc Piston 68 Klep Lebar Tembus 165 Km/h",
+            "tag": "TOP SPEED",
+            "tagColor": "red",
+            "views": "410K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-6",
+            "title": "Setting Karburator Sudco PE 28 Putaran Angin & Jarum Skep Anti Ngok",
+            "tag": "KARBURATOR",
+            "tagColor": "cyan",
+            "views": "180K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-7",
+            "title": "Suara Merdu Santriwati Pondok Pesantren Qasidah Mughrom Bikin Merinding",
+            "tag": "SHOLAWAT",
+            "tagColor": "gold",
+            "views": "760K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-8",
+            "title": "Atasi CVT Honda Beat Gredek Parah Cuma Modal Bor Mangkok Ganda",
+            "tag": "SERVIS CVT",
+            "tagColor": "orange",
+            "views": "630K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-9",
+            "title": "Herex Tiger 300cc Langkah 70 Knalpot Kalajengking Suara Blar Blar",
+            "tag": "HEREX BALAP",
+            "tagColor": "red",
+            "views": "920K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-10",
+            "title": "Porting Polish Head Silinder Klep 4-Tak Mengkilap Aliran Gas Maksimal",
+            "tag": "PORTING POLISH",
+            "tagColor": "cyan",
+            "views": "310K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-11",
+            "title": "Murottal Surat Al-Waqiah Santri Penghafal Al-Quran Pembuka Pintu Rezeki",
+            "tag": "MUROTTAL",
+            "tagColor": "gold",
+            "views": "1.1M views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-12",
+            "title": "Cara Reset Manual Kode Kedipan MIL 12 Injektor Honda Vario 125 & 150",
+            "tag": "RESET ECU",
+            "tagColor": "cyan",
+            "views": "245K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-13",
+            "title": "Mio M3 FFA 300cc Balap Drag Bike Sentul Catatan Waktu 6.8 Detik",
+            "tag": "DRAG MATIC",
+            "tagColor": "red",
+            "views": "540K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-14",
+            "title": "Aerox 155 Bore Up 183cc Knalpot Rob1 Suara Padat Bertenaga Harian",
+            "tag": "BORE UP MAXI",
+            "tagColor": "cyan",
+            "views": "420K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-15",
+            "title": "Lantunan Sholawat Jibril 500x Santri Pengajian Malam Jumat Penuh Berkah",
+            "tag": "SHOLAWAT",
+            "tagColor": "gold",
+            "views": "1.4M views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-16",
+            "title": "Tips Pasang Ring Piston 4-Tak Jangan Terbalik Gap Celah 120 Derajat",
+            "tag": "TIPS MONTIR",
+            "tagColor": "orange",
+            "views": "195K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-17",
+            "title": "Yamaha F1ZR Caltex Road Race Underbone 116cc Suara Knalpot King Udang",
+            "tag": "2-TAK ROADRACE",
+            "tagColor": "red",
+            "views": "810K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-18",
+            "title": "Cara Dial Noken As Racing Cari Titik Lobe Separation Angle Tepat",
+            "tag": "DIAL NOKEN",
+            "tagColor": "cyan",
+            "views": "160K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-19",
+            "title": "Tilawah Merdu Ayat Kursi Santri Penghafal Quran Pengusir Jin & Was-was",
+            "tag": "TILAWAH",
+            "tagColor": "gold",
+            "views": "980K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-20",
+            "title": "Tutorial Bersihkan Throttle Body & Sensor TPS Motor Matic Honda Yamaha",
+            "tag": "SERVIS INJEKSI",
+            "tagColor": "cyan",
+            "views": "330K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-21",
+            "title": "KLX 150 Bore Up 200cc Trabas Tanjakan Berbatu Tenaga Badak Torsi Galak",
+            "tag": "TRABAS TRAIL",
+            "tagColor": "orange",
+            "views": "275K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-22",
+            "title": "Seting Celah Kerenggangan Klep In dan Ex Menggunakan Fuler Gauge Presisi",
+            "tag": "SETTING KLEP",
+            "tagColor": "cyan",
+            "views": "140K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-23",
+            "title": "Aksi Hadroh Al-Banjari Santri Jawa Timur Festival Sholawat Nusantara",
+            "tag": "HADROH SANTRI",
+            "tagColor": "gold",
+            "views": "670K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-24",
+            "title": "Penyebab Motor Mogok Tiba-Tiba Hilang Kompresi Cara Cepat Montir Jalanan",
+            "tag": "DARURAT MONTIR",
+            "tagColor": "red",
+            "views": "490K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-25",
+            "title": "Ninja RR 150 Super KIPS Modif Karbu PWK 38 Air Striker Tarikan Kilat",
+            "tag": "NINJA 2T",
+            "tagColor": "cyan",
+            "views": "720K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-26",
+            "title": "Skir Klep Manual Pake Autosol & Pasta Amril Sampai Rapat Tanpa Bocor",
+            "tag": "SKIR KLEP",
+            "tagColor": "orange",
+            "views": "210K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-27",
+            "title": "Murottal Surat Yasin Santri Merdu Penyejuk Hati Pembawa Keberkahan Hidup",
+            "tag": "MUROTTAL",
+            "tagColor": "gold",
+            "views": "1.3M views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "yt-28",
+            "title": "Suara Knalpot Tsukigi Bobokan Silent Beat Deluxe Tarikan Responsif Enteng",
+            "tag": "KNALPOT TSUKIGI",
+            "tagColor": "cyan",
+            "views": "350K views",
+            "ratio": "9-16",
+            "category": "shorts",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
         }
-      ],
-
-      // 2. Tren TikTok (Embed resmi terkunci di halaman web)
-      tiktok: [
+    ],
+    "balap": [
         {
-          id: "tt-1",
-          title: "Sound Knalpot Suos Racing Bikin Kaget Satu Gang #MontirTeguh #BoreUp",
-          tag: "TIKTOK VIRAL",
-          tagColor: "red",
-          views: "1.2M views",
-          embedUrl: "https://www.tiktok.com/embed/v2/6718335390845095173"
+            "id": "race-1",
+            "title": "🏁 Aksi Joki Drag Bike 201m Settingan Karbu Sudco & Klep Lebar Resmi IDC",
+            "tag": "DRAG 201M",
+            "tagColor": "gold",
+            "views": "780K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "tt-2",
-          title: "Aksi Santri Bersholawat di Atas Panggung Bikin Adem Suasana Hati",
-          tag: "SANTRI KEREN",
-          tagColor: "gold",
-          views: "940K views",
-          embedUrl: "https://www.tiktok.com/embed/v2/6718335390845095173"
+            "id": "race-2",
+            "title": "🚀 Final FFA 4-Tak 250cc Suara Knalpot Menggelegar Sirkuit Gadhuro",
+            "tag": "FFA 250CC",
+            "tagColor": "cyan",
+            "views": "650K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "tt-3",
-          title: "Tutorial Porting Polish Silinder Head Agar Nafas Motor Tambah Gahar",
-          tag: "BENGKEL PRO",
-          tagColor: "cyan",
-          views: "430K views",
-          embedUrl: "https://www.tiktok.com/embed/v2/6718335390845095173"
+            "id": "race-3",
+            "title": "⚡ Pertarungan Ninja FFA vs Satria FU 200cc Taruhan Bergengsi Lintasan Lurus",
+            "tag": "BALAP RESMI",
+            "tagColor": "red",
+            "views": "890K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "tt-4",
-          title: "Review Sarung Santri Bahan Halus Anti Kusut Buat Sholat & Pengajian",
-          tag: "OOTD SANTRI",
-          tagColor: "orange",
-          views: "310K views",
-          embedUrl: "https://www.tiktok.com/embed/v2/6718335390845095173"
+            "id": "race-4",
+            "title": "🔥 Herex Tiger 300cc Napas Panjang Lintasan 500m Karbu PWK 38 Sudco",
+            "tag": "HEREX 500M",
+            "tagColor": "orange",
+            "views": "950K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-5",
+            "title": "🏎️ Dyno Test Honda CBR 250RR Porting Stage 3 Tembus 43 Horsepower",
+            "tag": "DYNO TEST",
+            "tagColor": "cyan",
+            "views": "310K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-6",
+            "title": "💨 RX King Super Pro 140cc Road Race Suara Knalpot Standar Racing Garing",
+            "tag": "RX KING ROADRACE",
+            "tagColor": "gold",
+            "views": "520K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-7",
+            "title": "🏁 Sleep Engine 200cc Bebek 4-Tak Karbu PE 28 Piston Kawahara 66mm",
+            "tag": "SLEEP ENGINE",
+            "tagColor": "cyan",
+            "views": "440K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-8",
+            "title": "🛵 Duel Matic FFA Mio 350cc vs Aerox 200cc Drag Sirkuit Mijen Semarang",
+            "tag": "MATIC FFA",
+            "tagColor": "red",
+            "views": "610K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-9",
+            "title": "⚡ MX King 150cc Road Race OnePrix Sirkuit Sentul Settingan ECU aRacer",
+            "tag": "ONEPRIX",
+            "tagColor": "cyan",
+            "views": "480K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-10",
+            "title": "💥 Vario 160 Spek Kirian Full KTC Kytaco Tes Akselerasi 0-100 Km/Jam",
+            "tag": "SPEK KIRIAN",
+            "tagColor": "orange",
+            "views": "390K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-11",
+            "title": "🔥 Seting Pengapian CDI BRT Dual Band & Koil YZ 125 Pada Motor Drag Balap",
+            "tag": "PENGAPIAN BALAP",
+            "tagColor": "cyan",
+            "views": "270K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-12",
+            "title": "🏁 Bebek Tune Up 130cc 4T Klep 28/24 Noken As Durasi 280 Derajat",
+            "tag": "TUNE UP 130CC",
+            "tagColor": "gold",
+            "views": "340K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-13",
+            "title": "🚀 Jupiter Z Burhan Spek 5TP 115cc Grasstrack Trabas Sirkuit Tanah Lumpur",
+            "tag": "GRASSTRACK",
+            "tagColor": "orange",
+            "views": "290K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-14",
+            "title": "🏎️ Review Knalpot AHM Original Malaysia Pada Ninja R 150cc Jambakan Maut",
+            "tag": "KNALPOT 2T",
+            "tagColor": "red",
+            "views": "430K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-15",
+            "title": "⚡ Sonic 150R Bore Up ECU Juken 5 Setting Fuel Mapping Dyno Jet",
+            "tag": "ECU TUNING",
+            "tagColor": "cyan",
+            "views": "220K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-16",
+            "title": "🏁 Balap Drag Bike Rookie Jawa Timur Joki Pemula Catat Best Time Impresif",
+            "tag": "DRAG ROOKIE",
+            "tagColor": "gold",
+            "views": "360K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-17",
+            "title": "💨 Ninja SS Hijau Modif Drag Harian Piston B75 Knalpot Creampie Jogja",
+            "tag": "MODIFIKASI 2T",
+            "tagColor": "cyan",
+            "views": "510K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-18",
+            "title": "🔥 Suara Gahar Karburator Keihin FCR 33mm Pada D-Tracker 150cc Supermoto",
+            "tag": "SUPERMOTO",
+            "tagColor": "orange",
+            "views": "380K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-19",
+            "title": "🏎️ Tes Konsumsi BBM Spek Balap Liar vs Seting Karbu Kering Irit Bertenaga",
+            "tag": "RISET BALAP",
+            "tagColor": "gold",
+            "views": "190K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-20",
+            "title": "🏁 Nmax 155cc Touring Modif Pulley Custom Keruk Jalur Roller 13.8 Derajat",
+            "tag": "PULLEY CUSTOM",
+            "tagColor": "cyan",
+            "views": "460K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-21",
+            "title": "⚡ Settingan Gir Rasio Final Gear Sentul Kecil vs Sirkuit Mijen Tikungan Patah",
+            "tag": "FINAL GEAR",
+            "tagColor": "red",
+            "views": "175K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-22",
+            "title": "💥 Tes Oli Samping Racing Motul 800 2T Asap Wangi Tarikan Enteng Tanpa Kerak",
+            "tag": "OLI RACING 2T",
+            "tagColor": "orange",
+            "views": "310K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-23",
+            "title": "🏁 Settingan Spuyer Main Jet & Pilot Jet Cuaca Hujan Dingin vs Panas Terik",
+            "tag": "JETTING KARBU",
+            "tagColor": "cyan",
+            "views": "230K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-24",
+            "title": "🚀 Satria 2-Tak Hiu Lumba 120cc Balap Underbone Sirkuit Bukit Peusar",
+            "tag": "SATRIA 2T",
+            "tagColor": "gold",
+            "views": "490K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-25",
+            "title": "🔥 Bore Up Honda Beat Karbu 130cc Harian Menggunakan Piston Kaze 53.5mm",
+            "tag": "BEAT BOREUP",
+            "tagColor": "red",
+            "views": "680K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "race-26",
+            "title": "🏁 Kompilasi Start Drag Bike Tercepat Sensor Lampu Hijau Reaction Time 0.001s",
+            "tag": "BEST REACTION",
+            "tagColor": "gold",
+            "views": "820K views",
+            "ratio": "16-9",
+            "category": "balap",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
         }
-      ],
-
-      // 3. Drakor Populer (Poster mewah, Keranjang Oranye Afiliasi, Pintu Doraemon Viu/iQIYI)
-      drakor: [
+    ],
+    "mekanik": [
         {
-          id: "kd-1",
-          title: "Queen of Tears (Ratu Air Mata)",
-          tag: "ROMANCE COMEDY",
-          tagColor: "gold",
-          rating: "⭐ 9.8 / 10",
-          poster: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Kisah cinta penuh liku dan intrik bisnis antara ratu toserba terkemuka dan direktur hukum yang berasal dari pedesaan.",
-          affiliateText: "Camilan Tteokbokki & Ramen Nonton Drakor",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.viu.com/ott/id/id/all/playlist-queen_of_tears-playlist-26274431"
+            "id": "mech-1",
+            "title": "⚙️ Tutorial Servis CVT Matic Bersihkan Pulley & Pasang Roller Silang",
+            "tag": "CVT MATIC",
+            "tagColor": "cyan",
+            "views": "520K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "kd-2",
-          title: "Vincenzo (Pengacara Mafia Berdarah Dingin)",
-          tag: "ACTION CRIME",
-          tagColor: "cyan",
-          rating: "⭐ 9.7 / 10",
-          poster: "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Pengacara consigliere mafia Italia kembali ke tanah kelahirannya di Korea untuk merebut emas batangan di gedung tua.",
-          affiliateText: "Kopi Kaleng Espresso & Jas Slimfit Vincenzo",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.iq.com"
+            "id": "mech-2",
+            "title": "⚡ Panduan Lengkap Bore Up Mesin 4-Tak Balap SMK Otomotif",
+            "tag": "BORE UP SMK",
+            "tagColor": "gold",
+            "views": "430K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "kd-3",
-          title: "Crash Landing on You (Mendarat di Hatimu)",
-          tag: "ROMANCE DRAMA",
-          tagColor: "orange",
-          rating: "⭐ 9.9 / 10",
-          poster: "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Pewaris konglomerat yang mengalami kecelakaan paralayang mendarat darurat di wilayah perbatasan militer Korea Utara.",
-          affiliateText: "Jaket Windbreaker Parasut Nonton K-Drama",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.viu.com"
+            "id": "mech-3",
+            "title": "🛠️ Cara Menyetel Kerenggangan Celah Klep Motor Injeksi Sesuai Spek Pabrik",
+            "tag": "STELE KELP",
+            "tagColor": "cyan",
+            "views": "310K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "kd-4",
-          title: "Doctor Romantic (Master Kim Operasi Darurat)",
-          tag: "MEDICAL LIFE",
-          tagColor: "cyan",
-          rating: "⭐ 9.6 / 10",
-          poster: "https://images.unsplash.com/photo-1538100592444-267332219711?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Ketegangan para dokter ahli bedah di Rumah Sakit Doldam pedesaan yang mengutamakan keselamatan jiwa pasien di atas segalanya.",
-          affiliateText: "Tumbler Kopi Stainless Suhu Dingin Panas",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.viu.com"
+            "id": "mech-4",
+            "title": "🔧 Cara Membaca Kode Error MIL Kedipan Lampu Check Engine Motor Honda",
+            "tag": "KODE MIL",
+            "tagColor": "orange",
+            "views": "640K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-5",
+            "title": "🔩 Trik Mengatasi Baut Patah Di Dalam Crankcase Tanpa Merusak Ulir Drat",
+            "tag": "TRIK BENGKEL",
+            "tagColor": "red",
+            "views": "290K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-6",
+            "title": "⚡ Reset Manual ECU & Kalibrasi Sensor TPS Menggunakan Kawat Jumper DLC",
+            "tag": "RESET DLC",
+            "tagColor": "cyan",
+            "views": "710K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-7",
+            "title": "🏍️ Cara Pasang Kipas Roller Rumah Roller & Trik V-Belt Tidak Cepat Retak",
+            "tag": "V-BELT CVT",
+            "tagColor": "gold",
+            "views": "380K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-8",
+            "title": "🔥 Skir Klep Bocor Kompresi Menggunakan Bor Tangan Hasil Rapat Maksimal",
+            "tag": "SKIR KLEP",
+            "tagColor": "cyan",
+            "views": "420K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-9",
+            "title": "🛠️ Cara Pasang Ring Piston 4 Tak Yang Benar Celah Silang 120 Derajat",
+            "tag": "RING PISTON",
+            "tagColor": "orange",
+            "views": "530K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-10",
+            "title": "⚙️ Mengatasi Motor Brebet Saat Gas Dibuka Penuh Analisa Fuel Pump & Busi",
+            "tag": "BREBET TUNTAS",
+            "tagColor": "red",
+            "views": "890K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-11",
+            "title": "🔧 Cara Ganti Seal Kruk As CVT Yang Bocor Oli Mesin Masuk ke Ruang CVT",
+            "tag": "SEAL KRUK AS",
+            "tagColor": "cyan",
+            "views": "260K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-12",
+            "title": "🔩 Panduan Porting Lubang Exhaust & Intake Mesin Bebek 4 Tak Agar Nafas Lega",
+            "tag": "PORTING INTAKE",
+            "tagColor": "gold",
+            "views": "340K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-13",
+            "title": "⚡ Cara Cek Tekanan Fuel Pump Injeksi Normal 42 PSI Menggunakan Manometer",
+            "tag": "FUEL PUMP",
+            "tagColor": "cyan",
+            "views": "410K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-14",
+            "title": "🏍️ Cara Membersihkan Karburator Vakum Mio & Beat Karbu Biar Tarikan Ringan",
+            "tag": "SERVIS KARBU",
+            "tagColor": "orange",
+            "views": "670K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-15",
+            "title": "🔥 Ganti Kampas Kopling Manual & Per Kopling Racing Tarikan Tidak Selip",
+            "tag": "KAMPAS KOPLING",
+            "tagColor": "red",
+            "views": "380K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-16",
+            "title": "🛠️ Mengatasi Shockbreaker Depan Jedug Bunyi Keras Ganti Oli Shock & Seal",
+            "tag": "KAKI-KAKI",
+            "tagColor": "cyan",
+            "views": "450K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-17",
+            "title": "⚙️ Cara Mengukur Kompresi Dinamis Mesin Motor Dengan Compression Tester",
+            "tag": "KOMPRESI MESIN",
+            "tagColor": "gold",
+            "views": "230K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-18",
+            "title": "🔧 Cara Ganti Rantai Keteng Kamrat Mesin Jupiter / Vega Biar Suara Halus",
+            "tag": "RANTAI KETENG",
+            "tagColor": "cyan",
+            "views": "370K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-19",
+            "title": "🔩 Trik Melepas Bearing Laher Roda yang Macet Berkarat Tanpa Tracker Khusus",
+            "tag": "BEARING RODA",
+            "tagColor": "orange",
+            "views": "580K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-20",
+            "title": "⚡ Mengenal Warna Kabel Kelistrikan Motor Honda Yamaha Suzuki Kawasaki",
+            "tag": "KELISTRIKAN",
+            "tagColor": "gold",
+            "views": "790K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-21",
+            "title": "🏍️ Cara Bleeding Buang Angin Rem Cakram Hidrolik Minyak Rem Cepat Padat",
+            "tag": "MINYAK REM",
+            "tagColor": "cyan",
+            "views": "320K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-22",
+            "title": "🔥 Setting TPS Vario 125 Pakai Multitester Digital Voltase 0.48 Volt Presisi",
+            "tag": "VOLTASE TPS",
+            "tagColor": "red",
+            "views": "440K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-23",
+            "title": "🛠️ Cara Servis Dinamo Starter Motor Matic Ganti Arang Brush Yang Aus",
+            "tag": "DINAMO STATER",
+            "tagColor": "cyan",
+            "views": "290K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-24",
+            "title": "⚙️ Mengatasi Suara Kasar Tik-Tik di Silinder Head Cek Pelatuk & Noken As",
+            "tag": "SUARA MESIN",
+            "tagColor": "orange",
+            "views": "610K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-25",
+            "title": "🔧 Cara Korter Silinder Blok & Hitung Clearance Celah Piston 0.03mm",
+            "tag": "KORTER BLOK",
+            "tagColor": "gold",
+            "views": "350K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/9bZkp7q19f0?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "mech-26",
+            "title": "🔩 Ciri-Ciri Oli Mesin Motor Palsu vs Asli Hindari Mesin Cepat Rusak",
+            "tag": "BEDAH OLI ASLI",
+            "tagColor": "red",
+            "views": "980K views",
+            "ratio": "16-9",
+            "category": "mekanik",
+            "embedUrl": "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=0&rel=0&modestbranding=1"
         }
-      ],
-
-      // 4. Sinema India (Poster Bollywood mewah, Keranjang Oranye, Tonton Resmi Doraemon)
-      india: [
+    ],
+    "santri": [
         {
-          id: "in-1",
-          title: "RRR (Rise Roar Revolt)",
-          tag: "BOLLYWOOD EPIC",
-          tagColor: "gold",
-          rating: "⭐ 9.5 / 10",
-          poster: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Dua pahlawan revolusi legendaris bertarung melawan penjajahan kolonial dengan koreografi aksi spektakuler tanpa batas.",
-          affiliateText: "Teh Rempah Masala Chai Asli India",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.viu.com"
+            "id": "santri-1",
+            "title": "🕌 Surah Al-Kahfi Merdu Santri - Pelindung dari Fitnah Akhir Zaman",
+            "tag": "TILAWAH AL-KAHFI",
+            "tagColor": "gold",
+            "views": "1.8M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "in-2",
-          title: "Jawan: Aksi Shah Rukh Khan Menuntut Keadilan",
-          tag: "ACTION THRILLER",
-          tagColor: "red",
-          rating: "⭐ 9.4 / 10",
-          poster: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Prajurit misterius memimpin tim khusus untuk memperbaiki ketidakadilan di tengah masyarakat dengan aksi dramatis.",
-          affiliateText: "Kacamata Aviator Hitam Keren Ala Jawan",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.iq.com"
+            "id": "santri-2",
+            "title": "📖 Murottal Al-Quran 30 Juz Nonstop Qari Merdu Nusantara Pengantar Tidur",
+            "tag": "MUROTTAL 30 JUZ",
+            "tagColor": "cyan",
+            "views": "3.2M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "in-3",
-          title: "3 Idiots (Kisah Persahabatan Teknik Mesin)",
-          tag: "COMEDY DRAMA",
-          tagColor: "cyan",
-          rating: "⭐ 9.9 / 10",
-          poster: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Tiga mahasiswa jurusan teknik mesin berjuang melawan sistem pendidikan yang kaku dengan filosofi kejar keunggulan bukan kesuksesan.",
-          affiliateText: "Set Kunci Pas Ring & Tool Kit Mesin 14 Pcs",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.viu.com"
+            "id": "santri-3",
+            "title": "✨ Lantunan Surat Ar-Rahman Merdu Meneteskan Air Mata Santri Tahfidz",
+            "tag": "AR-RAHMAN",
+            "tagColor": "gold",
+            "views": "2.4M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
         },
         {
-          id: "in-4",
-          title: "Dangal: Perjuangan Ayah & Pegulat Putri Juara",
-          tag: "SPORTS BIOPIC",
-          tagColor: "gold",
-          rating: "⭐ 9.7 / 10",
-          poster: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80",
-          synopsis: "Mantan pegulat melatih kedua putrinya dengan disiplin keras hingga berhasil meraih medali emas pesta olahraga dunia.",
-          affiliateText: "Suplemen Stamina & Sepatu Olahraga Kuat",
-          affiliateUrl: "https://shopee.co.id",
-          officialUrl: "https://www.iq.com"
+            "id": "santri-4",
+            "title": "🕌 Sholawat Jibril Penarik Rezeki Berlimpah Dilantunkan Santri Putri",
+            "tag": "SHOLAWAT JIBRIL",
+            "tagColor": "cyan",
+            "views": "4.5M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-5",
+            "title": "📖 Surah Al-Mulk Penyelamat dari Siksa Kubur Qari Nusantara Syahdu",
+            "tag": "AL-MULK",
+            "tagColor": "gold",
+            "views": "1.9M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-6",
+            "title": "✨ Dzikir Pagi dan Petang Pembuka Pintu Berkah & Perlindungan Diri",
+            "tag": "DZIKIR PAGI",
+            "tagColor": "cyan",
+            "views": "1.6M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-7",
+            "title": "🕌 Qasidah Burdah Lengkap Pembawa Ketentraman Batin Santri Pesantren",
+            "tag": "QASIDAH BURDAH",
+            "tagColor": "gold",
+            "views": "870K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-8",
+            "title": "📖 Juz 'Amma Lengkap Anak & Santri Pemula Belajar Tajwid Al-Quran",
+            "tag": "JUZ AMMA",
+            "tagColor": "cyan",
+            "views": "1.1M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-9",
+            "title": "✨ Sholawat Mughrom & Ya Imamar Rusli Vokal Duet Santri Merdu",
+            "tag": "SHOLAWAT DUET",
+            "tagColor": "orange",
+            "views": "940K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-10",
+            "title": "🕌 Surah Yasin Tahlil & Doa Selamat Pembacaan Santri Malam Jumat",
+            "tag": "SURAH YASIN",
+            "tagColor": "gold",
+            "views": "2.1M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-11",
+            "title": "📖 Ayat Ruqyah Mandiri Pengusir Gangguan Jin dan Penyakit Hati",
+            "tag": "RUQYAH SYAR'IYAH",
+            "tagColor": "cyan",
+            "views": "1.5M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-12",
+            "title": "✨ Sholawat Asyghil & Thibil Qulub Penentram Jiwa dan Keselamatan Umat",
+            "tag": "ASYGHIL",
+            "tagColor": "gold",
+            "views": "1.2M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-13",
+            "title": "🕌 Tilawah Surah Maryam Suara Menyentuh Hati Ibu Hamil & Calon Bayi",
+            "tag": "SURAH MARYAM",
+            "tagColor": "cyan",
+            "views": "820K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-14",
+            "title": "📖 Lantunan Asmaul Husna 99 Nama Allah Santri Tebuireng Syahdu",
+            "tag": "ASMAUL HUSNA",
+            "tagColor": "gold",
+            "views": "1.7M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-15",
+            "title": "✨ Festival Hadroh Nusantara Shalawat Nariyah Tabuhan Rebana Indah",
+            "tag": "FESTIVAL HADROH",
+            "tagColor": "orange",
+            "views": "730K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-16",
+            "title": "🕌 Surah Al-Baqarah Ayat 1-5 Ayat Kursi & 2 Ayat Terakhir Pelindung Rumah",
+            "tag": "AL-BAQARAH",
+            "tagColor": "cyan",
+            "views": "2.8M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-17",
+            "title": "📖 Sholawat Badar Menggetarkan Hati Pembukaan Acara Maulid Nabi",
+            "tag": "SHOLAWAT BADAR",
+            "tagColor": "gold",
+            "views": "1.4M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-18",
+            "title": "✨ Doa Khatam Al-Quran Santri Wisuda Tahfidz Penuh Haru",
+            "tag": "KHATAM QURAN",
+            "tagColor": "cyan",
+            "views": "640K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-19",
+            "title": "🕌 Murottal Surah Yusuf Pengingat Kesabaran & Akhlak Mulia Pemuda",
+            "tag": "SURAH YUSUF",
+            "tagColor": "gold",
+            "views": "950K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-20",
+            "title": "📖 Al-Matsurat Sughra Bacaan Dzikir Petang Pembenteng Jiwa Santri",
+            "tag": "AL-MATSURAT",
+            "tagColor": "orange",
+            "views": "890K views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-21",
+            "title": "✨ Sholawat Busyro Ijazah Para Ulama Membuka Pintu Kemudahan Hidup",
+            "tag": "SHOLAWAT BUSYRO",
+            "tagColor": "gold",
+            "views": "1.3M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
+        },
+        {
+            "id": "santri-22",
+            "title": "🕌 Murottal Santri Cilik Hafalan Surat Pendek Juz 30 Suara Jernih",
+            "tag": "SANTRI CILIK",
+            "tagColor": "cyan",
+            "views": "1.1M views",
+            "ratio": "16-9",
+            "category": "santri",
+            "embedUrl": "https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=0&rel=0&modestbranding=1"
         }
-      ]
-    };
+    ],
+    "tiktok": [
+        {
+            "id": "tt-1",
+            "title": "Sound Knalpot Suos Racing Bikin Kaget Satu Gang #MontirTeguh #BoreUp",
+            "tag": "TIKTOK VIRAL",
+            "tagColor": "red",
+            "views": "1.2M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-2",
+            "title": "Aksi Santri Bersholawat di Atas Panggung Bikin Adem Suasana Hati",
+            "tag": "SANTRI KEREN",
+            "tagColor": "gold",
+            "views": "940K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-3",
+            "title": "Tutorial Porting Polish Silinder Head Agar Nafas Motor Tambah Gahar",
+            "tag": "BENGKEL PRO",
+            "tagColor": "cyan",
+            "views": "430K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-4",
+            "title": "Review Sarung Santri Bahan Halus Anti Kusut Buat Sholat & Pengajian",
+            "tag": "OOTD SANTRI",
+            "tagColor": "orange",
+            "views": "310K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-5",
+            "title": "Momen Joki Drag Bike Nyaris Terbang Saat Wheelie di Garis Start 201m",
+            "tag": "DRAG CRASH",
+            "tagColor": "red",
+            "views": "2.1M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-6",
+            "title": "Kopiah Peci Santri Karakter Rajut Halus Nyaman Dipakai Seharian",
+            "tag": "PECI SANTRI",
+            "tagColor": "gold",
+            "views": "520K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-7",
+            "title": "Cinematic Motor Beat Karbu Modif Hedon Kaki-Kaki RCB Velg Rapih",
+            "tag": "BEAT HEDON",
+            "tagColor": "cyan",
+            "views": "830K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-8",
+            "title": "Suara Knalpot Tsukigi Silent Wrc Beat Street Bikin Tetangga Senang",
+            "tag": "KNALPOT ADEM",
+            "tagColor": "orange",
+            "views": "640K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-9",
+            "title": "Santri Mukim Masak Nasi Liwet Bareng Satu Nampan Nikmat Luar Biasa",
+            "tag": "KULTUR SANTRI",
+            "tagColor": "gold",
+            "views": "1.4M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-10",
+            "title": "Tips Memilih Roller Silang 8 Gram dan 10 Gram Biar Matic Tidak Lemot",
+            "tag": "TIPS ROLLER",
+            "tagColor": "cyan",
+            "views": "470K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-11",
+            "title": "Suara Helikopter Karbu PWK 28 Ninja R Bikin Merinding Pecinta 2 Tak",
+            "tag": "HELIKOPTER 2T",
+            "tagColor": "red",
+            "views": "1.1M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-12",
+            "title": "Aksi Qori Cilik Bersuara Emas Bikin Kagum Jamaah Pengajian Akbar",
+            "tag": "QORI CILIK",
+            "tagColor": "gold",
+            "views": "980K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-13",
+            "title": "Unboxing Tool Set Kunci Sok 46 Pcs Montir Rumahan Serbaguna Murah",
+            "tag": "TOOLKIT MONTIR",
+            "tagColor": "cyan",
+            "views": "360K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-14",
+            "title": "Gaya Santri Zaman Now Pakai Baju Koko Kurta Modern Elegan",
+            "tag": "KOKO MODERN",
+            "tagColor": "orange",
+            "views": "290K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-15",
+            "title": "Reaction Mekanik Luar Negeri Lihat Settingan Motor Drag Indonesia",
+            "tag": "REACTION DRAG",
+            "tagColor": "red",
+            "views": "1.7M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-16",
+            "title": "Tutorial Mengencangkan Rantai Motor Sesuai Batas Ayun 2-3 cm",
+            "tag": "RANTAI MOTOR",
+            "tagColor": "cyan",
+            "views": "420K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-17",
+            "title": "Kompilasi Sholawat Akustik Santri Pengiring Istirahat Malam Syahdu",
+            "tag": "SHOLAWAT AKUSTIK",
+            "tagColor": "gold",
+            "views": "1.3M views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        },
+        {
+            "id": "tt-18",
+            "title": "Tes Ketajaman Mata Pisau Bubut Porting Head Mesin 4 Tak Balap",
+            "tag": "BUBUT BALAP",
+            "tagColor": "orange",
+            "views": "340K views",
+            "ratio": "9-16",
+            "category": "tiktok",
+            "embedUrl": "https://www.tiktok.com/embed/v2/6718335390845095173"
+        }
+    ],
+    "drakor": [
+        {
+            "id": "kd-1",
+            "title": "Queen of Tears (Ratu Air Mata)",
+            "tag": "ROMANCE COMEDY",
+            "tagColor": "gold",
+            "rating": "⭐ 9.8 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Kisah cinta penuh liku dan intrik bisnis antara ratu toserba terkemuka dan direktur hukum yang berasal dari pedesaan.",
+            "affiliateText": "Camilan Tteokbokki & Ramen Nonton Drakor",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com/ott/id/id/all/playlist-queen_of_tears-playlist-26274431",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-2",
+            "title": "Vincenzo (Pengacara Mafia Berdarah Dingin)",
+            "tag": "ACTION CRIME",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.7 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pengacara consigliere mafia Italia kembali ke tanah kelahirannya di Korea untuk merebut emas batangan di gedung tua.",
+            "affiliateText": "Kopi Kaleng Espresso & Jas Slimfit Vincenzo",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-3",
+            "title": "Crash Landing on You (Mendarat di Hatimu)",
+            "tag": "ROMANCE DRAMA",
+            "tagColor": "orange",
+            "rating": "⭐ 9.9 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pewaris konglomerat yang mengalami kecelakaan paralayang mendarat darurat di wilayah perbatasan militer Korea Utara.",
+            "affiliateText": "Jaket Windbreaker Parasut Nonton K-Drama",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-4",
+            "title": "Doctor Romantic (Master Kim Operasi Darurat)",
+            "tag": "MEDICAL LIFE",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.6 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1538100592444-267332219711?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Ketegangan para dokter ahli bedah di Rumah Sakit Doldam pedesaan yang mengutamakan keselamatan jiwa pasien di atas segalanya.",
+            "affiliateText": "Tumbler Kopi Stainless Suhu Dingin Panas",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-5",
+            "title": "Business Proposal (Kencan Buta Bos CEO)",
+            "tag": "ROMCOM KANTOR",
+            "tagColor": "gold",
+            "rating": "⭐ 9.5 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Karyawati biasa menggantikan sahabatnya kencan buta yang ternyata pasangan kencannya adalah direktur utama perusahaannya sendiri.",
+            "affiliateText": "Snack Rumput Laut Nori Korea Halal",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-6",
+            "title": "Taxi Driver (Armada Balas Dendam Pelangi)",
+            "tag": "ACTION THRILLER",
+            "tagColor": "red",
+            "rating": "⭐ 9.8 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Layanan taksi misterius yang membalaskan dendam bagi para korban ketidakadilan hukum yang tidak tertolong pihak berwajib.",
+            "affiliateText": "Sarung Tangan Kulit Mengemudi Keren",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-7",
+            "title": "All of Us Are Dead (Wabah Zombie SMA)",
+            "tag": "HORROR SURVIVAL",
+            "tagColor": "red",
+            "rating": "⭐ 9.4 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Sekelompok siswa terjebak di gedung SMA ketika virus zombie merebak cepat dan harus bertahan hidup dengan alat seadanya.",
+            "affiliateText": "Lampu Senter Emergency LED Super Terang",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-8",
+            "title": "Moving (Pahlawan Super Agen Rahasia)",
+            "tag": "SCI-FI HERO",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.9 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Para remaja yang mewarisi kekuatan super misterius dari orang tua mereka yang mantan agen intelijen rahasia negara.",
+            "affiliateText": "Ransel Pria Waterproof Tas Sekolah Trendy",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-9",
+            "title": "Twinkling Watermelon (Perjalanan Waktu Band Musik)",
+            "tag": "YOUTH MUSIC",
+            "tagColor": "gold",
+            "rating": "⭐ 9.7 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Siswa CODA berbakat gitar menjelajahi masa lalu tahun 1995 melalui toko musik misterius dan membentuk band legendaris.",
+            "affiliateText": "Gitar Akustik Pemula & Senar Cadangan",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-10",
+            "title": "Marry My Husband (Balas Dendam Takdir Pernikahan)",
+            "tag": "REVENGE DRAMA",
+            "tagColor": "red",
+            "rating": "⭐ 9.6 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Wanita yang dikhianati suami dan sahabatnya mendapat kesempatan hidup kedua 10 tahun ke masa lalu untuk mengubah nasibnya.",
+            "affiliateText": "Dress Formal Korea Style Elegan",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-11",
+            "title": "Itaewon Class (Perjuangan Bisnis Kedai DanBam)",
+            "tag": "INSPIRING DRAMA",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.8 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Mantan narapidana membangun kedai makan kecil di kawasan Itaewon untuk melawan konglomerat industri makanan yang zalim.",
+            "affiliateText": "Jaket Bomber Streetwear Ala Park Saeroyi",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-12",
+            "title": "Goblin: The Lonely and Great God",
+            "tag": "FANTASY ROMANCE",
+            "tagColor": "gold",
+            "rating": "⭐ 9.9 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Jenderal perang abadi terkutuk harus menemukan pengantin manusianya agar dapat mengakhiri kehidupan abadinya dengan damai.",
+            "affiliateText": "Mantel Panjang Wool Pria Hangat Keren",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-13",
+            "title": "Descendants of the Sun (Kapten Tentara & Dokter)",
+            "tag": "MILITARY ROMANCE",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.8 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Kisah cinta penuh tantangan antara kapten pasukan khusus militer perdamaian PBB dan dokter bedah relawan di wilayah perang.",
+            "affiliateText": "Kacamata Hitam Rayban Polarized Anti Silau",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "kd-14",
+            "title": "Hotel Del Luna (Penginapan Khusus Arwah)",
+            "tag": "FANTASY MYSTERY",
+            "tagColor": "gold",
+            "rating": "⭐ 9.7 / 10",
+            "category": "drakor",
+            "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pemilik hotel misterius yang melayani arwah gentayangan sebelum mereka melanjutkan perjalanan ke alam baka.",
+            "affiliateText": "Aksesoris Anting & Kalung Vintage Mewah",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        }
+    ],
+    "india": [
+        {
+            "id": "in-1",
+            "title": "RRR (Rise Roar Revolt)",
+            "tag": "BOLLYWOOD EPIC",
+            "tagColor": "gold",
+            "rating": "⭐ 9.5 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Dua pahlawan revolusi legendaris bertarung melawan penjajahan kolonial dengan koreografi aksi spektakuler tanpa batas.",
+            "affiliateText": "Teh Rempah Masala Chai Asli India",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-2",
+            "title": "Jawan: Aksi Shah Rukh Khan Menuntut Keadilan",
+            "tag": "ACTION THRILLER",
+            "tagColor": "red",
+            "rating": "⭐ 9.4 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Prajurit misterius memimpin tim khusus untuk memperbaiki ketidakadilan di tengah masyarakat dengan aksi dramatis.",
+            "affiliateText": "Kacamata Aviator Hitam Keren Ala Jawan",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-3",
+            "title": "3 Idiots (Kisah Persahabatan Teknik Mesin)",
+            "tag": "COMEDY DRAMA",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.9 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Tiga mahasiswa jurusan teknik mesin berjuang melawan sistem pendidikan kaku dengan filosofi kejar keunggulan bukan kesuksesan.",
+            "affiliateText": "Set Kunci Pas Ring & Tool Kit Mesin 14 Pcs",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-4",
+            "title": "Dangal: Perjuangan Ayah & Pegulat Putri Juara",
+            "tag": "SPORTS BIOPIC",
+            "tagColor": "gold",
+            "rating": "⭐ 9.7 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Mantan pegulat melatih kedua putrinya dengan disiplin keras hingga berhasil meraih medali emas pesta olahraga dunia.",
+            "affiliateText": "Suplemen Stamina & Sepatu Olahraga Kuat",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-5",
+            "title": "Pathaan: Agen Rahasia Tempur Lintas Batas",
+            "tag": "SPY ACTION",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.3 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Agen rahasia India kembali dari pengasingan untuk menghentikan serangan biologis mematikan dari kelompok tentara bayaran.",
+            "affiliateText": "Kaos Taktikal Bodyfit Nyaman & Dingin",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-6",
+            "title": "K.G.F: Chapter 2 (Kebangkitan Penguasa Tambang Emas)",
+            "tag": "ACTION MASS",
+            "tagColor": "gold",
+            "rating": "⭐ 9.8 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Rocky Bhai mempertahankan wilayah tambang emas Narachi dari kepungan musuh dan pemerintah pusat dalam pertarungan hidup mati.",
+            "affiliateText": "Kalung Rantai Titanium Gold Maskulin Pria",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-7",
+            "title": "Baahubali 2: The Conclusion (Kebenaran Kematian Amarendra)",
+            "tag": "MYTHIC WAR",
+            "tagColor": "gold",
+            "rating": "⭐ 9.9 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Kisah pengorbanan pangeran agung Mahishmati dan perebutan tahta kerajaan legendaris oleh putranya Mahendra Baahubali.",
+            "affiliateText": "Pedang Miniatur Replika Hiasan Meja Mewah",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-8",
+            "title": "Animal: Pertarungan Balas Dendam Tahta Bisnis",
+            "tag": "CRIME THRILLER",
+            "tagColor": "red",
+            "rating": "⭐ 9.2 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1509281373149-e957c6296406?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Ikatan obsesif anak konglomerat baja yang rela menghancurkan kerajaan kejahatan demi membela keselamatan ayahnya.",
+            "affiliateText": "Minyak Rambut Pomade Matte Hold Wangi",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-9",
+            "title": "Salaar: Part 1 - Ceasefire (Pertempuran Kota Khansaar)",
+            "tag": "ACTION EPIC",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.4 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Janji persahabatan masa kecil berubah menjadi perang berdarah di kota benteng Khansaar yang dikuasai panglima kejam.",
+            "affiliateText": "Jaket Kulit Motor Touring Tebal Windproof",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-10",
+            "title": "PK (Pencarian Tuhan Alien Pengembara)",
+            "tag": "SATIRE COMEDY",
+            "tagColor": "gold",
+            "rating": "⭐ 9.8 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Makhluk luar angkasa polos kehilangan remot pesawat dan berkeliling India mencari tahu konsep Tuhan dari berbagai agama.",
+            "affiliateText": "Radio Portabel Mini FM/AM Vintage Antik",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-11",
+            "title": "Chennai Express (Petualangan Kereta Api India)",
+            "tag": "ACTION COMEDY",
+            "tagColor": "orange",
+            "rating": "⭐ 9.5 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pria dari Mumbai tanpa sengaja menaiki kereta yang membawanya ke wilayah pedalaman India Selatan bersama putri bos mafia.",
+            "affiliateText": "Kain Sari Tenun Tradisional India Asli",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-12",
+            "title": "Tiger 3: Misi Penyelamatan Agen Mata-Mata",
+            "tag": "ACTION SPY",
+            "tagColor": "red",
+            "rating": "⭐ 9.3 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Salman Khan & Katrina Kaif dijebak sebagai pengkhianat negara dan harus membersihkan nama mereka dari komplotan teroris.",
+            "affiliateText": "Syal Scarf Taktikal Arab Gurun Pasir",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-13",
+            "title": "Dhoom 3 (Perampokan Akrobatik Sirkus Chicago)",
+            "tag": "HEIST ACTION",
+            "tagColor": "cyan",
+            "rating": "⭐ 9.4 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pesulap dan akrobat sirkus membalaskan dendam kematian ayahnya dengan merampok bank korup menggunakan motor super cepat.",
+            "affiliateText": "Helm Full Face Balap Desain Carbon Racing",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.viu.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        },
+        {
+            "id": "in-14",
+            "title": "Bajrangi Bhaijaan (Penyelamatan Gadis Cilik Lintas Batas)",
+            "tag": "TOUCHING DRAMA",
+            "tagColor": "gold",
+            "rating": "⭐ 9.9 / 10",
+            "category": "india",
+            "poster": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80",
+            "synopsis": "Pria berhati mulia mempertaruhkan segalanya demi mengantar anak perempuan bisu tersesat kembali ke pelukan orang tuanya.",
+            "affiliateText": "Gelang Tangan Perak Liontin Hanuman Simbol Kebaikan",
+            "affiliateUrl": "https://shopee.co.id",
+            "officialUrl": "https://www.iq.com",
+            "embedUrl": "https://www.youtube.com/embed/kJQP7kiw5Fk"
+        }
+    ]
+};
 
     // State Video
-    let currentVideoTab = "shorts";
+    let currentVideoTab = "all";
     let currentSearchQuery = "";
 
     // ========================================================================
@@ -3361,6 +5055,11 @@
       }
       if (targetNav) {
         targetNav.classList.add("active");
+      }
+
+      if (roomName === "beranda") {
+        renderCustomPlaylists();
+        renderFavorites();
       }
 
       // Gulir ke atas dengan mulus saat berpindah kamar
@@ -3557,9 +5256,50 @@
     // ========================================================================
     // LOGIKA TABS DAN RENDER KONTEN VIDEO AGGREGATOR
     // ========================================================================
+    function quickSearchTag(tag) {
+      const input = document.getElementById("video-search-input");
+      if (input) {
+        input.value = tag;
+        handleSearchInput(tag);
+        input.focus();
+        const grid = document.getElementById("video-content-grid");
+        if (grid) {
+          grid.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+    }
+
+    function searchYouTubeUnlimited(query) {
+      if (!query || !query.trim()) query = "drag ninja bore up 300cc";
+      switchVideoTab("unlimited");
+      let embedUrl = "";
+      let q = query.trim();
+      if (q.includes("youtube.com/watch?v=")) {
+        const vidId = q.split("v=")[1].split("&")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else if (q.includes("youtu.be/")) {
+        const vidId = q.split("youtu.be/")[1].split("?")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else if (q.includes("youtube.com/shorts/")) {
+        const vidId = q.split("shorts/")[1].split("?")[0];
+        embedUrl = "https://www.youtube.com/embed/" + vidId + "?autoplay=1";
+      } else if (q.includes("embed/")) {
+        embedUrl = q;
+      } else {
+        embedUrl = "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(q) + "&autoplay=1";
+      }
+      setUnlimitedVideo(embedUrl, "🎬 Pencarian YouTube: \"" + escapeHTML(q) + "\"");
+      const input = document.getElementById("custom-video-input");
+      if (input) input.value = q;
+      const unlimitedPlayer = document.getElementById("room-video");
+      if (unlimitedPlayer) {
+        unlimitedPlayer.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
     function switchVideoTab(tabName) {
       currentVideoTab = tabName;
-      const allTabs = ["shorts", "tiktok", "drakor", "india", "unlimited"];
+      const allTabs = ["all", "shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india", "unlimited", "myplaylists"];
       allTabs.forEach(function (t) {
         const btn = document.getElementById("tab-btn-" + t);
         if (btn) btn.classList.remove("active");
@@ -3570,16 +5310,28 @@
 
       // Perbarui Banner Info Sesuai Tab
       const bannerTitle = document.getElementById("tab-info-title");
-      if (tabName === "shorts") {
-        bannerTitle.innerText = "⚡ YOUTUBE SHORTS RESMI: Garansi Tonton di Tempat Tanpa Iklan Mengganggu";
-      } else if (tabName === "tiktok") {
-        bannerTitle.innerText = "🎵 TIKTOK EMBED TERKUNCI: Ditonton Langsung di Sini Tanpa Melempar ke Aplikasi Asli";
-      } else if (tabName === "drakor") {
-        bannerTitle.innerText = "👑 K-DRAMA RESMI: Akses Legal Pintu Doraemon Viu & iQIYI (100% Aman Hak Cipta)";
-      } else if (tabName === "india") {
-        bannerTitle.innerText = "🕌 SINEMA BOLLYWOOD: Kartu Film Mewah & Link Streaming Resmi Terpercaya";
-      } else if (tabName === "unlimited") {
-        bannerTitle.innerText = "♾️ PUTAR BEBAS SEPUASNYA: Tonton Playlist Balap & Oprek Mesin Tanpa Batas / Masukkan Link Sendiri";
+      if (bannerTitle) {
+        if (tabName === "all") {
+          bannerTitle.innerText = "🌟 SEMUA KOLEKSI VIDEO (148+ Video Sample): Balap Drag, Servis Mesin SMK, Santri Tilawah, TikTok, Drakor & Bollywood";
+        } else if (tabName === "shorts") {
+          bannerTitle.innerText = "⚡ YOUTUBE SHORTS RESMI (28 Video): Garansi Tonton di Tempat Bebas Iklan";
+        } else if (tabName === "balap") {
+          bannerTitle.innerText = "🏁 BALAP MOTOR & DRAG BIKE (26 Video): Aksi Drag 201m/500m, Herex 300cc & Dyno Test";
+        } else if (tabName === "mekanik") {
+          bannerTitle.innerText = "⚙️ BENGKEL MONTIR & SERVIS MESIN (26 Video): Panduan Praktik SMK & Solusi Montir Mandiri";
+        } else if (tabName === "santri") {
+          bannerTitle.innerText = "🕌 SANTRI & TILAWAH AL-QUR'AN (22 Video): Murottal Merdu, Surat Pilihan & Sholawat Penyejuk Hati";
+        } else if (tabName === "tiktok") {
+          bannerTitle.innerText = "🎵 TREN TIKTOK VIRAL (18 Video): Klip Otomotif & Santri Ditonton Langsung di Sini";
+        } else if (tabName === "drakor") {
+          bannerTitle.innerText = "👑 K-DRAMA POPULER (14 Judul): Poster Mewah, Sinopsis & Akses Legal Pintu Doraemon Viu & iQIYI";
+        } else if (tabName === "india") {
+          bannerTitle.innerText = "🕌 SINEMA BOLLYWOOD (14 Judul): Film India Blockbuster & Link Streaming Resmi Terpercaya";
+        } else if (tabName === "unlimited") {
+          bannerTitle.innerText = "♾️ PUTAR BEBAS SEPUASNYA: Tonton Playlist Balap & Oprek Mesin Tanpa Batas / Masukkan Link Sendiri";
+        } else if (tabName === "myplaylists") {
+          bannerTitle.innerText = "📑 PLAYLIST KUSTOM TAK TERBATAS: Kelola dan Putar Koleksi Video Pilihan Anda Sendiri Sepuasnya";
+        }
       }
 
       renderVideoContent();
@@ -3623,11 +5375,240 @@
         // ID YouTube langsung (11 karakter)
         embed = "https://www.youtube.com/embed/" + raw + "?autoplay=1";
       } else {
-        embed = "https://www.youtube.com/embed/5qap5aO4i9A";
+        embed = "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(raw) + "&autoplay=1";
       }
 
-      setUnlimitedVideo(embed, "Video Kustom Pilihan Anda: " + raw);
+      setUnlimitedVideo(embed, "Video Pilihan Anda: " + raw);
       input.value = "";
+    }
+
+    function renderSingleVideoCard(v) {
+      const isDrama = v.category === "drakor" || v.category === "india";
+      const isTikTok = v.category === "tiktok";
+      const isShorts = v.category === "shorts" || v.ratio === "9-16";
+
+      if (isDrama) {
+        return `
+          <div class="video-card">
+            <div class="drama-poster-wrap">
+              <img src="${v.poster}" alt="${v.title}" class="drama-poster-img" loading="lazy" />
+              <div class="poster-overlay">
+                <span class="tag-pill gold" style="align-self: flex-start;">100% LEGAL & RESMI</span>
+                <span class="tag-pill cyan" style="align-self: flex-end;">${v.rating}</span>
+              </div>
+            </div>
+            <div class="video-details">
+              <div class="badge-tag-wrap">
+                <span class="tag-pill ${v.tagColor}">${v.tag}</span>
+                <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.category === 'drakor' ? 'SUB INDO' : 'BOLLYWOOD'}</span>
+              </div>
+              <h3 class="video-title">${v.title}</h3>
+              <p class="synopsis-text">${v.synopsis || ''}</p>
+
+              <!-- Tombol Ganda: Keranjang Oranye Afiliasi & Pintu Doraemon Legal -->
+              <div class="drama-actions">
+                <a href="${buildShopeeAffiliateUrl(v.affiliateText || v.title, 'keranjang_oranye')}" target="_blank" rel="noopener noreferrer" class="btn-orange-affiliate" title="Beli camilan / merchandise di Shopee">
+                  <span>🛒</span>
+                  <span>Keranjang Oranye</span>
+                </a>
+                <a href="${v.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn-doraemon-legal" title="Tonton Resmi di Platform Viu / iQIYI">
+                  <span>🚪</span>
+                  <span>Tonton Resmi</span>
+                </a>
+              </div>
+
+              <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; margin-top:8px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.08);">
+                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.officialUrl}', '${v.poster || ''}')">➕ Playlist</span>
+                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.officialUrl}')">⭐ Simpan</span>
+                <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (isTikTok) {
+        return `
+          <div class="video-card">
+            <div class="player-frame-container ratio-9-16">
+              <iframe 
+                src="${v.embedUrl}" 
+                title="${v.title}" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                sandbox="allow-scripts allow-same-origin allow-popups"
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-details">
+              <div class="badge-tag-wrap">
+                <span class="tag-pill ${v.tagColor}">${v.tag}</span>
+                <span style="font-size: 10px; color: var(--neon-cyan); font-weight: 700;">${v.views}</span>
+              </div>
+              <h3 class="video-title">${v.title}</h3>
+              <div class="video-meta-sub">
+                <span>🎵 TikTok Stream Web</span>
+                <div style="display:flex; gap:8px;">
+                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
+                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                  <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (isShorts) {
+        return `
+          <div class="video-card">
+            <div class="player-frame-container ratio-9-16">
+              <iframe 
+                src="${v.embedUrl}" 
+                title="${v.title}" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-details">
+              <div class="badge-tag-wrap">
+                <span class="tag-pill ${v.tagColor}">${v.tag}</span>
+                <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.views}</span>
+              </div>
+              <h3 class="video-title">${v.title}</h3>
+              <div class="video-meta-sub">
+                <span>🔒 Terkunci di Halaman</span>
+                <div style="display:flex; gap:8px;">
+                  <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
+                  <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                  <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Default: YouTube Landscape (16:9) untuk Balap, Mekanik, Santri & Video Pilihan
+      return `
+        <div class="video-card">
+          <div class="player-frame-container ratio-16-9">
+            <iframe 
+              src="${v.embedUrl}" 
+              title="${v.title}" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <div class="video-details">
+            <div class="badge-tag-wrap">
+              <span class="tag-pill ${v.tagColor}">${v.tag}</span>
+              <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.views}</span>
+            </div>
+            <h3 class="video-title">${v.title}</h3>
+            <div class="video-meta-sub">
+              <span>▶️ YouTube Player Resmi</span>
+              <div style="display:flex; gap:8px;">
+                <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">➕ Playlist</span>
+                <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeQuotes(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
+                <span style="color: #94a3b8; cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderUnlimitedPlayerTab(container) {
+      container.innerHTML = `
+        <div class="unlimited-player-container" style="grid-column: 1 / -1;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3 style="font-size:16px; color:var(--text-white); margin-bottom:2px; display:flex; align-items:center; gap:6px;">
+                <span>🎬</span> <span id="unlimited-current-title">Pemutar Bebas Sepuasnya (Drag Balap & Modifikasi Mesin)</span>
+              </h3>
+              <p style="font-size:11px; color:#cbd5e1;">Streaming embed resmi lancar jaya, bebas buffering, dan 100% aman untuk kuota</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button type="button" class="action-btn" onclick="saveCurrentUnlimitedToPlaylist()" style="font-size:11px; padding:6px 12px; background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:800; border:none; border-radius:6px; cursor:pointer;">
+                ➕ Masukkan ke Playlist
+              </button>
+              <span class="tag-pill cyan">SERVER 0 RP</span>
+            </div>
+          </div>
+
+          <!-- PLAYER IFRAME 16:9 -->
+          <div class="player-frame-container ratio-16-9" style="margin-bottom:12px; border-radius:8px; overflow:hidden;">
+            <iframe 
+              id="unlimited-main-iframe"
+              src="${customUnlimitedVideoUrl}" 
+              title="Pemutar Bebas Sepuasnya" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <!-- PILIHAN PRESET VIDEO VIRAL CEPAT -->
+          <div style="margin-bottom: 14px;">
+            <div style="font-size:12px; font-weight:700; color:var(--neon-cyan); margin-bottom:6px;">
+              ⚡ Pilih Playlist Cepat Streaming Sekali Klik:
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/5qap5aO4i9A', 'Drag Bike 201m Sentul Final FFA')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+                🏁 Drag Bike 201m
+              </button>
+              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/kJQP7kiw5Fk', 'Seting Karbu Sudco & Klep Balap 300cc')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+                ⚙️ Seting Karbu & Klep
+              </button>
+              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/9bZkp7q19f0', 'Tutorial Servis CVT Anti Gredek Bengkel')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+                🛠️ Servis CVT Gredek
+              </button>
+              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/dQw4w9WgXcQ', 'Cinematic RX King Knalpot Garing Kolong')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(0,240,255,0.3);">
+                👑 RX King 2-Tak
+              </button>
+              <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/fJ9rUzIMcZQ', 'Murottal Al-Quran Surat Ar-Rahman Syahdu')" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#fff; border:1px solid rgba(212,175,55,0.4);">
+                🕌 Murottal Merdu
+              </button>
+            </div>
+          </div>
+
+          <!-- INPUT FORM UNTUK MASUKKAN LINK YOUTUBE SENDIRI -->
+          <form onsubmit="handleCustomVideoSubmit(event)" style="margin-bottom:14px; background:#101c22; padding:12px; border-radius:8px; border:1px dashed var(--neon-cyan);">
+            <label style="display:block; font-size:12px; font-weight:700; color:#fff; margin-bottom:6px;">
+              🔗 Punya link video YouTube lain atau kata kunci pencarian? Masukkan di sini:
+            </label>
+            <div style="display:flex; gap:8px;">
+              <input 
+                type="text" 
+                id="custom-video-input" 
+                class="search-input" 
+                placeholder="Contoh: https://youtu.be/... atau https://youtube.com/shorts/... atau judul apa saja" 
+                style="font-size:12px;"
+              />
+              <button type="submit" class="action-btn" style="background:var(--neon-cyan); color:#0b1215; font-weight:800; white-space:nowrap; padding:0 14px;">
+                ▶️ Putar
+              </button>
+            </div>
+          </form>
+
+          <!-- REKOMENDASI BELANJA AFILIASI BERKAITAN -->
+          <div style="background:#18262c; border-radius:8px; padding:10px;">
+            <div style="font-size:11px; font-weight:700; color:var(--gold-accent); margin-bottom:8px;">
+              🛍️ Produk Terkait Video Ini (Siap Kirim & Diskon Eksklusif):
+            </div>
+            <div class="btn-cart-group">
+              <a href="${buildShopeeAffiliateUrl('oli motul racing motor', 'unlimited_video')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
+                🛒 Beli Oli Racing di Shopee
+              </a>
+              <a href="${buildTikTokAffiliateUrl('knalpot racing motor')}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
+                🎵 Cek Knalpot Racing di TikTok Shop
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     // Render Grid Video Sesuai Tab Aktif & Filter Pencarian
@@ -3635,24 +5616,68 @@
       const container = document.getElementById("video-content-grid");
       if (!container) return;
 
-      const rawItems = VIDEO_DATABASE[currentVideoTab] || [];
+      // Tab Khusus: Playlist Kustom Pengguna
+      if (currentVideoTab === "myplaylists") {
+        renderCustomPlaylistsInVideoTab(container);
+        return;
+      }
+
+      // Tab Khusus: Pemutar Bebas Unlimited (jika tidak sedang mengetik di search bar)
+      if (currentVideoTab === "unlimited" && !currentSearchQuery.trim()) {
+        renderUnlimitedPlayerTab(container);
+        return;
+      }
+
       const query = currentSearchQuery.toLowerCase().trim();
+      const isGlobalSearch = query.length > 0;
+      let itemsToRender = [];
 
-      // Saring konten berdasarkan kata kunci pencarian
-      const filteredItems = rawItems.filter(function (item) {
-        if (!query) return true;
-        const titleMatch = item.title.toLowerCase().includes(query);
-        const tagMatch = item.tag.toLowerCase().includes(query);
-        const synMatch = item.synopsis ? item.synopsis.toLowerCase().includes(query) : false;
-        return titleMatch || tagMatch || synMatch;
-      });
+      if (isGlobalSearch) {
+        // PENCARIAN GLOBAL CERDAS DI SELURUH 148+ KOLEKSI VIDEO DARI SEMUA KATEGORI
+        const allCatKeys = Object.keys(VIDEO_DATABASE);
+        allCatKeys.forEach(function (cat) {
+          const list = VIDEO_DATABASE[cat] || [];
+          list.forEach(function (item) {
+            const titleMatch = item.title && item.title.toLowerCase().includes(query);
+            const tagMatch = item.tag && item.tag.toLowerCase().includes(query);
+            const synMatch = item.synopsis && item.synopsis.toLowerCase().includes(query);
+            const catMatch = (item.category || cat).toLowerCase().includes(query);
+            if (titleMatch || tagMatch || synMatch || catMatch) {
+              itemsToRender.push(Object.assign({}, item, { category: item.category || cat }));
+            }
+          });
+        });
+      } else if (currentVideoTab === "all") {
+        // TAMPILKAN SELURUH 148+ VIDEO
+        const allCatKeys = ["shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india"];
+        allCatKeys.forEach(function (cat) {
+          const list = VIDEO_DATABASE[cat] || [];
+          list.forEach(function (item) {
+            itemsToRender.push(Object.assign({}, item, { category: item.category || cat }));
+          });
+        });
+      } else {
+        itemsToRender = (VIDEO_DATABASE[currentVideoTab] || []).map(function (item) {
+          return Object.assign({}, item, { category: item.category || currentVideoTab });
+        });
+      }
 
-      if (filteredItems.length === 0) {
+      if (itemsToRender.length === 0) {
         container.innerHTML = `
           <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: #152227; border-radius: 12px; border: 1px dashed var(--neon-cyan);">
-            <p style="font-size: 32px; margin-bottom: 8px;">🔍</p>
-            <h3 style="font-size: 16px; color: #fff; margin-bottom: 6px;">Tidak ada video yang cocok dengan "${currentSearchQuery}"</h3>
-            <p style="font-size: 12px; color: var(--text-muted);">Coba gunakan kata kunci lain seperti: "racing", "santri", "montir", atau pilih tab video lain.</p>
+            <p style="font-size: 36px; margin-bottom: 8px;">🔍</p>
+            <h3 style="font-size: 16px; color: #fff; margin-bottom: 6px;">Tidak ada video sample lokal yang pas dengan kata kunci "${escapeHTML(currentSearchQuery)}"</h3>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">
+              Ingin langsung menonton video YouTube apa saja dengan kata kunci ini di Teguh Stream tanpa batas?
+            </p>
+            <div style="display:inline-flex; gap:10px; flex-wrap:wrap; justify-content:center;">
+              <button type="button" onclick="searchYouTubeUnlimited('${escapeQuotes(currentSearchQuery)}')" class="action-btn" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; font-size:12px; padding:10px 18px; border:none; border-radius:6px; cursor:pointer;">
+                ▶️ Putar Langsung di Pemutar Bebas YouTube
+              </button>
+              <button type="button" onclick="clearSearchInput()" class="action-btn" style="background:#1e293b; color:#cbd5e1; font-size:12px; padding:10px 18px; border:1px solid rgba(255,255,255,0.2); border-radius:6px; cursor:pointer;">
+                🔄 Tampilkan Seluruh 148+ Koleksi Video
+              </button>
+            </div>
           </div>
         `;
         return;
@@ -3660,194 +5685,47 @@
 
       let html = "";
 
-      // Kasus 1: YouTube Shorts (Embed iframe resmi, allowautoplay, tonton di tempat)
-      if (currentVideoTab === "shorts") {
-        filteredItems.forEach(function (v) {
-          html += `
-            <div class="video-card">
-              <div class="player-frame-container ratio-9-16">
-                <iframe 
-                  src="${v.embedUrl}" 
-                  title="${v.title}" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  allowfullscreen
-                  loading="lazy">
-                </iframe>
-              </div>
-              <div class="video-details">
-                <div class="badge-tag-wrap">
-                  <span class="tag-pill ${v.tagColor}">${v.tag}</span>
-                  <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">${v.views}</span>
-                </div>
-                <h3 class="video-title">${v.title}</h3>
-                <div class="video-meta-sub">
-                  <span>🔒 Terkunci di Halaman</span>
-                  <div style="display:flex; gap:10px;">
-                    <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeHTML(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
-                    <span style="color: var(--neon-cyan); cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
-                  </div>
-                </div>
+      if (isGlobalSearch) {
+        html += `
+          <div style="grid-column: 1 / -1; background:#0f1d24; border:1px solid var(--neon-cyan); border-radius:8px; padding:12px 16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <span style="font-size:14px; font-weight:800; color:#fff;">
+                🎯 Ditemukan <span style="color:var(--neon-cyan);">${itemsToRender.length} video</span> dari pencarian: <span style="color:var(--gold-accent);">"${escapeHTML(currentSearchQuery)}"</span>
+              </span>
+              <div style="font-size:11px; color:#94a3b8; margin-top:2px;">
+                Hasil pencarian cerdas di seluruh koleksi (Shorts, Drag Balap, Mesin SMK, Santri, TikTok, Drakor & Bollywood)
               </div>
             </div>
-          `;
-        });
-      }
-
-      // Kasus 2: Tren TikTok (Embed iframe resmi, tonton di tempat tanpa melempar aplikasi)
-      else if (currentVideoTab === "tiktok") {
-        filteredItems.forEach(function (v) {
-          html += `
-            <div class="video-card">
-              <div class="player-frame-container ratio-9-16">
-                <iframe 
-                  src="${v.embedUrl}" 
-                  title="${v.title}" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  sandbox="allow-scripts allow-same-origin allow-popups"
-                  allowfullscreen
-                  loading="lazy">
-                </iframe>
-              </div>
-              <div class="video-details">
-                <div class="badge-tag-wrap">
-                  <span class="tag-pill ${v.tagColor}">${v.tag}</span>
-                  <span style="font-size: 10px; color: var(--neon-cyan); font-weight: 700;">${v.views}</span>
-                </div>
-                <h3 class="video-title">${v.title}</h3>
-                <div class="video-meta-sub">
-                  <span>🎵 TikTok Stream Web</span>
-                  <div style="display:flex; gap:10px;">
-                    <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${v.id}', '${escapeHTML(v.title)}', '${v.tag}', '${v.embedUrl}')">⭐ Simpan</span>
-                    <span style="color: var(--neon-cyan); cursor: pointer;" onclick="shareVideo('${v.title}')">🔗 Bagikan</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-        });
-      }
-
-      // Kasus 5: Unlimited Video & Playlist Bebas Sepuasnya (Modal Rp 0, 100% Legal)
-      else if (currentVideoTab === "unlimited") {
-        html = `
-          <div class="video-card" style="grid-column: 1 / -1; background: #142126; border-color: var(--neon-cyan);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-              <div>
-                <h3 id="unlimited-current-title" style="font-size:15px; font-weight:800; color:var(--neon-cyan); margin-bottom:2px;">
-                  🎬 Pemutar Bebas Sepuasnya: Drag Bike & Oprek Mesin
-                </h3>
-                <p style="font-size:11px; color:#cbd5e1;">Streaming embed resmi lancar jaya, bebas buffering, dan 100% aman untuk kuota</p>
-              </div>
-              <span class="tag-pill cyan">SERVER 0 RP</span>
-            </div>
-
-            <!-- PLAYER IFRAME 16:9 -->
-            <div class="player-frame-container ratio-16-9" style="margin-bottom:12px; border-radius:8px; overflow:hidden;">
-              <iframe 
-                id="unlimited-main-iframe"
-                src="${customUnlimitedVideoUrl}" 
-                title="Teguh Video Stream Unlimited Player" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen
-                loading="lazy">
-              </iframe>
-            </div>
-
-            <!-- PILIHAN PLAYLIST SIAP PUTAR -->
-            <div style="margin-bottom:14px;">
-              <div style="font-size:11px; font-weight:700; color:var(--gold-accent); margin-bottom:6px;">
-                ⚡ PILIH PLAYLIST RESMI SIAP TONTON SEPUASNYA:
-              </div>
-              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:6px;">
-                <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/5qap5aO4i9A', '🏁 Drag Bike 201m & 500m Liar / Resmi Nusantara')" style="font-size:11px; padding:8px 10px; text-align:left; background:#182830; border:1px solid rgba(0,240,255,0.3); color:#fff;">
-                  🏍️ Drag Bike 201m/500m
-                </button>
-                <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/9bZkp7q19f0', '⚙️ Tutorial Servis CVT Matic Anti Gredek & Pasang Roller')" style="font-size:11px; padding:8px 10px; text-align:left; background:#182830; border:1px solid rgba(0,240,255,0.3); color:#fff;">
-                  🛠️ Tutorial Servis CVT
-                </button>
-                <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/kJQP7kiw5Fk', '⚡ Panduan Lengkap Bore Up Mesin 4-Tak Balap SMK')" style="font-size:11px; padding:8px 10px; text-align:left; background:#182830; border:1px solid rgba(0,240,255,0.3); color:#fff;">
-                  ⚡ Oprek Mesin 4-Tak SMK
-                </button>
-                <button type="button" class="action-btn" onclick="setUnlimitedVideo('https://www.youtube.com/embed/videoseries?list=PLbpi6ZahtOH6Blw3RGY3PdVQ36msTtxaw', '🕌 Murottal Al-Quran 30 Juz Santri Merdu Nonstop')" style="font-size:11px; padding:8px 10px; text-align:left; background:#182830; border:1px solid rgba(245,158,11,0.4); color:#fff;">
-                  🕌 Murottal 30 Juz Nonstop
-                </button>
-              </div>
-            </div>
-
-            <!-- FORM INPUT LINK SENDIRI -->
-            <form onsubmit="handleCustomVideoSubmit(event)" style="background:#111a1e; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; margin-bottom:12px;">
-              <label style="font-size:11px; font-weight:700; color:var(--neon-cyan); display:block; margin-bottom:4px;">
-                🔗 Masukkan Link atau ID Video YouTube Pilihan Anda Sendiri:
-              </label>
-              <div style="display:flex; gap:8px;">
-                <input 
-                  type="text" 
-                  id="custom-video-input" 
-                  class="search-input" 
-                  placeholder="Contoh: https://youtu.be/... atau https://youtube.com/shorts/... atau ID video" 
-                  style="font-size:12px;"
-                />
-                <button type="submit" class="action-btn" style="background:var(--neon-cyan); color:#0b1215; font-weight:800; white-space:nowrap; padding:0 14px;">
-                  ▶️ Putar
-                </button>
-              </div>
-            </form>
-
-            <!-- REKOMENDASI BELANJA AFILIASI BERKAITAN -->
-            <div style="background:#18262c; border-radius:8px; padding:10px;">
-              <div style="font-size:11px; font-weight:700; color:var(--gold-accent); margin-bottom:8px;">
-                🛍️ Produk Terkait Video Ini (Siap Kirim & Diskon Eksklusif):
-              </div>
-              <div class="btn-cart-group">
-                <a href="${buildShopeeAffiliateUrl('oli motul racing motor', 'unlimited_video')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
-                  🛒 Beli Oli Racing di Shopee
-                </a>
-                <a href="${buildTikTokAffiliateUrl('knalpot racing motor')}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                  🎵 Cek Knalpot Racing di TikTok Shop
-                </a>
-              </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button type="button" onclick="searchYouTubeUnlimited('${escapeQuotes(currentSearchQuery)}')" class="action-btn" style="font-size:11px; padding:6px 12px; background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; border:none; border-radius:4px; cursor:pointer;">
+                ▶️ Putar di YouTube Bebas
+              </button>
+              <button type="button" onclick="clearSearchInput()" class="action-btn" style="font-size:11px; padding:6px 10px; background:#1e293b; color:#cbd5e1; border:1px solid rgba(255,255,255,0.2); border-radius:4px; cursor:pointer;">
+                ✕ Reset
+              </button>
             </div>
           </div>
         `;
-        container.innerHTML = html;
-        return;
       }
 
-      // Kasus 3 & 4: Drakor & Sinema India (Kartu Poster Mewah + Tombol Keranjang Oranye + Pintu Keluar Doraemon Legal)
-      else {
-        filteredItems.forEach(function (v) {
-          html += `
-            <div class="video-card">
-              <div class="drama-poster-wrap">
-                <img src="${v.poster}" alt="${v.title}" class="drama-poster-img" loading="lazy" />
-                <div class="poster-overlay">
-                  <span class="tag-pill gold" style="align-self: flex-start;">100% LEGAL & RESMI</span>
-                  <span class="tag-pill cyan" style="align-self: flex-end;">${v.rating}</span>
-                </div>
-              </div>
-              <div class="video-details">
-                <div class="badge-tag-wrap">
-                  <span class="tag-pill ${v.tagColor}">${v.tag}</span>
-                  <span style="font-size: 10px; color: var(--gold-accent); font-weight: 700;">SUB INDONESIA</span>
-                </div>
-                <h3 class="video-title">${v.title}</h3>
-                <p class="synopsis-text">${v.synopsis}</p>
+      itemsToRender.forEach(function (v) {
+        html += renderSingleVideoCard(v);
+      });
 
-                <!-- Tombol Ganda: Keranjang Oranye Afiliasi & Pintu Keluar Doraemon Legal -->
-                <div class="drama-actions">
-                  <a href="${buildShopeeAffiliateUrl(v.affiliateText || v.title, 'keranjang_oranye')}" target="_blank" rel="noopener noreferrer" class="btn-orange-affiliate" title="Beli camilan / merchandise di Shopee">
-                    <span>🛒</span>
-                    <span>Keranjang Oranye</span>
-                  </a>
-                  <a href="${v.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn-doraemon-legal" title="Tonton Resmi di Platform Viu / iQIYI">
-                    <span>🚪</span>
-                    <span>Tonton Resmi</span>
-                  </a>
-                </div>
-              </div>
+      if (isGlobalSearch) {
+        html += `
+          <div style="grid-column: 1 / -1; background:#111c22; border:1px dashed rgba(0,240,255,0.4); border-radius:10px; padding:18px; margin-top:16px; text-align:center;">
+            <div style="font-size:14px; font-weight:800; color:#fff; margin-bottom:4px;">
+              🎬 Ingin Menonton Video YouTube Lainnya Tanpa Batas?
             </div>
-          `;
-        });
+            <p style="font-size:11px; color:#94a3b8; margin-bottom:12px;">
+              Ketik kata kunci atau tempel link video YouTube apa saja untuk ditonton di tempat sepuasnya!
+            </p>
+            <button type="button" onclick="searchYouTubeUnlimited('${escapeQuotes(currentSearchQuery)}')" class="action-btn" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; font-size:12px; padding:8px 18px; border:none; border-radius:6px; cursor:pointer;">
+              ▶️ Putar "${escapeHTML(currentSearchQuery)}" di Pemutar Bebas YouTube
+            </button>
+          </div>
+        `;
       }
 
       container.innerHTML = html;
@@ -3939,6 +5817,10 @@
           <div class="video-details">
             <span class="tag-pill cyan">${shorts1.tag}</span>
             <h4 class="video-title">${shorts1.title}</h4>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${shorts1.embedUrl}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts1.id}', '${escapeQuotes(shorts1.title)}', '${shorts1.tag}', '${shorts1.embedUrl}')">⭐ Simpan</span>
+            </div>
           </div>
         </div>
 
@@ -3949,6 +5831,10 @@
           <div class="video-details">
             <span class="tag-pill gold">${shorts2.tag}</span>
             <h4 class="video-title">${shorts2.title}</h4>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${shorts2.embedUrl}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${shorts2.id}', '${escapeQuotes(shorts2.title)}', '${shorts2.tag}', '${shorts2.embedUrl}')">⭐ Simpan</span>
+            </div>
           </div>
         </div>
 
@@ -3962,6 +5848,10 @@
             <div class="drama-actions">
               <a href="${drama1.affiliateUrl}" target="_blank" rel="noopener noreferrer" class="btn-orange-affiliate">🛒 Shopee</a>
               <a href="${drama1.officialUrl}" target="_blank" rel="noopener noreferrer" class="btn-doraemon-legal">🚪 Tonton</a>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11px;">
+              <span style="color: var(--neon-cyan); cursor: pointer; font-weight:700;" onclick="openAddToPlaylistModal('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${drama1.officialUrl}', '${drama1.poster || ''}')">➕ Playlist</span>
+              <span style="color: var(--gold-accent); cursor: pointer; font-weight:700;" onclick="toggleBookmark('${drama1.id}', '${escapeQuotes(drama1.title)}', '${drama1.tag}', '${drama1.officialUrl}')">⭐ Simpan</span>
             </div>
           </div>
         </div>
@@ -4600,6 +6490,11 @@
       });
     }
 
+    function escapeQuotes(str) {
+      if (!str) return "";
+      return String(str).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, "&quot;");
+    }
+
     // Bagikan Video
     function shareVideo(title) {
       if (navigator.share) {
@@ -4676,8 +6571,9 @@
               <span class="tag-pill gold">${item.tag}</span>
               <h4 class="video-title">${item.title}</h4>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+                <span style="font-size:11px; color:var(--neon-cyan); cursor:pointer; font-weight:800;" onclick="openAddToPlaylistModal('${item.id}', '${escapeQuotes(item.title)}', '${item.tag}', '${item.embedUrl}')">➕ Playlist</span>
                 <span style="font-size:11px; color:#ef4444; cursor:pointer; font-weight:800;" onclick="toggleBookmark('${item.id}')">🗑️ Hapus</span>
-                <span style="font-size:11px; color:var(--neon-cyan); cursor:pointer; font-weight:800;" onclick="shareVideo('${item.title}')">🔗 Bagikan</span>
+                <span style="font-size:11px; color:#94a3b8; cursor:pointer; font-weight:800;" onclick="shareVideo('${item.title}')">🔗 Bagikan</span>
               </div>
             </div>
           </div>
@@ -4691,6 +6587,679 @@
       if (favSection) {
         favSection.scrollIntoView({ behavior: "smooth" });
       }
+    }
+
+    // ========================================================================
+    // FITUR PLAYLIST VIDEO KUSTOM TAK TERBATAS (LOCALSTORAGE)
+    // ========================================================================
+    const DEFAULT_PLAYLISTS_SEED = [
+      {
+        id: "pl_drag_nusantara",
+        title: "⚡ Drag Bike & Balap 201m Nusantara",
+        description: "Koleksi video aksi joki drag bike 201m & 500m resmi dan balap lintasan lurus.",
+        createdAt: "2026-09-20",
+        items: [
+          {
+            id: "v_drag_1",
+            title: "🏁 Aksi Joki Drag Bike 201m Settingan Karbu Sudco & Klep Lebar",
+            tag: "DRAG 201M",
+            tagColor: "gold",
+            embedUrl: "https://www.youtube.com/embed/5qap5aO4i9A"
+          },
+          {
+            id: "v_drag_2",
+            title: "🚀 Final FFA 4-Tak 250cc Suara Knalpot Menggelegar",
+            tag: "BALAP 4T",
+            tagColor: "cyan",
+            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+          }
+        ]
+      },
+      {
+        id: "pl_servis_cvt",
+        title: "🛠️ Rahasia Servis CVT & Oprek Mesin",
+        description: "Tutorial montir mandiri: servis CVT anti gredek, ganti roller & per cvt.",
+        createdAt: "2026-09-21",
+        items: [
+          {
+            id: "v_cvt_1",
+            title: "⚙️ Tutorial Servis CVT Matic Bersihkan Pulley & Pasang Roller Silang",
+            tag: "CVT MATIC",
+            tagColor: "cyan",
+            embedUrl: "https://www.youtube.com/embed/9bZkp7q19f0"
+          },
+          {
+            id: "v_boreup_1",
+            title: "⚡ Panduan Lengkap Bore Up Mesin 4-Tak Balap SMK",
+            tag: "BORE UP",
+            tagColor: "gold",
+            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+          }
+        ]
+      },
+      {
+        id: "pl_tilawah_santri",
+        title: "🕌 Tilawah Al-Qur'an & Murottal Merdu",
+        description: "Lantunan ayat suci Al-Qur'an penyejuk hati untuk mekanik bengkel & santri.",
+        createdAt: "2026-09-22",
+        items: [
+          {
+            id: "v_quran_1",
+            title: "Surah Al-Kahfi Merdu Santri - Pelindung dari Fitnah Dajjal",
+            tag: "TILAWAH",
+            tagColor: "gold",
+            embedUrl: "https://www.youtube.com/embed/kJQP7kiw5Fk"
+          },
+          {
+            id: "v_quran_2",
+            title: "Murottal Al-Quran 30 Juz Nonstop Qari Merdu Nusantara",
+            tag: "MUROTTAL",
+            tagColor: "cyan",
+            embedUrl: "https://www.youtube.com/embed/5qap5aO4i9A"
+          }
+        ]
+      }
+    ];
+
+    function getStoredCustomPlaylists() {
+      try {
+        const raw = localStorage.getItem("tvs_custom_playlists_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (e) {
+        console.error("Gagal baca playlist dari localStorage:", e);
+      }
+      try {
+        localStorage.setItem("tvs_custom_playlists_v1", JSON.stringify(DEFAULT_PLAYLISTS_SEED));
+      } catch (e) {}
+      return JSON.parse(JSON.stringify(DEFAULT_PLAYLISTS_SEED));
+    }
+
+    function saveStoredCustomPlaylists(playlists) {
+      try {
+        localStorage.setItem("tvs_custom_playlists_v1", JSON.stringify(playlists));
+      } catch (e) {
+        console.error("Gagal simpan playlist ke localStorage:", e);
+      }
+      renderCustomPlaylists();
+      if (currentVideoTab === "myplaylists") {
+        renderVideoContent();
+      }
+    }
+
+    function initCustomPlaylists() {
+      getStoredCustomPlaylists();
+      renderCustomPlaylists();
+    }
+
+    function renderCustomPlaylists() {
+      const grid = document.getElementById("custom-playlists-grid");
+      const badge = document.getElementById("playlist-count-badge");
+      const playlists = getStoredCustomPlaylists();
+
+      if (badge) badge.innerText = playlists.length + " Playlist";
+      if (!grid) return;
+
+      if (playlists.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 24px; background: #152227; border: 1px dashed rgba(0, 240, 255, 0.4); border-radius: 10px;">
+            <p style="font-size: 24px; margin-bottom: 6px;">📑</p>
+            <p style="font-size: 13px; color: #fff; font-weight: 700;">Belum ada playlist kustom</p>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Klik tombol "➕ Buat Playlist Baru" di atas untuk mulai membuat koleksi playlist video tak terbatas.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = "";
+      playlists.forEach(function (pl) {
+        const itemCount = (pl.items || []).length;
+
+        html += `
+          <div class="video-card" style="background:#111c22; border:1px solid rgba(0,240,255,0.25); display:flex; flex-direction:column; justify-content:space-between; padding:12px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                <div style="display:flex; align-items:center; gap:6px;">
+                  <span style="font-size:18px;">📑</span>
+                  <span class="tag-pill cyan" style="font-size:9px; padding:2px 6px;">${itemCount} Video</span>
+                </div>
+                <button type="button" onclick="deleteCustomPlaylist('${pl.id}')" title="Hapus Playlist Ini" style="background:transparent; border:none; color:#ef4444; font-size:13px; cursor:pointer; padding:2px;">
+                  🗑️
+                </button>
+              </div>
+
+              <h4 style="font-size:13px; font-weight:900; color:#fff; margin-bottom:4px; line-height:1.3;">
+                ${escapeHTML(pl.title)}
+              </h4>
+              <p style="font-size:11px; color:#94a3b8; margin-bottom:10px; line-height:1.4;">
+                ${escapeHTML(pl.description || 'Playlist kustom')}
+              </p>
+
+              <div style="background:#0a1215; border-radius:6px; padding:6px 8px; margin-bottom:12px; font-size:10px;">
+                <div style="color:var(--gold-accent); font-weight:800; margin-bottom:4px;">Daftar Video:</div>
+                ${itemCount === 0 
+                  ? '<div style="color:#64748b; font-style:italic;">Belum ada video. Tekan "➕ Playlist" pada kartu video mana saja.</div>'
+                  : pl.items.slice(0, 3).map(function (item, idx) {
+                      return '<div style="color:#cbd5e1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-bottom:2px;">' +
+                        (idx + 1) + '. ' + escapeHTML(item.title) +
+                      '</div>';
+                    }).join('') + (itemCount > 3 ? '<div style="color:var(--neon-cyan); font-weight:700;">+ ' + (itemCount - 3) + ' video lainnya...</div>' : '')
+                }
+              </div>
+            </div>
+
+            <div style="display:flex; gap:6px;">
+              <button type="button" onclick="openPlaylistPlayerModal('${pl.id}')" class="action-btn" style="flex:2; background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; font-size:11px; padding:8px 0; border:none; justify-content:center;">
+                ▶️ Putar Playlist
+              </button>
+              <button type="button" onclick="promptAddVideoUrlToPlaylist('${pl.id}')" class="action-btn" title="Tambah Video dari URL YouTube" style="flex:1; background:#182830; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:10px; padding:8px 0; justify-content:center;">
+                ➕ URL
+              </button>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function renderCustomPlaylistsInVideoTab(container) {
+      const playlists = getStoredCustomPlaylists();
+      let plHtml = `
+        <div class="video-card" style="grid-column: 1 / -1; background:#0f1a20; border:1px solid var(--neon-cyan); margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h3 style="font-size:16px; font-weight:900; color:var(--neon-cyan); margin:0;">
+                📑 Manajemen Playlist Video Kustom Tak Terbatas
+              </h3>
+              <p style="font-size:11px; color:#cbd5e1; margin-top:2px;">
+                Simpan, kelompokkan, dan tonton playlist buatan Anda sendiri sepuasnya tanpa batas kuota server!
+              </p>
+            </div>
+            <button type="button" class="action-btn" onclick="openCreatePlaylistModal()" style="background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:800; font-size:11px; padding:8px 14px; border:none; border-radius:6px; cursor:pointer;">
+              ➕ Buat Playlist Baru
+            </button>
+          </div>
+        </div>
+      `;
+
+      if (playlists.length === 0) {
+        plHtml += `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 36px 20px; background: #152227; border: 1px dashed rgba(0, 240, 255, 0.4); border-radius: 10px;">
+            <p style="font-size: 28px; margin-bottom: 6px;">📑</p>
+            <p style="font-size: 14px; color: #fff; font-weight: 700;">Belum ada playlist kustom tersimpan</p>
+            <p style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">Klik tombol "➕ Buat Playlist Baru" di atas untuk membuat playlist pertama Anda.</p>
+          </div>
+        `;
+      } else {
+        playlists.forEach(function (pl) {
+          const itemCount = (pl.items || []).length;
+          plHtml += `
+            <div class="video-card" style="background:#111c22; border:1px solid rgba(0,240,255,0.25); display:flex; flex-direction:column; justify-content:space-between; padding:12px;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                  <div style="display:flex; align-items:center; gap:6px;">
+                    <span style="font-size:18px;">📑</span>
+                    <span class="tag-pill cyan" style="font-size:9px; padding:2px 6px;">${itemCount} Video</span>
+                  </div>
+                  <button type="button" onclick="deleteCustomPlaylist('${pl.id}')" title="Hapus Playlist Ini" style="background:transparent; border:none; color:#ef4444; font-size:13px; cursor:pointer; padding:2px;">
+                    🗑️
+                  </button>
+                </div>
+                <h4 style="font-size:13px; font-weight:900; color:#fff; margin-bottom:4px; line-height:1.3;">
+                  ${escapeHTML(pl.title)}
+                </h4>
+                <p style="font-size:11px; color:#94a3b8; margin-bottom:10px; line-height:1.4;">
+                  ${escapeHTML(pl.description || 'Playlist kustom')}
+                </p>
+                <div style="background:#0a1215; border-radius:6px; padding:6px 8px; margin-bottom:12px; font-size:10px;">
+                  <div style="color:var(--gold-accent); font-weight:800; margin-bottom:4px;">Daftar Video:</div>
+                  ${itemCount === 0 
+                    ? '<div style="color:#64748b; font-style:italic;">Belum ada video di playlist ini.</div>'
+                    : pl.items.slice(0, 3).map(function (item, idx) {
+                        return '<div style="color:#cbd5e1; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; margin-bottom:2px;">' +
+                          (idx + 1) + '. ' + escapeHTML(item.title) +
+                        '</div>';
+                      }).join('') + (itemCount > 3 ? '<div style="color:var(--neon-cyan); font-weight:700;">+ ' + (itemCount - 3) + ' video lainnya...</div>' : '')
+                  }
+                </div>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button type="button" onclick="openPlaylistPlayerModal('${pl.id}')" class="action-btn" style="flex:2; background:linear-gradient(135deg, #00f0ff 0%, #0284c7 100%); color:#021017; font-weight:900; font-size:11px; padding:8px 0; border:none; justify-content:center;">
+                  ▶️ Putar Playlist
+                </button>
+                <button type="button" onclick="promptAddVideoUrlToPlaylist('${pl.id}')" class="action-btn" title="Tambah Video dari URL" style="flex:1; background:#182830; border:1px solid rgba(255,255,255,0.15); color:#fff; font-size:10px; padding:8px 0; justify-content:center;">
+                  ➕ URL
+                </button>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      container.innerHTML = plHtml;
+    }
+
+    // Modal & Aksi Tambah ke Playlist
+    let pendingVideoToAdd = null;
+
+    function openAddToPlaylistModal(videoId, title, tag, embedUrl, poster) {
+      pendingVideoToAdd = {
+        id: videoId || ("v_" + Date.now()),
+        title: title || "Video Pilihan",
+        tag: tag || "KUSTOM",
+        tagColor: "cyan",
+        embedUrl: embedUrl || "https://www.youtube.com/embed/5qap5aO4i9A",
+        poster: poster || ""
+      };
+
+      const modal = document.getElementById("add-to-playlist-modal");
+      const previewEl = document.getElementById("modal-video-preview");
+
+      if (previewEl) {
+        previewEl.innerHTML = `
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div style="font-size:24px; background:#182830; width:44px; height:44px; display:flex; align-items:center; justify-content:center; border-radius:6px; border:1px solid rgba(0,240,255,0.3);">
+              🎥
+            </div>
+            <div style="overflow:hidden;">
+              <span class="tag-pill cyan" style="font-size:9px; padding:1px 6px;">${escapeHTML(pendingVideoToAdd.tag)}</span>
+              <div style="font-size:12px; font-weight:800; color:#fff; margin-top:2px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                ${escapeHTML(pendingVideoToAdd.title)}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      renderAddToPlaylistOptions();
+
+      if (modal) modal.classList.add("show");
+    }
+
+    function closeAddToPlaylistModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && e.target.tagName !== "BUTTON") return;
+      const modal = document.getElementById("add-to-playlist-modal");
+      if (modal) modal.classList.remove("show");
+      pendingVideoToAdd = null;
+    }
+
+    function renderAddToPlaylistOptions() {
+      const listEl = document.getElementById("modal-playlist-options-list");
+      if (!listEl || !pendingVideoToAdd) return;
+
+      const playlists = getStoredCustomPlaylists();
+      let html = "";
+      playlists.forEach(function (pl) {
+        const alreadyIn = (pl.items || []).some(function (item) {
+          return item.id === pendingVideoToAdd.id || item.embedUrl === pendingVideoToAdd.embedUrl;
+        });
+        html += `
+          <div style="display:flex; justify-content:space-between; align-items:center; background:#101a1e; border:1px solid rgba(255,255,255,0.08); border-radius:6px; padding:8px 12px;">
+            <div>
+              <div style="font-size:12px; font-weight:800; color:#e2e8f0;">${escapeHTML(pl.title)}</div>
+              <div style="font-size:10px; color:#64748b;">${(pl.items || []).length} Video</div>
+            </div>
+            ${alreadyIn
+              ? '<span style="font-size:10px; color:#22c55e; font-weight:800; padding:4px 8px; background:rgba(34,197,94,0.12); border-radius:4px; border:1px solid rgba(34,197,94,0.3);">✅ Sudah Ada</span>'
+              : '<button type="button" onclick="confirmAddVideoToPlaylist(\'' + pl.id + '\')" class="action-btn" style="font-size:10px; padding:4px 10px; background:rgba(0,240,255,0.15); border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-weight:800; border-radius:4px; cursor:pointer;">➕ Masukkan</button>'
+            }
+          </div>
+        `;
+      });
+      listEl.innerHTML = html;
+    }
+
+    function confirmAddVideoToPlaylist(playlistId) {
+      if (!pendingVideoToAdd) return;
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === playlistId; });
+      if (!pl) return;
+
+      if (!pl.items) pl.items = [];
+      const alreadyIn = pl.items.some(function (item) {
+        return item.id === pendingVideoToAdd.id || item.embedUrl === pendingVideoToAdd.embedUrl;
+      });
+      if (alreadyIn) {
+        showToastNotification("⚠️ Video ini sudah ada di playlist '" + pl.title + "'", "warning");
+        return;
+      }
+
+      pl.items.push(JSON.parse(JSON.stringify(pendingVideoToAdd)));
+      saveStoredCustomPlaylists(playlists);
+      showToastNotification("✅ Berhasil ditambahkan ke playlist '" + pl.title + "'!");
+      renderAddToPlaylistOptions();
+      setTimeout(closeAddToPlaylistModal, 600);
+    }
+
+    function createPlaylistAndAddSelectedVideo() {
+      const input = document.getElementById("quick-new-playlist-title");
+      if (!input || !input.value.trim() || !pendingVideoToAdd) {
+        showToastNotification("Ketik nama playlist baru terlebih dahulu!", "warning");
+        return;
+      }
+      const title = input.value.trim();
+      const newPl = {
+        id: "pl_" + Date.now(),
+        title: title,
+        description: "Dibuat langsung dari penambahan video",
+        createdAt: new Date().toISOString().split("T")[0],
+        items: [JSON.parse(JSON.stringify(pendingVideoToAdd))]
+      };
+
+      const playlists = getStoredCustomPlaylists();
+      playlists.unshift(newPl);
+      saveStoredCustomPlaylists(playlists);
+      input.value = "";
+      showToastNotification("✅ Playlist '" + title + "' dibuat & video berhasil dimasukkan!");
+      renderAddToPlaylistOptions();
+      setTimeout(closeAddToPlaylistModal, 600);
+    }
+
+    // Modal Buat Playlist Baru
+    function openCreatePlaylistModal() {
+      const modal = document.getElementById("create-playlist-modal");
+      const titleInput = document.getElementById("new-playlist-title-input");
+      const descInput = document.getElementById("new-playlist-desc-input");
+      if (titleInput) titleInput.value = "";
+      if (descInput) descInput.value = "";
+      if (modal) modal.classList.add("show");
+    }
+
+    function closeCreatePlaylistModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && e.target.tagName !== "BUTTON") return;
+      const modal = document.getElementById("create-playlist-modal");
+      if (modal) modal.classList.remove("show");
+    }
+
+    function handleCreatePlaylistSubmit(e) {
+      if (e) e.preventDefault();
+      const titleInput = document.getElementById("new-playlist-title-input");
+      const descInput = document.getElementById("new-playlist-desc-input");
+      if (!titleInput || !titleInput.value.trim()) return;
+
+      const title = titleInput.value.trim();
+      const desc = descInput ? descInput.value.trim() : "";
+
+      const newPl = {
+        id: "pl_" + Date.now(),
+        title: title,
+        description: desc || "Playlist kustom pengguna",
+        createdAt: new Date().toISOString().split("T")[0],
+        items: []
+      };
+
+      const playlists = getStoredCustomPlaylists();
+      playlists.unshift(newPl);
+      saveStoredCustomPlaylists(playlists);
+      showToastNotification("✅ Playlist baru '" + title + "' berhasil dibuat!");
+      closeCreatePlaylistModal();
+    }
+
+    function deleteCustomPlaylist(playlistId) {
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === playlistId; });
+      if (!pl) return;
+      if (!confirm("Hapus playlist \"" + pl.title + "\" beserta seluruh isinya?")) return;
+
+      const nextPlaylists = playlists.filter(function (p) { return p.id !== playlistId; });
+      saveStoredCustomPlaylists(nextPlaylists);
+      showToastNotification("🗑️ Playlist '" + pl.title + "' berhasil dihapus.");
+
+      if (currentActivePlaylistId === playlistId) {
+        closePlaylistPlayerModal();
+      }
+    }
+
+    function promptAddVideoUrlToPlaylist(playlistId) {
+      const url = prompt("Masukkan Link atau ID Video YouTube / Shorts:");
+      if (!url || !url.trim()) return;
+      const title = prompt("Masukkan Judul Video (Opsional):") || ("Video YouTube: " + url.substring(0, 30));
+      const embed = parseToEmbedUrl(url);
+
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === playlistId; });
+      if (pl) {
+        if (!pl.items) pl.items = [];
+        pl.items.push({
+          id: "v_custom_" + Date.now(),
+          title: title,
+          tag: "KUSTOM",
+          tagColor: "cyan",
+          embedUrl: embed
+        });
+        saveStoredCustomPlaylists(playlists);
+        showToastNotification("✅ Video berhasil ditambahkan ke playlist '" + pl.title + "'!");
+      }
+    }
+
+    function removeVideoFromPlaylist(playlistId, videoId) {
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === playlistId; });
+      if (!pl || !pl.items) return;
+
+      const itemIdx = pl.items.findIndex(function (item) { return item.id === videoId; });
+      if (itemIdx >= 0) {
+        pl.items.splice(itemIdx, 1);
+        saveStoredCustomPlaylists(playlists);
+        showToastNotification("🗑️ Video dihapus dari playlist.");
+
+        if (currentActivePlaylistId === playlistId) {
+          if (pl.items.length === 0) {
+            closePlaylistPlayerModal();
+          } else {
+            if (currentPlayingTrackIndex >= pl.items.length) {
+              currentPlayingTrackIndex = pl.items.length - 1;
+            }
+            updatePlaylistPlayerUI();
+          }
+        }
+      }
+    }
+
+    // Modal Pemutar Playlist
+    let currentActivePlaylistId = null;
+    let currentPlayingTrackIndex = 0;
+
+    function openPlaylistPlayerModal(playlistId, startIndex) {
+      if (typeof startIndex === "undefined") startIndex = 0;
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === playlistId; });
+      if (!pl) return;
+      if (!pl.items || pl.items.length === 0) {
+        showToastNotification("⚠️ Playlist '" + pl.title + "' masih kosong. Tambahkan video dulu!", "warning");
+        return;
+      }
+
+      currentActivePlaylistId = playlistId;
+      currentPlayingTrackIndex = Math.max(0, Math.min(startIndex, pl.items.length - 1));
+
+      const modal = document.getElementById("playlist-player-modal");
+      if (modal) modal.classList.add("show");
+
+      updatePlaylistPlayerUI();
+    }
+
+    function closePlaylistPlayerModal(e) {
+      if (e && e.target && e.target !== e.currentTarget && e.target.tagName !== "BUTTON") return;
+      const modal = document.getElementById("playlist-player-modal");
+      if (modal) {
+        modal.classList.remove("show");
+        const iframe = document.getElementById("playlist-player-iframe");
+        if (iframe) iframe.src = "";
+      }
+    }
+
+    function updatePlaylistPlayerUI() {
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === currentActivePlaylistId; });
+      if (!pl || !pl.items || pl.items.length === 0) return;
+
+      if (currentPlayingTrackIndex >= pl.items.length) {
+        currentPlayingTrackIndex = 0;
+      }
+
+      const activeItem = pl.items[currentPlayingTrackIndex];
+      const titleEl = document.getElementById("playlist-player-title");
+      const trackInfoEl = document.getElementById("playlist-player-track-info");
+      const iframe = document.getElementById("playlist-player-iframe");
+      const queueEl = document.getElementById("playlist-player-queue");
+
+      if (titleEl) titleEl.innerText = pl.title;
+      if (trackInfoEl) trackInfoEl.innerText = "Memutar Video " + (currentPlayingTrackIndex + 1) + " dari " + pl.items.length + ": \"" + activeItem.title + "\"";
+
+      if (iframe) {
+        let url = activeItem.embedUrl;
+        if (!url.includes("autoplay=1")) {
+          url += (url.includes("?") ? "&autoplay=1" : "?autoplay=1");
+        }
+        iframe.src = url;
+      }
+
+      if (queueEl) {
+        let queueHtml = "";
+        pl.items.forEach(function (item, idx) {
+          const isCurrent = idx === currentPlayingTrackIndex;
+          queueHtml += `
+            <div style="display:flex; justify-content:space-between; align-items:center; background:${isCurrent ? 'rgba(0,240,255,0.18)' : '#101a1f'}; border:${isCurrent ? '1px solid var(--neon-cyan)' : '1px solid rgba(255,255,255,0.06)'}; border-radius:6px; padding:6px 10px; cursor:pointer;" onclick="playTrackAt(${idx})">
+              <div style="display:flex; align-items:center; gap:8px; overflow:hidden;">
+                <span style="font-size:12px; font-weight:800; color:${isCurrent ? 'var(--neon-cyan)' : '#94a3b8'}; min-width:18px;">
+                  ${isCurrent ? '▶️' : (idx + 1) + '.'}
+                </span>
+                <div style="overflow:hidden;">
+                  <div style="font-size:12px; font-weight:700; color:${isCurrent ? '#fff' : '#cbd5e1'}; white-space:nowrap; text-overflow:ellipsis; overflow:hidden;">
+                    ${escapeHTML(item.title)}
+                  </div>
+                  <span style="font-size:9px; color:${isCurrent ? 'var(--neon-cyan)' : 'var(--gold-accent)'}; font-weight:800;">
+                    ${item.tag || 'VIDEO'}
+                  </span>
+                </div>
+              </div>
+              <button type="button" onclick="event.stopPropagation(); removeVideoFromPlaylist('${pl.id}', '${item.id}')" title="Hapus dari playlist" style="background:transparent; border:none; color:#ef4444; font-size:12px; cursor:pointer; padding:4px 6px;">
+                🗑️
+              </button>
+            </div>
+          `;
+        });
+        queueEl.innerHTML = queueHtml;
+      }
+    }
+
+    function playTrackAt(index) {
+      currentPlayingTrackIndex = index;
+      updatePlaylistPlayerUI();
+    }
+
+    function playlistPlayerNext() {
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === currentActivePlaylistId; });
+      if (!pl || !pl.items || pl.items.length === 0) return;
+      if (currentPlayingTrackIndex < pl.items.length - 1) {
+        currentPlayingTrackIndex++;
+      } else {
+        currentPlayingTrackIndex = 0;
+      }
+      updatePlaylistPlayerUI();
+    }
+
+    function playlistPlayerPrev() {
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === currentActivePlaylistId; });
+      if (!pl || !pl.items || pl.items.length === 0) return;
+      if (currentPlayingTrackIndex > 0) {
+        currentPlayingTrackIndex--;
+      } else {
+        currentPlayingTrackIndex = pl.items.length - 1;
+      }
+      updatePlaylistPlayerUI();
+    }
+
+    function handleAddUrlToCurrentPlaylist(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById("playlist-add-url-input");
+      if (!input || !input.value.trim() || !currentActivePlaylistId) return;
+      const raw = input.value.trim();
+      const embed = parseToEmbedUrl(raw);
+      const newVideo = {
+        id: "v_custom_" + Date.now(),
+        title: "Video Tambahan: " + raw.substring(0, 35) + "...",
+        tag: "KUSTOM",
+        tagColor: "cyan",
+        embedUrl: embed
+      };
+
+      const playlists = getStoredCustomPlaylists();
+      const pl = playlists.find(function (p) { return p.id === currentActivePlaylistId; });
+      if (pl) {
+        if (!pl.items) pl.items = [];
+        pl.items.push(newVideo);
+        saveStoredCustomPlaylists(playlists);
+        showToastNotification("✅ Video baru berhasil ditambahkan ke playlist '" + pl.title + "'!");
+        input.value = "";
+        updatePlaylistPlayerUI();
+      }
+    }
+
+    function saveCurrentUnlimitedToPlaylist() {
+      const titleSpan = document.getElementById("unlimited-current-title");
+      const currentTitle = titleSpan ? titleSpan.innerText.replace("🎬 Pemutar Bebas Sepuasnya: ", "") : "Video Putar Bebas";
+      openAddToPlaylistModal("v_unlimited_" + Date.now(), currentTitle, "UNLIMITED", customUnlimitedVideoUrl);
+    }
+
+    function parseToEmbedUrl(raw) {
+      if (!raw) return "https://www.youtube.com/embed/5qap5aO4i9A";
+      raw = raw.trim();
+      if (raw.includes("youtube.com/watch?v=")) {
+        const vidId = raw.split("v=")[1].split("&")[0];
+        return "https://www.youtube.com/embed/" + vidId;
+      } else if (raw.includes("youtu.be/")) {
+        const vidId = raw.split("youtu.be/")[1].split("?")[0];
+        return "https://www.youtube.com/embed/" + vidId;
+      } else if (raw.includes("youtube.com/shorts/")) {
+        const vidId = raw.split("shorts/")[1].split("?")[0];
+        return "https://www.youtube.com/embed/" + vidId;
+      } else if (raw.includes("embed/")) {
+        return raw;
+      } else if (raw.length === 11 && !raw.includes("/") && !raw.includes(".")) {
+        return "https://www.youtube.com/embed/" + raw;
+      }
+      return raw;
+    }
+
+    function showToastNotification(message, type) {
+      if (typeof type === "undefined") type = "success";
+      let toast = document.getElementById("tvs-toast-notification");
+      if (!toast) {
+        toast = document.createElement("div");
+        toast.id = "tvs-toast-notification";
+        toast.style.cssText = "position:fixed; bottom:70px; right:20px; z-index:9999; background:rgba(15,23,42,0.95); border:1px solid var(--neon-cyan); box-shadow:0 8px 24px rgba(0,240,255,0.3); color:#fff; padding:10px 16px; border-radius:8px; font-size:12px; font-weight:700; display:flex; align-items:center; gap:8px; transform:translateY(20px); opacity:0; transition:all 0.3s cubic-bezier(0.16,1,0.3,1); pointer-events:none;";
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = message;
+      if (type === 'warning') {
+        toast.style.borderColor = "var(--gold-accent)";
+        toast.style.boxShadow = "0 8px 24px rgba(245,158,11,0.3)";
+      } else {
+        toast.style.borderColor = "var(--neon-cyan)";
+        toast.style.boxShadow = "0 8px 24px rgba(0,240,255,0.3)";
+      }
+      toast.style.display = "flex";
+      setTimeout(function () {
+        toast.style.transform = "translateY(0)";
+        toast.style.opacity = "1";
+      }, 10);
+
+      setTimeout(function () {
+        toast.style.transform = "translateY(20px)";
+        toast.style.opacity = "0";
+        setTimeout(function () {
+          toast.style.display = "none";
+        }, 300);
+      }, 3200);
     }
 
     // ========================================================================
@@ -4795,8 +7364,65 @@
     }
 
     // ========================================================================
-    // PROMOSI & MODAL PWA PASANG DI HP
+    // PROMOSI & MODAL PWA PASANG DI HP & SERVICE WORKER ENGINE
     // ========================================================================
+    let deferredPWAInstallPrompt = null;
+    let isAppInstalledStandalone = false;
+
+    // Deteksi apakah sedang berjalan dalam mode PWA Standalone (Sudah Terpasang)
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      isAppInstalledStandalone = true;
+    }
+
+    // Registrasi Service Worker PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(reg) {
+            console.log('✅ PWA Service Worker terdaftar dengan cakupan:', reg.scope);
+          })
+          .catch(function(err) {
+            console.warn('PWA Service Worker register error:', err);
+          });
+      });
+    }
+
+    // Tangkap Event BeforeInstallPrompt Browser (Android / Chrome / Edge)
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPWAInstallPrompt = e;
+      const btn = document.getElementById("pwa-native-install-btn");
+      if (btn && !isAppInstalledStandalone) {
+        btn.style.display = "flex";
+      }
+    });
+
+    window.addEventListener('appinstalled', function() {
+      deferredPWAInstallPrompt = null;
+      isAppInstalledStandalone = true;
+      const btn = document.getElementById("pwa-native-install-btn");
+      if (btn) btn.style.display = "none";
+      alert("🎉 TEGUH VIDEO STREAM berhasil dipasang di layar HP Anda!");
+    });
+
+    async function triggerPWAInstall() {
+      if (deferredPWAInstallPrompt) {
+        deferredPWAInstallPrompt.prompt();
+        const choice = await deferredPWAInstallPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          console.log('Pengguna menerima instalasi PWA');
+        }
+        deferredPWAInstallPrompt = null;
+      } else {
+        const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+        if (isIOS) {
+          alert("📱 Panduan Pasang di iPhone / iPad (Safari):\n1. Ketuk tombol 'Share' (ikon kotak bertanda panah ke atas) di bilah bawah Safari.\n2. Gulir ke bawah dan pilih 'Add to Home Screen' (Tambahkan ke Layar Utama).\n3. Ketuk 'Add' di pojok kanan atas.");
+        } else {
+          alert("📱 Panduan Pasang di HP Android (Google Chrome):\n1. Ketuk titik tiga (⋮) di pojok kanan atas browser.\n2. Pilih 'Tambahkan ke Layar Utama' (Add to Home screen) atau 'Instal Aplikasi'.\n3. Ikon TEGUH STREAM akan langsung muncul di menu HP Anda.");
+        }
+      }
+    }
+
     function closeFlashSale() {
       const el = document.getElementById("floating-flash-sale");
       if (el) el.style.display = "none";
@@ -5394,6 +8020,7 @@ _Matur nuwun atas kepercayaan Anda! Semoga motor awet, tarikan enteng, dan selam
       calculateGearRatio();
       selectOprekPackage("boreup");
       renderFavorites();
+      initCustomPlaylists();
 
       // Inisialisasi Fitur Solusi Montir & Simulator
       switchTuningSubtab("ai");
