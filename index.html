@@ -1036,6 +1036,320 @@
       line-height: 1.4;
     }
 
+    /* ROOM 3: TILAWAH & MUROTTAL 30 JUZ & AYAT FAVORIT */
+    .tilawah-player-console {
+      background: linear-gradient(135deg, #0b151a 0%, #112028 100%);
+      border: 2px solid var(--gold-accent);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .tilawah-player-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .tilawah-now-playing {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tilawah-icon-pulse {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      animation: pulseGold 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseGold {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(212, 175, 55, 0.4); }
+      50% { transform: scale(1.06); box-shadow: 0 0 12px rgba(212, 175, 55, 0.7); }
+    }
+
+    .tilawah-info h3 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tilawah-info p {
+      font-size: 12px;
+      color: var(--gold-accent);
+      margin: 2px 0 0 0;
+    }
+
+    .tilawah-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: #081014;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .tilawah-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tilawah-ctrl-btn {
+      background: #172830;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #fff;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+    }
+
+    .tilawah-ctrl-btn:hover {
+      background: var(--gold-accent);
+      color: #000;
+      border-color: var(--gold-accent);
+    }
+
+    .tilawah-ctrl-btn.active {
+      background: var(--gold-accent);
+      color: #000;
+    }
+
+    .tilawah-progress-container {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .tilawah-seeker {
+      flex: 1;
+      height: 6px;
+      accent-color: var(--gold-accent);
+      cursor: pointer;
+    }
+
+    .tilawah-tabs-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tilawah-nav-btn {
+      background: #101c22;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tilawah-nav-btn:hover {
+      border-color: var(--neon-cyan);
+      color: #fff;
+    }
+
+    .tilawah-nav-btn.active {
+      background: var(--gold-accent);
+      color: #0a1114;
+      border-color: var(--gold-accent);
+      font-weight: 900;
+    }
+
+    .thematic-chips-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .thematic-chip {
+      background: #111e24;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      color: #e2e8f0;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .thematic-chip:hover, .thematic-chip.active {
+      background: #1a2f38;
+      border-color: var(--gold-accent);
+      color: var(--gold-accent);
+    }
+
+    .thematic-card {
+      background: #0f191e;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .thematic-card:hover {
+      border-color: var(--neon-cyan);
+    }
+
+    .thematic-card.playing {
+      border-color: var(--gold-accent);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+      background: #121e24;
+    }
+
+    .thematic-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+
+    .thematic-verse-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold-accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .thematic-faidah-box {
+      background: rgba(0, 240, 255, 0.05);
+      border-left: 3px solid var(--neon-cyan);
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #94a3b8;
+      margin: 8px 0;
+    }
+
+    .thematic-card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .surahs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    .surah-card-btn {
+      background: #0f1a1f;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .surah-card-btn:hover {
+      background: #16262e;
+      border-color: var(--gold-accent);
+      transform: translateY(-1px);
+    }
+
+    .surah-card-btn.playing {
+      background: #1a2f38;
+      border-color: var(--gold-accent);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+
+    .surah-card-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .surah-number-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #172830;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gold-accent);
+    }
+
+    .surah-card-btn.playing .surah-number-badge {
+      background: var(--gold-accent);
+      color: #000;
+    }
+
+    .surah-names-box h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+    }
+
+    .surah-names-box p {
+      font-size: 10px;
+      color: #94a3b8;
+      margin: 2px 0 0 0;
+    }
+
+    .surah-arabic-preview {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold-accent);
+      font-family: "Amiri", "Traditional Arabic", serif;
+      text-align: right;
+    }
+
     /* ROOM 4: TUNING PRO */
     .tuning-grid {
       display: grid;
@@ -1966,56 +2280,158 @@
 
 
     <!-- ======================================================================
-         KAMAR 3: TILAWAH [📖 Tilawah]
+         KAMAR 3: TILAWAH & MUROTTAL 30 JUZ & AYAT PILIHAN SANTRI [📖 Tilawah]
          ====================================================================== -->
     <section id="room-tilawah" class="room-view">
       <div class="tilawah-container">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid var(--gold-accent); padding-bottom: 10px;">
+        <!-- HEADER TILAWAH -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid var(--gold-accent); padding-bottom: 12px; flex-wrap: wrap; gap: 10px;">
           <div>
-            <h2 style="font-size: 18px; font-weight: 900; color: var(--gold-accent);">📖 Ruang Tilawah & Murottal Santri</h2>
-            <p style="font-size: 11px; color: var(--text-muted);">Lantunan Ayat Suci Al-Quran & Terjemahan Bahasa Indonesia</p>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 24px;">📖</span>
+              <div>
+                <h2 style="font-size: 19px; font-weight: 900; color: var(--gold-accent); margin: 0;">Ruang Tilawah, Murottal 30 Juz & Ayat Pilihan</h2>
+                <p style="font-size: 11px; color: var(--text-muted); margin: 2px 0 0 0;">Lantunan 114 Surah Al-Quran 30 Juz Lengkap & Kumpulan Ayat Tematik Merdu (Tawakal, Sabar, Syukur, Rezeki & Ruqyah)</p>
+              </div>
+            </div>
           </div>
-          <button class="tab-btn" onclick="playTilawahMurottal()" style="min-height: 38px; padding: 6px 12px;">
-            <span>🔊 Putar Murottal</span>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span class="tag-pill gold" style="font-size: 11px;">✨ 114 SURAH LENGKAP</span>
+            <span class="tag-pill cyan" style="font-size: 11px;">🎧 AUDIO HI-RES 128KBPS</span>
+          </div>
+        </div>
+
+        <!-- DEDICATED MUROTTAL PLAYER CONSOLE -->
+        <div class="tilawah-player-console">
+          <audio id="tilawah-audio-engine" preload="none"></audio>
+          
+          <div class="tilawah-player-top">
+            <div class="tilawah-now-playing">
+              <div class="tilawah-icon-pulse" id="tilawah-pulse-icon">
+                <span>🕌</span>
+              </div>
+              <div class="tilawah-info">
+                <h3 id="tilawah-current-title">Surah 001. Al-Fatihah (الفاتحة)</h3>
+                <p id="tilawah-current-sub">Qari: Syaikh Misyari Rasyid • Pembukaan (7 Ayat • Makkiyyah)</p>
+              </div>
+            </div>
+
+            <!-- Qari Selector -->
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <label for="tilawah-qari-select" style="font-size: 11px; color: #94a3b8; font-weight: 700;">Qari:</label>
+              <select id="tilawah-qari-select" onchange="changeTilawahQari(this.value)" style="background: #15242b; border: 1px solid var(--gold-accent); color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; outline: none;">
+                <option value="ar.alafasy" selected>Syaikh Misyari Rasyid Al-Afasy</option>
+                <option value="ar.sudais">Syaikh Abdurrahman As-Sudais (Imam Makkah)</option>
+                <option value="ar.maher">Syaikh Maher Al-Muaiqly (Tartil)</option>
+                <option value="ar.ghamidi">Syaikh Sa'ad Al-Ghamidi (Menyejukkan)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div class="tilawah-controls-bar">
+            <div class="tilawah-btn-group">
+              <button class="tilawah-ctrl-btn" onclick="prevTilawahSurah()" title="Surah Sebelumnya">
+                <span>⏮️</span><span>Prev</span>
+              </button>
+              <button class="tilawah-ctrl-btn active" id="tilawah-play-btn" onclick="toggleTilawahPlayback()" style="min-width: 100px; justify-content: center;">
+                <span id="tilawah-play-icon">▶️</span><span id="tilawah-play-text">Putar</span>
+              </button>
+              <button class="tilawah-ctrl-btn" onclick="nextTilawahSurah()" title="Surah Selanjutnya">
+                <span>Next</span><span>⏭️</span>
+              </button>
+              <button class="tilawah-ctrl-btn" id="tilawah-loop-btn" onclick="toggleTilawahLoop()" title="Ulangi Surah Terus-Menerus">
+                <span>🔁</span><span>Loop: OFF</span>
+              </button>
+            </div>
+
+            <!-- Volume Control -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 14px;">🔊</span>
+              <input type="range" id="tilawah-volume-slider" min="0" max="1" step="0.05" value="0.9" oninput="setTilawahVolume(this.value)" style="width: 80px; accent-color: var(--gold-accent); cursor: pointer;" title="Atur Volume Murottal">
+            </div>
+          </div>
+
+          <!-- Progress Seeker Bar -->
+          <div class="tilawah-progress-container">
+            <span id="tilawah-time-current">00:00</span>
+            <input type="range" id="tilawah-seeker" class="tilawah-seeker" min="0" max="100" value="0" oninput="seekTilawah(this.value)">
+            <span id="tilawah-time-duration">00:00</span>
+          </div>
+        </div>
+
+        <!-- TILAWAH SUB-TABS NAVIGATION -->
+        <div class="tilawah-tabs-nav">
+          <button class="tilawah-nav-btn active" id="tab-btn-thematic" onclick="switchTilawahTab('thematic')">
+            <span>🌟 Ayat-Ayat Favorit Pilihan</span>
+          </button>
+          <button class="tilawah-nav-btn" id="tab-btn-all-surahs" onclick="switchTilawahTab('all-surahs')">
+            <span>📖 114 Surah (Lengkap 30 Juz)</span>
+          </button>
+          <button class="tilawah-nav-btn" id="tab-btn-daily-surahs" onclick="switchTilawahTab('daily-surahs')">
+            <span>🕌 Surat Pilihan Harian</span>
+          </button>
+          <button class="tilawah-nav-btn" id="tab-btn-visual" onclick="switchTilawahTab('visual')">
+            <span>🎬 Video Tilawah Santri</span>
           </button>
         </div>
 
-        <!-- Surah Al-Fatihah -->
-        <div class="quran-surah-card">
-          <div class="surah-header">
-            <span style="font-weight: 800; color: var(--neon-cyan);">01. Surah Al-Fatihah (Pembukaan)</span>
-            <span class="tag-pill gold">7 Ayat • Makkiyyah</span>
+        <!-- SUB-PANEL 1: AYAT FAVORIT TEMATIK -->
+        <div id="tilawah-panel-thematic">
+          <div class="thematic-chips-grid">
+            <button class="thematic-chip active" onclick="filterThematicVerses('all', this)">🌟 Semua Ayat</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('tawakal', this)">🤲 Tawakal & Kelapangan</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('sabar', this)">🛡️ Sabar & Ketegaran</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('syukur', this)">🌾 Syukur & Nikmat</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('rezeki', this)">💰 Pembuka Rezeki & Berkah</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('syifa', this)">💖 Penenang Jiwa (Syifa)</button>
+            <button class="thematic-chip" onclick="filterThematicVerses('ruqyah', this)">👑 Perlindungan & Ruqyah</button>
           </div>
-          <p class="arabic-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-          <p class="latin-text">Bismillaahir-rohmaanir-rohiim</p>
-          <p class="arti-text">1. Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</p>
-          <hr style="border: none; border-top: 1px dashed rgba(255,255,255,0.1); margin: 10px 0;">
-          <p class="arabic-text">الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
-          <p class="latin-text">Al-hamdu lillaahi robbil-'aalamiin</p>
-          <p class="arti-text">2. Segala puji bagi Allah, Tuhan seluruh alam.</p>
-          <hr style="border: none; border-top: 1px dashed rgba(255,255,255,0.1); margin: 10px 0;">
-          <p class="arabic-text">الرَّحْمَٰنِ الرَّحِيمِ • مَالِكِ يَوْمِ الدِّينِ</p>
-          <p class="latin-text">Ar-rohmaanir-rohiim. Maaliki yaumid-diin.</p>
-          <p class="arti-text">3. Yang Maha Pengasih, Maha Penyayang. 4. Pemilik hari pembalasan.</p>
+          <div id="thematic-verses-list">
+            <!-- Diisi dinamis oleh JavaScript -->
+          </div>
         </div>
 
-        <!-- Surah Al-Ikhlas -->
-        <div class="quran-surah-card">
-          <div class="surah-header">
-            <span style="font-weight: 800; color: var(--neon-cyan);">112. Surah Al-Ikhlas (Keesaan Allah)</span>
-            <span class="tag-pill cyan">4 Ayat • Makkiyyah</span>
+        <!-- SUB-PANEL 2: 114 SURAH LENGKAP 30 JUZ -->
+        <div id="tilawah-panel-all-surahs" style="display: none;">
+          <!-- Filter & Search Bar Surah -->
+          <div style="background: #0d171c; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+              <input type="text" id="surah-search-input" placeholder="🔍 Cari Surah (nama, arti, nomor 1-114, atau juz)..." oninput="handleSurahSearch(this.value)" style="flex: 1; min-width: 220px; background: #142229; border: 1px solid rgba(0,240,255,0.3); border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 13px; outline: none;">
+              <button class="tab-btn" onclick="handleSurahSearch('')" style="padding: 6px 12px; font-size: 12px;">Reset</button>
+            </div>
+            <!-- Juz Quick Filter Chips -->
+            <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;">
+              <button class="thematic-chip active" onclick="filterJuzRange('all', this)">Semua 114 Surah</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz30', this)">Juz 30 (Juz 'Amma)</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz1_5', this)">Juz 1 - 5</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz6_10', this)">Juz 6 - 10</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz11_15', this)">Juz 11 - 15</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz16_20', this)">Juz 16 - 20</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz21_25', this)">Juz 21 - 25</button>
+              <button class="thematic-chip" onclick="filterJuzRange('juz26_29', this)">Juz 26 - 29</button>
+            </div>
           </div>
-          <p class="arabic-text">قُلْ هُوَ اللَّهُ أَحَدٌ • اللَّهُ الصَّمَدُ • لَمْ يَلِدْ وَلَمْ يُولَدْ • وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ</p>
-          <p class="latin-text">Qul huwalloohu ahad. Alloohus-somad. Lam yalid wa lam yuulad. Wa lam yakul-lahuu kufuwan ahad.</p>
-          <p class="arti-text">Artinya: "Katakanlah (Muhammad), Dialah Allah, Yang Maha Esa. Allah tempat meminta segala sesuatu. (Allah) tidak beranak dan tidak pula diperanakkan. Dan tidak ada sesuatu pun yang setara dengan Dia."</p>
+          <div id="surahs-grid-container" class="surahs-grid">
+            <!-- 114 Surah diisi dinamis oleh JavaScript -->
+          </div>
         </div>
 
-        <!-- Audio Player Tilawah Khusus -->
-        <div style="background: #10191d; border: 1px solid var(--neon-cyan); border-radius: 8px; padding: 12px; margin-top: 14px; text-align: center;">
-          <h4 style="font-size: 13px; color: var(--neon-cyan); margin-bottom: 6px;">🎧 Audio Murottal 30 Juz Syaikh Misyari Rasyid</h4>
-          <audio controls style="width: 100%; border-radius: 6px;" src="https://server8.mp3quran.net/afs/001.mp3">
-            Browser Anda tidak mendukung elemen audio.
-          </audio>
+        <!-- SUB-PANEL 3: SURAT PILIHAN HARIAN -->
+        <div id="tilawah-panel-daily-surahs" style="display: none;">
+          <div style="margin-bottom: 12px;">
+            <p style="font-size: 12px; color: #94a3b8;">Surat-surat istimewa yang dianjurkan dibaca harian oleh santri & penuntut ilmu untuk kelancaran rezeki, ketenangan hati, perlindungan dari fitnah, dan bekal akhirat.</p>
+          </div>
+          <div id="daily-surahs-container" class="surahs-grid">
+            <!-- Diisi dinamis oleh JavaScript -->
+          </div>
+        </div>
+
+        <!-- SUB-PANEL 4: VIDEO TILAWAH SANTRI -->
+        <div id="tilawah-panel-visual" style="display: none;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;" id="visual-tilawah-grid">
+            <!-- Diisi dinamis oleh JavaScript -->
+          </div>
         </div>
       </div>
     </section>
@@ -3333,94 +3749,142 @@
     // ========================================================================
     const RADIO_DATABASE = {
       islami: {
-        title: "🕌 Folder: Islami",
+        title: "🕌 Folder: Islami & Dakwah",
         channels: [
           {
-            id: "rodja",
-            name: "Radio Rodja 756 AM",
-            freq: "756 AM Cileungsi",
-            streamUrl: "https://radiorodja.com;",
-            fallbackUrl: "https://live.radiorodja.com/stream",
-            desc: "Menebar Cahaya Sunnah & Kajian Shahih"
-          },
-          {
-            id: "isykarima",
-            name: "Radio Isy Karima FM",
-            freq: "Karanganyar Solo",
-            streamUrl: "http://isykarima.com",
-            fallbackUrl: "https://radio.isykarima.com/live",
-            desc: "Al-Quran & Nilai Peradaban Islam"
+            id: "murottal_alafasi",
+            name: "Radio Murottal Syaikh Alafasy 24 Jam",
+            freq: "Live 24 Jam Streaming",
+            streamUrl: "https://qurango.net/radio/mishary_alafasi",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://qurango.net/radio/mishary_alafasi"),
+            desc: "Lantunan Murottal Al-Quran Merdu Nonstop"
           },
           {
             id: "suaraquran",
-            name: "Radio Suara Al-Quran",
-            freq: "Streaming 24 Jam",
+            name: "Radio Suara Al-Quran Tarteel",
+            freq: "Streaming Makkah & Madinah",
             streamUrl: "https://server8.mp3quran.net/afs/001.mp3",
-            fallbackUrl: "https://server8.mp3quran.net/afs/001.mp3",
-            desc: "Lantunan Murottal Merdu 30 Juz Non-Stop"
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://server8.mp3quran.net/afs/001.mp3"),
+            desc: "Tilawah Pilihan Penyejuk Hati & Jiwa"
+          },
+          {
+            id: "alseraj",
+            name: "Alseraj Radio Islam Internasional",
+            freq: "Kajian & Murottal",
+            streamUrl: "https://eu4.fastcast4u.com/proxy/aabdul00?mp=/1",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://eu4.fastcast4u.com/proxy/aabdul00?mp=/1"),
+            desc: "Siaran Islam Menenteramkan Jiwa"
+          },
+          {
+            id: "damu",
+            name: "Radio Dakwah Mustofa (DAMU)",
+            freq: "Kajian Sunnah Salaf",
+            streamUrl: "https://stream.radiodakwahmustofa.com:8724/damu",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://stream.radiodakwahmustofa.com:8724/damu"),
+            desc: "Siraman Rohani & Bimbingan Akhlak Mulia"
           }
         ]
       },
       berita: {
-        title: "📰 Folder: Berita",
+        title: "📰 Folder: Berita & Informasi",
         channels: [
           {
             id: "elshinta",
             name: "Radio Elshinta News & Talk",
             freq: "90.0 FM Jakarta",
-            streamUrl: "https://teve.id",
-            fallbackUrl: "https://stream.elshinta.com/live",
+            streamUrl: "https://stream-ssl.arenastreaming.com:8000/jakarta",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://stream-ssl.arenastreaming.com:8000/jakarta"),
             desc: "Informasi Terkini, Lalu Lintas & Berita Cepat"
           },
           {
-            id: "rri",
-            name: "RRI Pro 1 Nasional",
-            freq: "Kanal Informasi Utama",
-            streamUrl: "https://rri.co.id",
-            fallbackUrl: "https://stream-node1.rri.co.id/pro1",
-            desc: "Radio Republik Indonesia Kanal Terpercaya"
+            id: "sonora",
+            name: "Sonora FM 92 Jakarta",
+            freq: "92.0 FM Jakarta",
+            streamUrl: "https://sonora-radio.arenastreaming.com/8130/stream",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://sonora-radio.arenastreaming.com/8130/stream"),
+            desc: "News, Musik, Informasi Bisnis & Otomotif"
+          },
+          {
+            id: "suarasby",
+            name: "Radio Suara Surabaya FM",
+            freq: "100.0 FM Surabaya",
+            streamUrl: "https://c5.siar.us/proxy/ssfm/stream",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://c5.siar.us/proxy/ssfm/stream"),
+            desc: "Kabar Lalu Lintas & Info Komunitas Jalan Raya"
+          },
+          {
+            id: "mstri",
+            name: "MSTRI FM 104.2 Jakarta",
+            freq: "104.2 FM Jabodetabek",
+            streamUrl: "https://c2.siar.us:8120/live",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://c2.siar.us:8120/live"),
+            desc: "Informasi Terpercaya & Dialog Interaktif"
           }
         ]
       },
       dangdut: {
-        title: "🎵 Folder: Dangdut",
+        title: "🎵 Folder: Dangdut & Koplo",
         channels: [
+          {
+            id: "campursari",
+            name: "Campursari & Dangdut FM",
+            freq: "Irama Nusantara 24 Jam",
+            streamUrl: "https://streaming.campursarifm.com/listen/campursari/campursari892",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://streaming.campursarifm.com/listen/campursari/campursari892"),
+            desc: "Gending Jawa, Campursari & Dangdut Klasik"
+          },
+          {
+            id: "mettaswara",
+            name: "Mettaswara Dangdut Koplo",
+            freq: "Special Beat Bengkel",
+            streamUrl: "https://mettaswara.com:8700//koplo",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://mettaswara.com:8700//koplo"),
+            desc: "Kendang Koplo Mantap Penambah Semangat Bongkar Mesin"
+          },
           {
             id: "rdi",
             name: "RDI 97.1 FM Jakarta",
             freq: "97.1 FM Jakarta",
-            streamUrl: "https://rdifm.co.id",
-            fallbackUrl: "https://stream.rdi.co.id/live",
-            desc: "Tempat Asik Goyang Dangdut & Pop Melayu"
-          },
-          {
-            id: "koplo_racing",
-            name: "Dangdut Koplo Racing Station",
-            freq: "Special Beat Montir",
-            streamUrl: "https://live.koploracing.stream",
-            fallbackUrl: "https://stream.zeno.fm/koplo",
-            desc: "Semangat Oprek Mesin Irama Kendang Mantap"
+            streamUrl: "/api/radio-stream?url=" + encodeURIComponent("http://202.147.199.99:8000/;stream/1"),
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("http://202.147.199.99:8000/;"),
+            desc: "Goyang Dangdut Asik & Lagu Daerah Populer"
           }
         ]
       },
       pop: {
-        title: "🎸 Folder: Pop",
+        title: "🎸 Folder: Pop & Rock Racing",
         channels: [
           {
-            id: "prambors",
-            name: "Prambors FM 102.2",
-            freq: "102.2 FM Jakarta",
-            streamUrl: "https://pramborsfm.com",
-            fallbackUrl: "https://stream.pramborsfm.com/live",
-            desc: "Hits Music Terlengkap Kawula Muda"
+            id: "ardan",
+            name: "ARDAN FM 105.9 Bandung",
+            freq: "105.9 FM Bandung",
+            streamUrl: "https://stream.rcs.revma.com/ugpyzu9n5k3vv",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://stream.rcs.revma.com/ugpyzu9n5k3vv"),
+            desc: "Stay Cool & Lovely, Hits Musik Terkini"
           },
           {
-            id: "genfm",
-            name: "Gen 98.7 FM",
-            freq: "98.7 FM Suara Musik",
-            streamUrl: "https://gen987fm.com",
-            fallbackUrl: "https://stream.genfm.com/live",
-            desc: "Suara Musik Anak Muda Indonesia"
+            id: "delta",
+            name: "Delta FM Indonesia",
+            freq: "100% Lagu Enak",
+            streamUrl: "https://stream.rcs.revma.com/k02rmq48kxcwv",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://stream.rcs.revma.com/k02rmq48kxcwv"),
+            desc: "Deretan Lagu Hits Santai Menemani Lembur"
+          },
+          {
+            id: "rock181",
+            name: "181.FM Rock Racing Bengkel",
+            freq: "Hard Rock & Metal Power",
+            streamUrl: "https://listen.181fm.com/181-rock_128k.mp3",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://listen.181fm.com/181-rock_128k.mp3"),
+            desc: "Adrenalin Balap & Ketukan Rock Montir Sejati"
+          },
+          {
+            id: "geronimo",
+            name: "Geronimo FM 106.1 Jogja",
+            freq: "106.1 FM Jogja",
+            streamUrl: "https://ig.idstreamer.com:8090/live",
+            fallbackUrl: "/api/radio-stream?url=" + encodeURIComponent("https://ig.idstreamer.com:8090/live"),
+            desc: "Hits Music Jogja Paling Fresh & Asik"
           }
         ]
       }
@@ -5375,12 +5839,20 @@
       currentActiveRadioFolder = null;
     }
 
-    // Putar Saluran Radio Spesifik
+    // Putar Saluran Radio Spesifik (100% Reliable: Direct Stream + Proxy Fallback)
     function playRadioChannel(folderKey, channelId) {
       const folderData = RADIO_DATABASE[folderKey];
       if (!folderData) return;
       const channel = folderData.channels.find(function (c) { return c.id === channelId; });
       if (!channel) return;
+
+      // Jeda Murottal jika sedang diputar agar suara tidak tumpang tindih
+      const tilawahAudio = document.getElementById("tilawah-audio-engine");
+      if (tilawahAudio && !tilawahAudio.paused) {
+        tilawahAudio.pause();
+        const tPlayBtn = document.getElementById("tilawah-play-btn");
+        if (tPlayBtn) tPlayBtn.innerHTML = "<span>▶️</span><span>Putar Murottal</span>";
+      }
 
       currentActiveChannel = channel;
       const audioElement = document.getElementById("teguh-audio-engine");
@@ -5391,34 +5863,52 @@
       const statRadioStatus = document.getElementById("stat-radio-status");
 
       // Set Metadata Pemutar
-      titleEl.innerText = "🔴 " + channel.name;
+      titleEl.innerText = "⏳ Menghubungkan: " + channel.name;
       subEl.innerText = channel.freq + " • " + channel.desc;
       miniRadioBar.classList.add("active");
+      if (statRadioStatus) statRadioStatus.innerText = "CONNECTING...";
 
-      // Coba putar stream link valid
+      let triedFallback = false;
+
+      function onStreamError() {
+        if (!triedFallback && channel.fallbackUrl) {
+          triedFallback = true;
+          console.warn("Direct stream dialihkan ke proxy aman:", channel.fallbackUrl);
+          audioElement.src = channel.fallbackUrl;
+          audioElement.play().then(function() {
+            isRadioPlaying = true;
+            titleEl.innerText = "🔴 " + channel.name;
+            playBtn.innerText = "⏸️ PAUSE";
+            if (statRadioStatus) statRadioStatus.innerText = "ONLINE (LIVE)";
+          }).catch(function(e) {
+            console.error("Proxy streaming error:", e);
+            if (statRadioStatus) statRadioStatus.innerText = "OFFLINE";
+            titleEl.innerText = "⚠️ Gangguan Jaringan: " + channel.name;
+          });
+        } else {
+          if (statRadioStatus) statRadioStatus.innerText = "RETRYING";
+        }
+      }
+
+      audioElement.onerror = onStreamError;
+
       try {
         audioElement.src = channel.streamUrl;
         const playPromise = audioElement.play();
         if (playPromise !== undefined) {
           playPromise.then(function () {
             isRadioPlaying = true;
+            titleEl.innerText = "🔴 " + channel.name;
             playBtn.innerText = "⏸️ PAUSE";
-            if (statRadioStatus) statRadioStatus.innerText = "ONLINE";
+            if (statRadioStatus) statRadioStatus.innerText = "ONLINE (LIVE)";
           }).catch(function (error) {
-            console.log("Stream audio link CORS/format fallback applied:", error);
-            // Gunakan fallback URL atau simulasi synth merdu
-            audioElement.src = channel.fallbackUrl;
-            audioElement.play().catch(function() {
-              startSynthesizedTone();
-            });
-            isRadioPlaying = true;
-            playBtn.innerText = "⏸️ PAUSE";
-            if (statRadioStatus) statRadioStatus.innerText = "ONLINE (SYNTH)";
+            console.log("Stream direct dicegah browser/CORS, beralih ke proxy:", error);
+            onStreamError();
           });
         }
       } catch (err) {
         console.error(err);
-        startSynthesizedTone();
+        onStreamError();
       }
 
       // Perbarui tampilan item di level 2 jika sedang dibuka
@@ -5432,21 +5922,34 @@
       const audioElement = document.getElementById("teguh-audio-engine");
       const playBtn = document.getElementById("player-play-btn");
       const statRadioStatus = document.getElementById("stat-radio-status");
+      const titleEl = document.getElementById("player-station-title");
 
       if (isRadioPlaying) {
         audioElement.pause();
-        stopSynthesizedTone();
         isRadioPlaying = false;
         playBtn.innerText = "▶️ PLAY";
         if (statRadioStatus) statRadioStatus.innerText = "PAUSED";
       } else {
         if (currentActiveChannel) {
-          audioElement.play().catch(function() {
-            startSynthesizedTone();
+          // Jeda Murottal jika sedang diputar
+          const tilawahAudio = document.getElementById("tilawah-audio-engine");
+          if (tilawahAudio && !tilawahAudio.paused) tilawahAudio.pause();
+
+          audioElement.play().then(function() {
+            isRadioPlaying = true;
+            playBtn.innerText = "⏸️ PAUSE";
+            if (titleEl && currentActiveChannel) titleEl.innerText = "🔴 " + currentActiveChannel.name;
+            if (statRadioStatus) statRadioStatus.innerText = "ONLINE (LIVE)";
+          }).catch(function() {
+            if (currentActiveChannel.fallbackUrl) {
+              audioElement.src = currentActiveChannel.fallbackUrl;
+              audioElement.play().then(function() {
+                isRadioPlaying = true;
+                playBtn.innerText = "⏸️ PAUSE";
+                if (statRadioStatus) statRadioStatus.innerText = "ONLINE (LIVE)";
+              });
+            }
           });
-          isRadioPlaying = true;
-          playBtn.innerText = "⏸️ PAUSE";
-          if (statRadioStatus) statRadioStatus.innerText = "ONLINE";
         }
       }
     }
@@ -5459,7 +5962,6 @@
 
       audioElement.pause();
       audioElement.src = "";
-      stopSynthesizedTone();
       isRadioPlaying = false;
       miniRadioBar.classList.remove("active");
       if (statRadioStatus) statRadioStatus.innerText = "STANDBY";
@@ -5491,10 +5993,778 @@
       }
     }
 
-    // Putar Murottal Cepat dari Kamar Tilawah
-    function playTilawahMurottal() {
-      playRadioChannel("islami", "suaraquran");
+
+    // ========================================================================
+    // TILAWAH, MUROTTAL 30 JUZ & AYAT TEMATIK ENGINE
+    // ========================================================================
+    const SURAHS_114_DATABASE = [[1,"Al-Fatihah","الفاتحة","Pembukaan",7,"Makkiyyah",1],[2,"Al-Baqarah","البقرة","Sapi Betina",286,"Madaniyyah",1],[3,"Ali Imran","آل عمران","Keluarga Imran",200,"Madaniyyah",3],[4,"An-Nisa","النساء","Wanita",176,"Madaniyyah",4],[5,"Al-Maidah","المائدة","Hidangan",120,"Madaniyyah",6],[6,"Al-Anam","الأنعام","Binatang Ternak",165,"Makkiyyah",7],[7,"Al-Araf","الأعراف","Tempat Tertinggi",206,"Makkiyyah",8],[8,"Al-Anfal","الأنفال","Rampasan Perang",75,"Madaniyyah",9],[9,"At-Taubah","التوبة","Pengampunan",129,"Madaniyyah",10],[10,"Yunus","يونس","Nabi Yunus",109,"Makkiyyah",11],[11,"Hud","هود","Nabi Hud",123,"Makkiyyah",11],[12,"Yusuf","يوسف","Nabi Yusuf",111,"Makkiyyah",12],[13,"Ar-Rad","الرعد","Guruh",43,"Madaniyyah",13],[14,"Ibrahim","إبراهيم","Nabi Ibrahim",52,"Makkiyyah",13],[15,"Al-Hijr","الحجر","Negeri Kaum Tsamud",99,"Makkiyyah",14],[16,"An-Nahl","النحل","Lebah",128,"Makkiyyah",14],[17,"Al-Isra","الإسراء","Perjalanan Malam",111,"Makkiyyah",15],[18,"Al-Kahf","الكهف","Gua",110,"Makkiyyah",15],[19,"Maryam","مريم","Siti Maryam",98,"Makkiyyah",16],[20,"Taha","طه","Thaha",135,"Makkiyyah",16],[21,"Al-Anbiya","الأنبياء","Para Nabi",112,"Makkiyyah",17],[22,"Al-Hajj","الحج","Haji",78,"Madaniyyah",17],[23,"Al-Muminun","المؤمنون","Orang-Orang Mukmin",118,"Makkiyyah",18],[24,"An-Nur","النور","Cahaya",64,"Madaniyyah",18],[25,"Al-Furqan","الفرقان","Pembeda",77,"Makkiyyah",18],[26,"Asy-Syuara","الشعراء","Para Penyair",227,"Makkiyyah",19],[27,"An-Naml","النمل","Semut",93,"Makkiyyah",19],[28,"Al-Qasas","القصص","Kisah-Kisah",88,"Makkiyyah",20],[29,"Al-Ankabut","العنكبوت","Laba-Laba",69,"Makkiyyah",20],[30,"Ar-Rum","الروم","Bangsa Romawi",60,"Makkiyyah",21],[31,"Luqman","لقمان","Luqman",34,"Makkiyyah",21],[32,"As-Sajdah","السجدة","Sujud",30,"Makkiyyah",21],[33,"Al-Ahzab","الأحزاب","Golongan yang Bersekutu",73,"Madaniyyah",21],[34,"Saba","سبأ","Kaum Saba",54,"Makkiyyah",22],[35,"Fatir","فاطر","Pencipta",45,"Makkiyyah",22],[36,"Yasin","يس","Yasin",83,"Makkiyyah",22],[37,"As-Saffat","الصافات","Barisan-Barisan",182,"Makkiyyah",23],[38,"Sad","ص","Shad",88,"Makkiyyah",23],[39,"Az-Zumar","الزمر","Rombongan-Rombongan",75,"Makkiyyah",23],[40,"Ghafir","غافر","Yang Mengampuni",85,"Makkiyyah",24],[41,"Fussilat","فصلت","Yang Dijelaskan",54,"Makkiyyah",24],[42,"Asy-Syura","الشورى","Musyawarah",53,"Makkiyyah",25],[43,"Az-Zukhruf","الزخرف","Perhiasan",89,"Makkiyyah",25],[44,"Ad-Dukhan","الدخان","Kabut Asap",59,"Makkiyyah",25],[45,"Al-Jasiyah","الجاثية","Yang Berlutut",37,"Makkiyyah",25],[46,"Al-Ahqaf","الأحقاف","Bukit-Bukit Pasir",35,"Makkiyyah",26],[47,"Muhammad","محمد","Nabi Muhammad",38,"Madaniyyah",26],[48,"Al-Fath","الفتح","Kemenangan",29,"Madaniyyah",26],[49,"Al-Hujurat","الحجرات","Kamar-Kamar",18,"Madaniyyah",26],[50,"Qaf","ق","Qaf",45,"Makkiyyah",26],[51,"Az-Zariyat","الذاريات","Angin yang Menerbangkan",60,"Makkiyyah",26],[52,"At-Tur","الطور","Bukit Tursina",49,"Makkiyyah",27],[53,"An-Najm","النجم","Bintang",62,"Makkiyyah",27],[54,"Al-Qamar","القمر","Bulan",55,"Makkiyyah",27],[55,"Ar-Rahman","الرحمن","Yang Maha Pengasih",78,"Madaniyyah",27],[56,"Al-Waqiah","الواقعة","Hari Kiamat",96,"Makkiyyah",27],[57,"Al-Hadid","الحديد","Besi",29,"Madaniyyah",27],[58,"Al-Mujadilah","المجادلة","Wanita yang Menggugat",22,"Madaniyyah",28],[59,"Al-Hasyr","الحشر","Pengusiran",24,"Madaniyyah",28],[60,"Al-Mumtahanah","الممتحنة","Wanita yang Diuji",13,"Madaniyyah",28],[61,"As-Saff","الصف","Barisan",14,"Madaniyyah",28],[62,"Al-Jumuah","الجمعة","Hari Jumat",11,"Madaniyyah",28],[63,"Al-Munafiqun","المنافقون","Orang-Orang Munafik",11,"Madaniyyah",28],[64,"At-Tagabun","التغابن","Hari Ditampakkan Kesalahan",18,"Madaniyyah",28],[65,"At-Talaq","الطلاق","Perceraian",12,"Madaniyyah",28],[66,"At-Tahrim","التحريم","Mengharamkan",12,"Madaniyyah",28],[67,"Al-Mulk","الملك","Kerajaan",30,"Makkiyyah",29],[68,"Al-Qalam","القلم","Pena",52,"Makkiyyah",29],[69,"Al-Haqqah","الحاقة","Hari Kiamat yang Pasti",52,"Makkiyyah",29],[70,"Al-Maarij","المعارج","Tempat-Tempat Naik",44,"Makkiyyah",29],[71,"Nuh","نوح","Nabi Nuh",28,"Makkiyyah",29],[72,"Al-Jinn","الجن","Jin",28,"Makkiyyah",29],[73,"Al-Muzzammil","المزمل","Orang yang Berselimut",20,"Makkiyyah",29],[74,"Al-Muddassir","المدثر","Orang yang Berkemul",56,"Makkiyyah",29],[75,"Al-Qiyamah","القيامة","Hari Kiamat",40,"Makkiyyah",29],[76,"Al-Insan","الإنسان","Manusia",31,"Madaniyyah",29],[77,"Al-Mursalat","المرسلات","Malaikat yang Diutus",50,"Makkiyyah",29],[78,"An-Naba","النبأ","Berita Besar",40,"Makkiyyah",30],[79,"An-Naziat","النازعات","Malaikat yang Mencabut",46,"Makkiyyah",30],[80,"Abasa","عبس","Ia Bermuka Masam",42,"Makkiyyah",30],[81,"At-Takwir","التكوير","Menggulung",29,"Makkiyyah",30],[82,"Al-Infitar","الانفطار","Terbelah",19,"Makkiyyah",30],[83,"Al-Mutaffifin","المطففين","Orang-Orang yang Curang",36,"Makkiyyah",30],[84,"Al-Insyiqaq","الانشقاق","Terbelah Menjadi Dua",25,"Makkiyyah",30],[85,"Al-Buruj","البروج","Gugusan Bintang",22,"Makkiyyah",30],[86,"At-Tariq","الطارق","Yang Datang di Malam Hari",17,"Makkiyyah",30],[87,"Al-Ala","الأعلى","Yang Maha Tinggi",19,"Makkiyyah",30],[88,"Al-Gasyiyah","الغاشية","Hari Pembalasan",26,"Makkiyyah",30],[89,"Al-Fajr","الفجر","Fajar",30,"Makkiyyah",30],[90,"Al-Balad","البلد","Negeri",20,"Makkiyyah",30],[91,"Asy-Syams","الشمس","Matahari",15,"Makkiyyah",30],[92,"Al-Lail","الليل","Malam",21,"Makkiyyah",30],[93,"Ad-Duha","الضحى","Waktu Dhuha",11,"Makkiyyah",30],[94,"Asy-Syarh","الشرح","Kelapangan Hati",8,"Makkiyyah",30],[95,"At-Tin","التين","Buah Tin",8,"Makkiyyah",30],[96,"Al-Alaq","العلق","Segumpal Darah",19,"Makkiyyah",30],[97,"Al-Qadr","القدر","Malam Kemuliaan",5,"Makkiyyah",30],[98,"Al-Bayyinah","البينة","Bukti Nyata",8,"Madaniyyah",30],[99,"Az-Zalzalah","الزلزلة","Kegoncangan",8,"Madaniyyah",30],[100,"Al-Adiyat","العاديات","Kuda yang Berlari Kencang",11,"Makkiyyah",30],[101,"Al-Qariah","القارعة","Hari Kiamat yang Menggetarkan",11,"Makkiyyah",30],[102,"At-Takasur","التكاثر","Bermegah-Megahan",8,"Makkiyyah",30],[103,"Al-Asr","العصر","Demi Masa",3,"Makkiyyah",30],[104,"Al-Humazah","الهمزة","Pengumpat",9,"Makkiyyah",30],[105,"Al-Fil","الفيل","Gajah",5,"Makkiyyah",30],[106,"Quraisy","قريش","Suku Quraisy",4,"Makkiyyah",30],[107,"Al-Maun","الماعون","Bantuan Barang Berguna",7,"Makkiyyah",30],[108,"Al-Kausar","الكوثر","Nikmat yang Berlimpah",3,"Makkiyyah",30],[109,"Al-Kafirun","الكافرون","Orang-Orang Kafir",6,"Makkiyyah",30],[110,"An-Nasr","النصر","Pertolongan",3,"Madaniyyah",30],[111,"Al-Lahab","اللهب","Gejolak Api",5,"Makkiyyah",30],[112,"Al-Ikhlas","الإخلاص","Keesaan Allah",4,"Makkiyyah",30],[113,"Al-Falaq","الفلق","Waktu Subuh",5,"Makkiyyah",30],[114,"An-Nas","الناس","Manusia",6,"Makkiyyah",30]];
+
+    const THEMATIC_VERSES = [
+  {
+    "id": "tawakal_talaq",
+    "category": "tawakal",
+    "title": "Ayat 1000 Dinar • QS. At-Talaq: 2-3",
+    "themeBadge": "Jalan Keluar & Rezeki Tak Terduga",
+    "arabic": "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا • وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ۚ وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ ۚ إِنَّ اللَّهَ بَالِغُ أَمْرِهِ ۚ قَدْ جَعَلَ اللَّهُ لِكُلِّ شَيْءٍ قَدْرًا",
+    "latin": "Wa may yattaqillaaha yaj'al lahuu makhrajaa. Wa yarzuq-hu min haitsu laa yahtasib. Wa may yatawakkal 'alallaahi fahuwa hasbuh. Innallaaha baalighu amrih, qad ja'alallaahu likulli syai'in qadraa.",
+    "arti": "Barangsiapa bertakwa kepada Allah niscaya Dia akan membukakan jalan keluar baginya, dan Dia memberinya rezeki dari arah yang tiada disangka-sangkanya. Dan barangsiapa bertawakal kepada Allah, niscaya Allah akan mencukupkan (keperluan)nya. Sesungguhnya Allah melaksanakan urusan-Nya. Sungguh, Allah telah mengadakan ketentuan bagi setiap sesuatu.",
+    "faidah": "Mutiara Santri: Kunci pembuka pintu rezeki montir dan penyelesaian masalah hidup yang paling mustajab adalah tawakal total setelah ikhtiar maksimal.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/065002.mp3",
+    "surahRef": 65
+  },
+  {
+    "id": "tawakal_imran",
+    "category": "tawakal",
+    "title": "Keteguhan Tekad & Tawakal • QS. Ali 'Imran: 159",
+    "themeBadge": "Bulatkan Tekad & Serahkan Hasilnya",
+    "arabic": "فَإِذَا عَزَمْتَ فَتَوَكَّلْ عَلَى اللَّهِ ۚ إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ",
+    "latin": "Fa idzaa 'azamta fatawakkal 'alallaah, innallaaha yuhibbul-mutawakkiliin.",
+    "arti": "Kemudian, apabila engkau telah membulatkan tekad, maka bertawakallah kepada Allah. Sungguh, Allah mencintai orang-orang yang bertawakal.",
+    "faidah": "Mutiara Santri: Dalam meriset mesin, belajar tajwid, atau menempuh ujian, bulatkan niat lalu serahkan hasil mutlak kepada Allah SWT.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/003159.mp3",
+    "surahRef": 3
+  },
+  {
+    "id": "tawakal_baqarah286",
+    "category": "tawakal",
+    "title": "Doa Akhir Surah Al-Baqarah • QS. Al-Baqarah: 286",
+    "themeBadge": "Beban Hidup Pasti Sesuai Kemampuan",
+    "arabic": "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا",
+    "latin": "Laa yukalliful-laahu nafsan illaa wus'ahaa, lahaa maa kasabat wa 'alaihaa maktasabat, Rabbanaa laa tu'aakhidznaa in nasiinaa aw akhtha'naa...",
+    "arti": "Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya. Dia mendapat (pahala) dari (kebajikan) yang dikerjakannya dan dia mendapat (siksa) dari (kejahatan) yang diperbuatnya.",
+    "faidah": "Mutiara Santri: Jangan pernah putus asa menghadapi kesulitan oprek mesin atau himpitan ekonomi, Allah menjamin beban tersebut sesuai kapasitas kita.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/002286.mp3",
+    "surahRef": 2
+  },
+  {
+    "id": "sabar_baqarah153",
+    "category": "sabar",
+    "title": "Sabar & Sholat Penolong Hidup • QS. Al-Baqarah: 153-155",
+    "themeBadge": "Pertolongan Allah Bersama Orang Sabar",
+    "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ • وَلَنَبْلُوَنَّكُم بِشَيْءٍ مِّنَ الْخَوْفِ وَالْجُوعِ وَنَقْصٍ مِّنَ الْأَمْوَالِ وَالْأَنفُسِ وَالثَّمَرَاتِ ۗ وَبَشِّرِ الصَّابِرِينَ",
+    "latin": "Yaa ayyuhal-ladziina aamanus-ta'iinuu bish-shabri wash-shalaah, innallaaha ma'ash-shaabiriin. Wa lanabluwannakum bisyai'im minal-khaufi wal-juu'i wa naqshim minal-amwaali wal-anfusi wats-tsamaraat, wa basysyirish-shaabiriin.",
+    "arti": "Wahai orang-orang yang beriman! Mohonlah pertolongan (kepada Allah) dengan sabar dan salat. Sungguh, Allah beserta orang-orang yang sabar. Dan Kami pasti akan menguji kamu dengan sedikit ketakutan, kelaparan, kekurangan harta, jiwa, dan buah-buahan. Dan sampaikanlah kabar gembira kepada orang-orang yang sabar.",
+    "faidah": "Mutiara Santri: Benteng utama saat bengkel sepi, motor trouble, atau hati gundah adalah tegakkan shalat tepat waktu dan bentangkan kesabaran.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/002153.mp3",
+    "surahRef": 2
+  },
+  {
+    "id": "sabar_insyirah",
+    "category": "sabar",
+    "title": "Kemudahan Bersama Kesulitan • QS. Al-Insyirah (Asy-Syarh): 1-8",
+    "themeBadge": "Pasti Ada Jalan Keluar Di Balik Kesulitan",
+    "arabic": "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ • وَوَضَعْنَا عَنكَ وِزْرَكَ • الَّذِي أَنقَضَ ظَهْرَكَ • وَرَفَعْنَا لَكَ ذِكْرَكَ • فَإِنَّ مَعَ الْعُسْرِ يُسْرًا • إِنَّ مَعَ الْعُسْرِ يُسْرًا • فَإِذَا فَرَغْتَ فَانصَبْ • وَإِلَىٰ رَبِّكَ فَارْغَب",
+    "latin": "Alam nasyrah laka shadrak. Wa wadha'naa 'anka wizrak. Alladzii anqadha zhahrak. Wa rafa'naa laka dzikrak. Fa inna ma'al-'usri yusraa. Inna ma'al-'usri yusraa. Fa idzaa faraghta fanshab. Wa ilaa Rabbika farghab.",
+    "arti": "Bukankah Kami telah melapangkan dadamu (Muhammad)? dan Kami pun telah menurunkan bebanmu darimu, yang memberatkan punggungmu, dan Kami tinggikan sebutan (nama)mu bagimu. Maka sesungguhnya beserta kesulitan ada kemudahan, sesungguhnya beserta kesulitan ada kemudahan...",
+    "faidah": "Mutiara Santri: Kata al-'usr (kesulitan) disebut satu kali secara makrifat, sedangkan yusra (kemudahan) berulang kali. Satu kesulitan tidak akan pernah mengalahkan dua kemudahan!",
+    "audioUrl": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/94.mp3",
+    "surahRef": 94
+  },
+  {
+    "id": "sabar_zumar",
+    "category": "sabar",
+    "title": "Pahala Sabar Tanpa Batas • QS. Az-Zumar: 10",
+    "themeBadge": "Ganjaran Melimpah Ruah Dari Allah",
+    "arabic": "إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",
+    "latin": "Innamaa yuwaffash-shaabiruuna ajrahum bighairi hisaab.",
+    "arti": "Hanya orang-orang yang bersabarlah yang disempurnakan pahalanya tanpa batas (tanpa hitungan).",
+    "faidah": "Mutiara Santri: Sabar adalah satu-satunya amalan yang timbangan pahalanya tidak memakai takaran manusia, melainkan langsung dari karunia Allah.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/039010.mp3",
+    "surahRef": 39
+  },
+  {
+    "id": "syukur_ibrahim",
+    "category": "syukur",
+    "title": "Janji Penambahan Nikmat • QS. Ibrahim: 7",
+    "themeBadge": "Kunci Berkah & Kelimpahan Rezeki",
+    "arabic": "وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ",
+    "latin": "Wa idz ta-adz-dzana Rabbukum la'in syakartum la'aziidannakum wa la'in kafartum inna 'adzaabii lasyadiid.",
+    "arti": "Dan (ingatlah) ketika Tuhanmu memaklumkan, 'Sesungguhnya jika kamu bersyukur, niscaya Aku akan menambah (nikmat) kepadamu, tetapi jika kamu mengingkari (nikmat-Ku), maka pasti azab-Ku sangat berat.'",
+    "faidah": "Mutiara Santri: Mengikat nikmat yang ada dan memancing nikmat yang belum datang dilakukan dengan satu kalimat tulus: Alhamdulillah.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/014007.mp3",
+    "surahRef": 14
+  },
+  {
+    "id": "syukur_rahman",
+    "category": "syukur",
+    "title": "Nikmat Tuhan Yang Tiada Tara • QS. Ar-Rahman: 1-13",
+    "themeBadge": "Pengingat Kasih Sayang Allah Yang Maha Pengasih",
+    "arabic": "الرَّحْمَٰنُ • عَلَّمَ الْقُرْآنَ • خَلَقَ الْإِنسَانَ • عَلَّمَهُ الْبَيَانَ ... فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ",
+    "latin": "Ar-Rahmaan. 'Allamal-Qur'aan. Khalaqal-insaan. 'Allamahul-bayaan... Fabi-ayyi aalaa-i Rabbikumaa tukadz-dzibaan.",
+    "arti": "(Allah) Yang Maha Pengasih, yang telah mengajarkan Al-Qur'an. Dia menciptakan manusia, mengajarnya pandai berbicara... Maka nikmat Tuhanmu yang manakah yang kamu dustakan?",
+    "faidah": "Mutiara Santri: Ayat penggetar sanubari yang diulang 31 kali agar kita tidak menjadi hamba yang buta terhadap limpahan nikmat sehat dan rezeki.",
+    "audioUrl": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/55.mp3",
+    "surahRef": 55
+  },
+  {
+    "id": "syukur_duha",
+    "category": "syukur",
+    "title": "Penghibur Hati & Mensyukuri Nikmat • QS. Ad-Duha: 1-11",
+    "themeBadge": "Tuhanmu Tak Pernah Meninggalkanmu",
+    "arabic": "وَالضُّحَىٰ • وَاللَّيْلِ إِذَا سَجَىٰ • مَا وَدَّعَكَ رَبُّكَ وَمَا قَلَىٰ • وَلَلْآخِرَةُ خَيْرٌ لَّكَ مِنَ الْأُولَىٰ ... وَأَمَّا بِنِعْمَةِ رَبِّكَ فَحَدِّثْ",
+    "latin": "Wadh-dhuhaa. Wal-laili idzaa sajaa. Maa wadda'aka Rabbuka wa maa qalaa. Wa lal-aakhiratu khairul laka minal-uulaa... Wa ammaa bini'mati Rabbika fahaddits.",
+    "arti": "Demi waktu dhuha dan demi malam apabila telah sunyi, Tuhanmu tidak meninggalkan engkau dan tidak membencimu... Dan terhadap nikmat Tuhanmu, hendaklah engkau nyatakan.",
+    "faidah": "Mutiara Santri: Surat penenang jiwa saat rindu dan lelah. Pengingat bahwa masa depan orang beriman selalu lebih baik dari masa lalunya.",
+    "audioUrl": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/93.mp3",
+    "surahRef": 93
+  },
+  {
+    "id": "rezeki_waqiah",
+    "category": "rezeki",
+    "title": "Surah Pembuka Keran Rezeki • QS. Al-Waqi'ah: 1-38",
+    "themeBadge": "Penjaga Dari Kefakiran & Kemiskinan",
+    "arabic": "إِذَا وَقَعَتِ الْوَاقِعَةُ • لَيْسَ لِوَقْعَتِهَا كَاذِبَةٌ • خَافِضَةٌ رَّافِعَةٌ ... وَأَصْحَابُ الْيَمِينِ مَا أَصْحَابُ الْيَمِينِ",
+    "latin": "Idzaa waqa'atil-waaqi'ah. Laisa liwaq'atihaa kaadzibah. Khaafidhatur raafi'ah...",
+    "arti": "Apabila terjadi hari Kiamat, terjadinya tidak dapat didustakan. (Kejadian itu) merendahkan (satu golongan) dan meninggikan (golongan yang lain)...",
+    "faidah": "Mutiara Santri: Sabda Nabi SAW: 'Barangsiapa membaca surat Al-Waqi'ah setiap malam, maka ia tidak akan ditimpa kemiskinan selamanya.' (HR. Baihaqi).",
+    "audioUrl": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/56.mp3",
+    "surahRef": 56
+  },
+  {
+    "id": "rezeki_nuh",
+    "category": "rezeki",
+    "title": "Keajaiban Istighfar Membuka Rezeki • QS. Nuh: 10-12",
+    "themeBadge": "Hujan Berkah, Kelimpahan Harta & Anak",
+    "arabic": "فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا • يُرْسِلِ السَّمَاءَ عَلَيْكُم مِّدْرَارًا • وَيُمْدِدْكُم بِأَمْوَالٍ وَبَنِينَ وَيَجْعَل لَّكُمْ جَنَّاتٍ وَيَجْعَل لَّكُمْ أَنْهَارًا",
+    "latin": "Faqultus-taghfiru Rabbakum innahuu kaana ghaffaaraa. Yursilis-samaa-a 'alaikum midraaraa. Wa yumdidkum bi-amwaaliw wa baniina wa yaj'al lakum jannaatiw wa yaj'al lakum an-haaraa.",
+    "arti": "Maka aku berkata (kepada mereka), 'Mohonlah ampunan kepada Tuhanmu, sungguh, Dia Maha Pengampun, niscaya Dia akan menurunkan hujan yang lebat dari langit kepadamu, dan Dia memperbanyak harta dan anak-anakmu...'",
+    "faidah": "Mutiara Santri: Jika rezeki bengkel seret atau usaha tersendat, perbanyak istighfar minimal 100 kali setiap pagi dan sore.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/071010.mp3",
+    "surahRef": 71
+  },
+  {
+    "id": "syifa_rad",
+    "category": "syifa",
+    "title": "Hati Tenang Mengingat Allah • QS. Ar-Ra'd: 28",
+    "themeBadge": "Penawar Jiwa Gelisah, Resah & Stres",
+    "arabic": "الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ ۗ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+    "latin": "Alladziina aamanuu wa tathma'innu quluubuhum bidzikrillaah, alaa bidzikrillaahi tathma'innul-quluub.",
+    "arti": "(yaitu) orang-orang yang beriman dan hati mereka menjadi tenteram dengan mengingat Allah. Ingatlah, hanya dengan mengingat Allah hati menjadi tenteram.",
+    "faidah": "Mutiara Santri: Ketika pikiran montir tegang atau santri kelelahan menghafal, dengarkan lantunan ayat ini untuk meredakan kegelisahan hati.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/013028.mp3",
+    "surahRef": 13
+  },
+  {
+    "id": "syifa_isra",
+    "category": "syifa",
+    "title": "Al-Qur'an Sebagai Obat & Rahmat • QS. Al-Isra': 82",
+    "themeBadge": "Asy-Syifa' Penawar Jasmani & Rohani",
+    "arabic": "وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ ۙ وَلَا يَزِيدُ الظَّالِمِينَ إِلَّا خَسَارًا",
+    "latin": "Wa nunazzilu minal-Qur'aani maa huwa syifaa-uw wa rahmatul lil-mu'miniin, wa laa yaziiduzh-zhaalimiina illaa khasaaraa.",
+    "arti": "Dan Kami turunkan dari Al-Qur'an (suatu) yang menjadi penawar (obat) dan rahmat bagi orang-orang yang beriman...",
+    "faidah": "Mutiara Santri: Murottal merdu adalah terapi syaraf alami terbaik yang merilekskan otot-otot tubuh dan menjernihkan akal budi.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/017082.mp3",
+    "surahRef": 17
+  },
+  {
+    "id": "ruqyah_kursi",
+    "category": "ruqyah",
+    "title": "Ayat Kursi • QS. Al-Baqarah: 255",
+    "themeBadge": "Ayat Paling Agung & Benteng Gaib Terkuat",
+    "arabic": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+    "latin": "Allaahu laa ilaaha illaa huwal-hayyul-qayyuum, laa ta'khudzuhuu sinatuw wa laa naum, lahuu maa fis-samaawaati wa maa fil-ardh...",
+    "arti": "Allah, tidak ada tuhan selain Dia. Yang Mahahidup, Yang terus-menerus mengurus (makhluk-Nya), tidak mengantuk dan tidak tidur...",
+    "faidah": "Mutiara Santri: Dibaca sehabis shalat fardhu dan sebelum tidur di bengkel atau pondok, malaikat penjaga akan melindungi dari mara bahaya hingga pagi.",
+    "audioUrl": "https://everyayah.com/data/Alafasy_128kbps/002255.mp3",
+    "surahRef": 2
+  },
+  {
+    "id": "ruqyah_muawwidzatain",
+    "category": "ruqyah",
+    "title": "Surah Al-Falaq & An-Nas (Al-Mu'awwidzatain)",
+    "themeBadge": "Perlindungan Dari Hasad, Kejahatan Malam & Was-was",
+    "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ • مِن شَرِّ مَا خَلَقَ • وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ... قُلْ أَعُوذُ بِرَبِّ النَّاسِ • مَلِكِ النَّاسِ • إِلَٰهِ النَّاسِ",
+    "latin": "Qul a'uudzu bi Rabbil-falaq... Qul a'uudzu bi Rabbin-naas...",
+    "arti": "Katakanlah: 'Aku berlindung kepada Tuhan yang menguasai subuh...' Katakanlah: 'Aku berlindung kepada Tuhannya manusia, Raja manusia...'",
+    "faidah": "Mutiara Santri: Bacaan ruqyah mandiri harian yang diajarkan Rasulullah SAW untuk menangkal santet, sihir, 'ain (pandangan hasad), dan was-was.",
+    "audioUrl": "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/113.mp3",
+    "surahRef": 113
+  }
+];
+
+    const DAILY_SURAHS_IDS = [56, 18, 36, 67, 55, 32, 93, 94];
+
+    // State Pemutar Tilawah
+    let currentTilawahSurah = 1;
+    let currentThematicVerseId = null;
+    let currentTilawahQari = "ar.alafasy";
+    let isTilawahPlaying = false;
+    let isTilawahLoop = false;
+    let currentThematicFilter = "all";
+    let currentJuzFilter = "all";
+    let currentSurahSearchQuery = "";
+
+    function getQariAudioUrl(qariKey, surahNum) {
+      const pad3 = String(surahNum).padStart(3, "0");
+      if (qariKey === "ar.sudais") {
+        return "https://server11.mp3quran.net/sds/" + pad3 + ".mp3";
+      } else if (qariKey === "ar.maher") {
+        return "https://server12.mp3quran.net/maher/" + pad3 + ".mp3";
+      } else if (qariKey === "ar.ghamidi") {
+        return "https://server7.mp3quran.net/s_gmd/" + pad3 + ".mp3";
+      } else {
+        // Alafasy (Default)
+        return "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/" + surahNum + ".mp3";
+      }
     }
+
+    function getQariFallbackUrl(qariKey, surahNum) {
+      const pad3 = String(surahNum).padStart(3, "0");
+      return "https://server8.mp3quran.net/afs/" + pad3 + ".mp3";
+    }
+
+    // Render Sub-panel 1: Ayat Favorit Tematik
+    function renderThematicVerses() {
+      const container = document.getElementById("thematic-verses-list");
+      if (!container) return;
+
+      const filtered = THEMATIC_VERSES.filter(function(v) {
+        if (currentThematicFilter === "all") return true;
+        return v.category === currentThematicFilter;
+      });
+
+      let html = "";
+      filtered.forEach(function(v) {
+        const isPlaying = currentThematicVerseId === v.id && isTilawahPlaying;
+        const playBtnText = isPlaying ? "⏸️ Jeda Tilawah" : "▶️ Putar Tilawah Merdu";
+        const playingClass = isPlaying ? "playing" : "";
+
+        // Escape string for onclick
+        const safeTitle = v.title.replace(/'/g, "\\'");
+        const safeArabic = v.arabic.replace(/'/g, "\\'");
+        const safeLatin = v.latin.replace(/'/g, "\\'");
+        const safeArti = v.arti.replace(/'/g, "\\'");
+
+        html += '<div class="thematic-card ' + playingClass + '" id="thematic-card-' + v.id + '">' +
+          '<div class="thematic-card-header">' +
+            '<span class="thematic-verse-title"><span>🌟</span><span>' + v.title + '</span></span>' +
+            '<span class="tag-pill gold">' + v.themeBadge + '</span>' +
+          '</div>' +
+          '<p class="arabic-text" dir="rtl">' + v.arabic + '</p>' +
+          '<p class="latin-text">' + v.latin + '</p>' +
+          '<p class="arti-text">' + v.arti + '</p>' +
+          '<div class="thematic-faidah-box">' + v.faidah + '</div>' +
+          '<div class="thematic-card-actions">' +
+            '<button class="tilawah-ctrl-btn active" onclick="playThematicVerse(\'' + v.id + '\')"><span>' + playBtnText + '</span></button>' +
+            '<button class="tilawah-ctrl-btn" onclick="copyVerseText(\'' + safeTitle + '\', \'' + safeArabic + '\', \'' + safeLatin + '\', \'' + safeArti + '\')"><span>📋 Salin Ayat & Arti</span></button>' +
+          '</div>' +
+        '</div>';
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Render Sub-panel 2: 114 Surah Grid
+    function renderSurahsGrid() {
+      const container = document.getElementById("surahs-grid-container");
+      if (!container) return;
+
+      const q = currentSurahSearchQuery.toLowerCase().trim();
+
+      const filtered = SURAHS_114_DATABASE.filter(function(s) {
+        const num = s[0];
+        const latin = s[1].toLowerCase();
+        const arabic = s[2];
+        const arti = s[3].toLowerCase();
+        const juz = s[6];
+
+        // Filter Juz
+        if (currentJuzFilter === "juz30" && juz !== 30) return false;
+        if (currentJuzFilter === "juz1_5" && (juz < 1 || juz > 5)) return false;
+        if (currentJuzFilter === "juz6_10" && (juz < 6 || juz > 10)) return false;
+        if (currentJuzFilter === "juz11_15" && (juz < 11 || juz > 15)) return false;
+        if (currentJuzFilter === "juz16_20" && (juz < 16 || juz > 20)) return false;
+        if (currentJuzFilter === "juz21_25" && (juz < 21 || juz > 25)) return false;
+        if (currentJuzFilter === "juz26_29" && (juz < 26 || juz > 29)) return false;
+
+        // Search Query
+        if (q) {
+          const matchNum = String(num) === q;
+          const matchLatin = latin.includes(q);
+          const matchArti = arti.includes(q);
+          const matchArabic = arabic.includes(q);
+          const matchJuz = ("juz " + juz).includes(q) || ("juz" + juz).includes(q);
+          return matchNum || matchLatin || matchArti || matchArabic || matchJuz;
+        }
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #94a3b8;">' +
+          '<p style="font-size: 14px; font-weight: 700;">Tidak ditemukan Surah yang cocok dengan pencarian.</p>' +
+          '<p style="font-size: 12px;">Coba kata kunci lain: "Kahfi", "Yasin", "Mulk", atau nomor surah (1-114).</p>' +
+        '</div>';
+        return;
+      }
+
+      let html = "";
+      filtered.forEach(function(s) {
+        const num = s[0];
+        const latin = s[1];
+        const arabic = s[2];
+        const arti = s[3];
+        const ayat = s[4];
+        const juz = s[6];
+
+        const isCurrent = currentTilawahSurah === num && currentThematicVerseId === null;
+        const isPlaying = isCurrent && isTilawahPlaying;
+        const playingClass = isCurrent ? "playing" : "";
+
+        html += '<button class="surah-card-btn ' + playingClass + '" onclick="playTilawahSurah(' + num + ')">' +
+          '<div class="surah-card-left">' +
+            '<div class="surah-number-badge">' + num + '</div>' +
+            '<div class="surah-names-box">' +
+              '<h4>' + latin + '</h4>' +
+              '<p>' + arti + ' • ' + ayat + ' Ayat • Juz ' + juz + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<div style="text-align: right;">' +
+            '<span class="surah-arabic-preview">' + arabic + '</span>' +
+            '<div style="font-size: 10px; font-weight: 800; color: var(--gold-accent); margin-top: 2px;">' +
+              (isPlaying ? "🔊 PLAYING" : "▶️ PUTAR") +
+            '</div>' +
+          '</div>' +
+        '</button>';
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Render Sub-panel 3: Daily Surahs
+    function renderDailySurahs() {
+      const container = document.getElementById("daily-surahs-container");
+      if (!container) return;
+
+      let html = "";
+      DAILY_SURAHS_IDS.forEach(function(id) {
+        const s = SURAHS_114_DATABASE.find(function(item) { return item[0] === id; });
+        if (!s) return;
+
+        const num = s[0];
+        const latin = s[1];
+        const arabic = s[2];
+        const arti = s[3];
+        const ayat = s[4];
+        const juz = s[6];
+
+        const isCurrent = currentTilawahSurah === num && currentThematicVerseId === null;
+        const isPlaying = isCurrent && isTilawahPlaying;
+        const playingClass = isCurrent ? "playing" : "";
+
+        let fadhilahDesc = "";
+        if (num === 56) fadhilahDesc = "Pembuka Pintu Rezeki & Tolak Kemiskinan";
+        else if (num === 18) fadhilahDesc = "Cahaya Hari Jumat & Penangkal Dajjal";
+        else if (num === 36) fadhilahDesc = "Jantung Al-Qur\'an & Pelebur Dosa";
+        else if (num === 67) fadhilahDesc = "Penyelamat dari Siksa Kubur";
+        else if (num === 55) fadhilahDesc = "Pengingat Kelimpahan Nikmat Allah";
+        else if (num === 32) fadhilahDesc = "Sunnah Subuh Hari Jumat & Penguat Iman";
+        else if (num === 93) fadhilahDesc = "Penenang Jiwa Lelah & Gelisah";
+        else if (num === 94) fadhilahDesc = "Janji Kemudahan di Balik Kesulitan";
+
+        html += '<button class="surah-card-btn ' + playingClass + '" onclick="playTilawahSurah(' + num + ')">' +
+          '<div class="surah-card-left">' +
+            '<div class="surah-number-badge">' + num + '</div>' +
+            '<div class="surah-names-box">' +
+              '<h4>' + latin + ' (' + arabic + ')</h4>' +
+              '<p style="color: var(--neon-cyan); font-weight: 700;">' + fadhilahDesc + '</p>' +
+              '<p>' + arti + ' • ' + ayat + ' Ayat • Juz ' + juz + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<div style="text-align: right;">' +
+            '<span class="surah-arabic-preview">' + arabic + '</span>' +
+            '<div style="font-size: 10px; font-weight: 800; color: var(--gold-accent); margin-top: 2px;">' +
+              (isPlaying ? "🔊 PLAYING" : "▶️ PUTAR") +
+            '</div>' +
+          '</div>' +
+        '</button>';
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Render Sub-panel 4: Video Tilawah Santri
+    function renderVisualTilawahVideos() {
+      const container = document.getElementById("visual-tilawah-grid");
+      if (!container) return;
+
+      const videos = [
+        {
+          title: "Murottal Al-Waqi\'ah Merdu Penyejuk Hati",
+          qari: "Muzammil Hasballah",
+          desc: "Lantunan ayat pembuka rezeki dengan maqam nahawand syahdu",
+          videoId: "60ItHLz5WEA"
+        },
+        {
+          title: "Surah Al-Mulk Merdu Pelindung Siksa Kubur",
+          qari: "Salim Bahanan",
+          desc: "Tartil indah sebelum istirahat malam santri & montir",
+          videoId: "O7L3OQpGvhQ"
+        },
+        {
+          title: "Surah Ar-Rahman Lantunan Tartil Khusyuk",
+          qari: "Ibrahim Elhaq",
+          desc: "Pengingat nikmat agung Allah SWT di setiap tarikan nafas",
+          videoId: "5sS6yU6-d3I"
+        }
+      ];
+
+      let html = "";
+      videos.forEach(function(v) {
+        html += '<div style="background: #0f1a1f; border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">' +
+          '<div style="position: relative; padding-top: 56.25%;">' +
+            '<iframe style="position: absolute; top:0; left:0; width:100%; height:100%; border:none;" src="https://www.youtube-nocookie.com/embed/' + v.videoId + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>' +
+          '</div>' +
+          '<div style="padding: 12px;">' +
+            '<h4 style="font-size: 13px; font-weight: 800; color: #fff; margin: 0 0 4px 0;">' + v.title + '</h4>' +
+            '<p style="font-size: 11px; color: var(--gold-accent); font-weight: 700; margin: 0 0 4px 0;">Qari: ' + v.qari + '</p>' +
+            '<p style="font-size: 10px; color: #94a3b8; margin: 0;">' + v.desc + '</p>' +
+          '</div>' +
+        '</div>';
+      });
+
+      container.innerHTML = html;
+    }
+
+    // Putar Surah Spesifik (1 s/d 114)
+    function playTilawahSurah(surahNum, autoPlay = true) {
+      if (surahNum < 1) surahNum = 114;
+      if (surahNum > 114) surahNum = 1;
+
+      currentTilawahSurah = surahNum;
+      currentThematicVerseId = null;
+
+      const surahData = SURAHS_114_DATABASE.find(function(s) { return s[0] === surahNum; });
+      if (!surahData) return;
+
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      const titleEl = document.getElementById("tilawah-current-title");
+      const subEl = document.getElementById("tilawah-current-sub");
+
+      // Jeda Radio Background
+      const radioAudio = document.getElementById("teguh-audio-engine");
+      if (radioAudio && !radioAudio.paused) {
+        radioAudio.pause();
+        isRadioPlaying = false;
+        const radioPlayBtn = document.getElementById("player-play-btn");
+        if (radioPlayBtn) radioPlayBtn.innerText = "▶️ PLAY";
+        const statRadio = document.getElementById("stat-radio-status");
+        if (statRadio) statRadio.innerText = "STANDBY (PAUSED)";
+      }
+
+      // Update Metadata Console
+      const padNum = String(surahNum).padStart(3, "0");
+      if (titleEl) titleEl.innerText = "Surah " + padNum + ". " + surahData[1] + " (" + surahData[2] + ")";
+
+      const qariName = getQariDisplayName(currentTilawahQari);
+      if (subEl) subEl.innerText = "Qari: " + qariName + " • " + surahData[3] + " (" + surahData[4] + " Ayat • " + surahData[5] + " • Juz " + surahData[6] + ")";
+
+      if (audioElement) {
+        const audioUrl = getQariAudioUrl(currentTilawahQari, surahNum);
+        audioElement.src = audioUrl;
+
+        let triedFallback = false;
+        audioElement.onerror = function() {
+          if (!triedFallback) {
+            triedFallback = true;
+            const fallbackUrl = getQariFallbackUrl(currentTilawahQari, surahNum);
+            console.warn("Direct Islamic CDN fallback ke MP3Quran:", fallbackUrl);
+            audioElement.src = fallbackUrl;
+            if (autoPlay) audioElement.play().catch(function(e) { console.log(e); });
+          }
+        };
+
+        if (autoPlay) {
+          audioElement.play().then(function() {
+            isTilawahPlaying = true;
+            updateTilawahPlayButtonUI(true);
+          }).catch(function(err) {
+            console.log("Tilawah play error/waiting user interaction:", err);
+            updateTilawahPlayButtonUI(false);
+          });
+        }
+      }
+
+      renderSurahsGrid();
+      renderDailySurahs();
+      renderThematicVerses();
+    }
+
+    // Putar Ayat Favorit Tematik
+    function playThematicVerse(verseId) {
+      const verse = THEMATIC_VERSES.find(function(v) { return v.id === verseId; });
+      if (!verse) return;
+
+      currentThematicVerseId = verseId;
+
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      const titleEl = document.getElementById("tilawah-current-title");
+      const subEl = document.getElementById("tilawah-current-sub");
+
+      // Jeda Radio Background
+      const radioAudio = document.getElementById("teguh-audio-engine");
+      if (radioAudio && !radioAudio.paused) {
+        radioAudio.pause();
+        isRadioPlaying = false;
+        const radioPlayBtn = document.getElementById("player-play-btn");
+        if (radioPlayBtn) radioPlayBtn.innerText = "▶️ PLAY";
+      }
+
+      // Update Metadata Console
+      if (titleEl) titleEl.innerText = "🌟 " + verse.title;
+      if (subEl) subEl.innerText = "Kategori: " + verse.themeBadge + " • Lantunan Merdu Syaikh Misyari Rasyid";
+
+      if (audioElement) {
+        audioElement.src = verse.audioUrl;
+        audioElement.play().then(function() {
+          isTilawahPlaying = true;
+          updateTilawahPlayButtonUI(true);
+        }).catch(function(err) {
+          console.log("Thematic verse play error:", err);
+          updateTilawahPlayButtonUI(false);
+        });
+      }
+
+      renderThematicVerses();
+      renderSurahsGrid();
+    }
+
+    // Toggle Play / Pause Murottal
+    function toggleTilawahPlayback() {
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      if (!audioElement) return;
+
+      if (!audioElement.src || audioElement.src === window.location.href) {
+        playTilawahSurah(currentTilawahSurah, true);
+        return;
+      }
+
+      if (isTilawahPlaying) {
+        audioElement.pause();
+        isTilawahPlaying = false;
+        updateTilawahPlayButtonUI(false);
+      } else {
+        // Jeda radio jika menyala
+        const radioAudio = document.getElementById("teguh-audio-engine");
+        if (radioAudio && !radioAudio.paused) radioAudio.pause();
+
+        audioElement.play().then(function() {
+          isTilawahPlaying = true;
+          updateTilawahPlayButtonUI(true);
+        }).catch(function(e) {
+          console.log(e);
+        });
+      }
+
+      renderSurahsGrid();
+      renderDailySurahs();
+      renderThematicVerses();
+    }
+
+    function nextTilawahSurah() {
+      playTilawahSurah(currentTilawahSurah + 1, true);
+    }
+
+    function prevTilawahSurah() {
+      playTilawahSurah(currentTilawahSurah - 1, true);
+    }
+
+    function toggleTilawahLoop() {
+      isTilawahLoop = !isTilawahLoop;
+      const btn = document.getElementById("tilawah-loop-btn");
+      if (btn) {
+        if (isTilawahLoop) {
+          btn.classList.add("active");
+          btn.innerHTML = "<span>🔁</span><span>Loop: ON</span>";
+        } else {
+          btn.classList.remove("active");
+          btn.innerHTML = "<span>🔁</span><span>Loop: OFF</span>";
+        }
+      }
+    }
+
+    function changeTilawahQari(qariKey) {
+      currentTilawahQari = qariKey;
+      if (currentThematicVerseId === null) {
+        playTilawahSurah(currentTilawahSurah, isTilawahPlaying);
+      }
+    }
+
+    function setTilawahVolume(vol) {
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      if (audioElement) audioElement.volume = parseFloat(vol);
+    }
+
+    function seekTilawah(percent) {
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      if (audioElement && audioElement.duration) {
+        audioElement.currentTime = (percent / 100) * audioElement.duration;
+      }
+    }
+
+    function updateTilawahPlayButtonUI(isPlaying) {
+      const icon = document.getElementById("tilawah-play-icon");
+      const text = document.getElementById("tilawah-play-text");
+      const pulseIcon = document.getElementById("tilawah-pulse-icon");
+
+      if (isPlaying) {
+        if (icon) icon.innerText = "⏸️";
+        if (text) text.innerText = "Jeda";
+        if (pulseIcon) pulseIcon.style.animationPlayState = "running";
+      } else {
+        if (icon) icon.innerText = "▶️";
+        if (text) text.innerText = "Putar";
+        if (pulseIcon) pulseIcon.style.animationPlayState = "paused";
+      }
+    }
+
+    function getQariDisplayName(key) {
+      if (key === "ar.sudais") return "Syaikh Abdurrahman As-Sudais";
+      if (key === "ar.maher") return "Syaikh Maher Al-Muaiqly";
+      if (key === "ar.ghamidi") return "Syaikh Sa\'ad Al-Ghamidi";
+      return "Syaikh Misyari Rasyid Al-Afasy";
+    }
+
+    function formatTimeAudio(sec) {
+      if (!sec || isNaN(sec)) return "00:00";
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+    }
+
+    function switchTilawahTab(tabName) {
+      const tabs = ["thematic", "all-surahs", "daily-surahs", "visual"];
+      tabs.forEach(function(t) {
+        const btn = document.getElementById("tab-btn-" + t);
+        const panel = document.getElementById("tilawah-panel-" + t);
+        if (btn) btn.classList.toggle("active", t === tabName);
+        if (panel) panel.style.display = (t === tabName) ? "block" : "none";
+      });
+    }
+
+    function filterThematicVerses(cat, btn) {
+      currentThematicFilter = cat;
+      const chips = document.querySelectorAll("#tilawah-panel-thematic .thematic-chip");
+      chips.forEach(function(c) { c.classList.remove("active"); });
+      if (btn) btn.classList.add("active");
+      renderThematicVerses();
+    }
+
+    function filterJuzRange(juz, btn) {
+      currentJuzFilter = juz;
+      const chips = document.querySelectorAll("#tilawah-panel-all-surahs .thematic-chip");
+      chips.forEach(function(c) { c.classList.remove("active"); });
+      if (btn) btn.classList.add("active");
+      renderSurahsGrid();
+    }
+
+    function handleSurahSearch(query) {
+      currentSurahSearchQuery = query;
+      renderSurahsGrid();
+    }
+
+    function copyVerseText(title, arabic, latin, arti) {
+      const text = title + "\n\n" + arabic + "\n\n" + latin + "\n\nArtinya:\n" + arti + "\n\n(Disalin dari Teguh Stream Center - Ruang Tilawah & Murottal 30 Juz)";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToastNotification("✨ Ayat & Terjemah berhasil disalin ke clipboard!");
+        }).catch(function() {
+          fallbackCopyText(text);
+        });
+      } else {
+        fallbackCopyText(text);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      const t = document.createElement("textarea");
+      t.value = text;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand("copy");
+      document.body.removeChild(t);
+      showToastNotification("✨ Ayat & Terjemah berhasil disalin!");
+    }
+
+    function showToastNotification(msg) {
+      const existing = document.getElementById("teguh-toast-notification");
+      if (existing) existing.remove();
+
+      const toast = document.createElement("div");
+      toast.id = "teguh-toast-notification";
+      toast.innerText = msg;
+      toast.style.cssText = "position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:var(--gold-accent); color:#000; font-weight:800; font-size:12px; padding:10px 18px; border-radius:30px; box-shadow:0 6px 20px rgba(0,0,0,0.6); z-index:99999; animation:fadeInUp 0.3s ease-out;";
+      document.body.appendChild(toast);
+      setTimeout(function() {
+        toast.remove();
+      }, 3000);
+    }
+
+    // Inisialisasi Event Audio Murottal
+    function initTilawahAudioEvents() {
+      const audioElement = document.getElementById("tilawah-audio-engine");
+      if (!audioElement) return;
+
+      audioElement.addEventListener("timeupdate", function() {
+        const currentEl = document.getElementById("tilawah-time-current");
+        const durEl = document.getElementById("tilawah-time-duration");
+        const seeker = document.getElementById("tilawah-seeker");
+
+        if (currentEl) currentEl.innerText = formatTimeAudio(audioElement.currentTime);
+        if (durEl) durEl.innerText = formatTimeAudio(audioElement.duration);
+
+        if (seeker && audioElement.duration) {
+          seeker.value = (audioElement.currentTime / audioElement.duration) * 100;
+        }
+      });
+
+      audioElement.addEventListener("ended", function() {
+        if (isTilawahLoop) {
+          audioElement.currentTime = 0;
+          audioElement.play();
+        } else if (currentThematicVerseId) {
+          isTilawahPlaying = false;
+          updateTilawahPlayButtonUI(false);
+          renderThematicVerses();
+        } else {
+          // Lanjut otomatis ke Surah selanjutnya
+          nextTilawahSurah();
+        }
+      });
+
+      audioElement.addEventListener("play", function() {
+        isTilawahPlaying = true;
+        updateTilawahPlayButtonUI(true);
+      });
+
+      audioElement.addEventListener("pause", function() {
+        isTilawahPlaying = false;
+        updateTilawahPlayButtonUI(false);
+      });
+    }
+
+    // Panggil Inisialisasi Tilawah
+    function initTilawahEngine() {
+      renderThematicVerses();
+      renderSurahsGrid();
+      renderDailySurahs();
+      renderVisualTilawahVideos();
+      initTilawahAudioEvents();
+    }
+
+    // Panggil saat DOM Siap
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initTilawahEngine);
+    } else {
+      setTimeout(initTilawahEngine, 100);
+    }
+
+    // Kompatibilitas tombol Murottal Cepat
+    function playTilawahMurottal() {
+      switchRoom("room-tilawah");
+      playTilawahSurah(currentTilawahSurah, true);
+    }
+
 
     // ========================================================================
     // LOGIKA TABS DAN RENDER KONTEN VIDEO AGGREGATOR
