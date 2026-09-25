@@ -1,6 +1,6 @@
 {
   "name": "TEGUH VIDEO STREAM CENTER",
-  "description": "Pusat streaming video, radio multi-level folder, konsultasi dokter motor, simulator MIL injeksi, dan kalkulator tuning pro untuk santri & montir SMK berbiaya Rp 0 dengan integrasi monetisasi afiliasi Shopee & TikTok.",
+  "description": "Pusat streaming video, radio multi-level folder, konsultasi dokter motor, simulator MIL injeksi, dan kalkulator tuning pro untuk santri & montir SMK berbiaya Rp 0 dengan integrasi monetisasi afiliasi Shopee.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

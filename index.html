@@ -32,9 +32,9 @@
        CARBON RACING THEME & RESET STYLE
        ========================================================================== */
     :root {
-      --bg-dark: #111a1e;
-      --bg-card: #162227;
-      --bg-card-hover: #1c2b32;
+      --bg-dark: #121214;
+      --bg-card: #1e1e24;
+      --bg-card-hover: #26262e;
       --neon-cyan: #00f0ff;
       --neon-cyan-glow: rgba(0, 240, 255, 0.4);
       --gold-accent: #d4af37;
@@ -44,8 +44,7 @@
       --danger-red: #ef4444;
       --success-green: #10b981;
       --shopee-orange: #ee4d2d;
-      --tiktok-pink: #fe2c55;
-    }
+        }
 
     * {
       box-sizing: border-box;
@@ -98,7 +97,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 16px;
     }
 
     .brand-box {
@@ -393,7 +392,7 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 16px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
@@ -598,10 +597,7 @@
       box-shadow: 0 2px 6px rgba(238, 77, 45, 0.4);
     }
 
-    .aff-btn.tiktok {
-      background: linear-gradient(135deg, #000, #25f4ee, #fe2c55);
-      color: #fff;
-    }
+    
 
     /* ==========================================================================
        TABS KATEGORI KONTEN VIDEO
@@ -716,7 +712,7 @@
       transform: translateY(-2px);
     }
 
-    /* Frame Pemutar YouTube Shorts & TikTok (Garansi Tonton Di Tempat) */
+    /* Frame Pemutar YouTube Shorts (Garansi Tonton Di Tempat) */
     .player-frame-container {
       position: relative;
       width: 100%;
@@ -724,7 +720,7 @@
       border-bottom: 1px solid rgba(212, 175, 55, 0.4);
     }
 
-    /* 9:16 Aspect Ratio untuk Shorts & TikTok */
+    /* 9:16 Aspect Ratio untuk Shorts */
     .ratio-9-16 {
       padding-top: 140%; /* Menyesuaikan agar pas di layar HP tanpa terlalu panjang */
       position: relative;
@@ -957,7 +953,7 @@
     .dashboard-stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
+      gap: 16px;
       margin-bottom: 16px;
     }
 
@@ -968,7 +964,7 @@
       padding: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .stat-icon {
@@ -1058,7 +1054,7 @@
     .tilawah-now-playing {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
 
     .tilawah-icon-pulse {
@@ -1100,7 +1096,7 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
       background: #081014;
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
@@ -1354,7 +1350,7 @@
     .tuning-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
+      gap: 16px;
     }
 
     .calc-card {
@@ -1671,7 +1667,7 @@
       box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
     }
 
-    /* TOMBOL BELANJA AFILIASI GANDA (SHOPEE & TIKTOK SHOP CUAN) */
+    /* TOMBOL BELANJA AFILIASI SHOPEE RESMI CUAN */
     .btn-cart-group {
       display: flex;
       flex-wrap: wrap;
@@ -1698,26 +1694,8 @@
       transform: translateY(-1px);
       opacity: 0.95;
     }
-    .btn-tiktok-cart {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      background: linear-gradient(135deg, #0f172a 0%, #000000 60%, #fe2c55 100%);
-      color: #ffffff !important;
-      border: 1px solid rgba(254, 44, 85, 0.6);
-      font-size: 11px;
-      font-weight: 800;
-      padding: 7px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      box-shadow: 0 2px 8px rgba(254, 44, 85, 0.35);
-      transition: transform 0.15s, opacity 0.15s;
-    }
-    .btn-tiktok-cart:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
-    }
+    
+    
 
     /* SUB TABS DI DALAM KAMAR TUNING */
     .tuning-subtabs {
@@ -2087,7 +2065,7 @@
         </div>
 
         <!-- DAFTAR PLAYLIST KUSTOM (GRID) -->
-        <div id="custom-playlists-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px;">
+        <div id="custom-playlists-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px;">
           <!-- Diisi otomatis dari LocalStorage via renderCustomPlaylists() -->
         </div>
       </div>
@@ -2142,7 +2120,7 @@
           <button type="button" class="quick-chip" onclick="quickSearchTag('drakor')">👑 Drakor</button>
         </div>
 
-        <!-- REKOMENDASI PINTAR AI AFILIASI SHOPEE & TIKTOK -->
+        <!-- REKOMENDASI PINTAR AI AFILIASI RESMI SHOPEE -->
         <div id="ai-affiliate-banner" class="ai-affiliate-banner" style="margin-top:10px;">
           <div class="ai-affiliate-head">
             <span class="ai-affiliate-title">🤖 Rekomendasi Pintar AI Teguh Stream: Produk Terkait</span>
@@ -2171,9 +2149,7 @@
         <button class="tab-btn" id="tab-btn-santri" onclick="switchVideoTab('santri')">
           <span>🕌 Santri & Tilawah (22)</span>
         </button>
-        <button class="tab-btn" id="tab-btn-tiktok" onclick="switchVideoTab('tiktok')">
-          <span>🎵 Tren TikTok (18)</span>
-        </button>
+
         <button class="tab-btn" id="tab-btn-drakor" onclick="switchVideoTab('drakor')">
           <span>👑 Drakor (14)</span>
         </button>
@@ -2432,7 +2408,7 @@
 
         <!-- SUB-PANEL 4: VIDEO TILAWAH SANTRI -->
         <div id="tilawah-panel-visual" style="display: none;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;" id="visual-tilawah-grid">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;" id="visual-tilawah-grid">
             <!-- Diisi dinamis oleh JavaScript -->
           </div>
         </div>
@@ -2780,9 +2756,7 @@
               <a href="https://shopee.co.id/search?keyword=paking+tembaga+head+boreup" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Paking Tembaga Head
               </a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Beli Busi Dingin Iridium
-              </a>
+              
             </div>
           </div>
 
@@ -2847,9 +2821,7 @@
               <a href="https://shopee.co.id/search?keyword=gir+set+rantai+racing+sss" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Gir Set Racing SSS Shopee
               </a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Cek Rantai Emas O-Ring di TikTok Shop
-              </a>
+              
             </div>
           </div>
         </div>
@@ -2904,14 +2876,12 @@
                 </tbody>
               </table>
             </div>
-            <!-- Beli Kunci Torsi Shopee / TikTok -->
+            <!-- Beli Kunci Torsi Shopee -->
             <div class="btn-cart-group">
               <a href="https://shopee.co.id/search?keyword=kunci+momen+torsi+torque+wrench" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Kunci Torsi Presisi di Shopee
               </a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Beli Tool Box Montir di TikTok Shop
-              </a>
+              
             </div>
           </div>
 
@@ -2958,16 +2928,14 @@
               <a href="https://shopee.co.id/search?keyword=feeler+gauge+bengkel+motor" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Feeler Gauge Bilah Klep di Shopee
               </a>
-              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Beli Kunci Setelan Klep di TikTok Shop
-              </a>
+              
             </div>
           </div>
 
           <!-- KALKULATOR PAKET OPREK & PART SHOPEE CUAN (MESIN MONETISASI AFILIASI) -->
           <div class="calc-card" style="grid-column: 1 / -1; border-color: #f59e0b; background: linear-gradient(135deg, #182830 0%, #152227 100%);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-              <h3 style="color: #f59e0b; margin-bottom:0;">💰 Estimator Biaya Oprek & Rekomendasi Part Shopee + TikTok</h3>
+              <h3 style="color: #f59e0b; margin-bottom:0;">💰 Estimator Biaya Oprek & Rekomendasi Part Shopee</h3>
               <span class="tag-pill gold">HEMAT BIAYA</span>
             </div>
             <p style="font-size:11px; color:#cbd5e1; margin-bottom:12px;">
@@ -3248,7 +3216,7 @@
       </div>
 
       <p style="font-size:11px; color:#cbd5e1; line-height:1.5; margin-bottom:14px;">
-        Data ini langsung ditanamkan ke dalam seluruh tombol belanja Shopee, TikTok Shop, QRIS, dan Trakteer di seluruh web Anda tanpa perlu ubah kode pemrograman.
+        Data ini langsung ditanamkan ke dalam seluruh tombol belanja Shopee, QRIS, dan Trakteer di seluruh web Anda tanpa perlu ubah kode pemrograman.
       </p>
 
       <form onsubmit="handleSaveAffiliateSettings(event)">
@@ -3302,10 +3270,7 @@
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
-          <div>
-            <label style="font-size:10px; font-weight:700; color:#94a3b8; display:block; margin-bottom:3px;">Username TikTok Shop:</label>
-            <input type="text" id="cfg-tiktok-user" class="calc-input" value="teguhusaha" style="font-size:12px;" />
-          </div>
+
           <div>
             <label style="font-size:10px; font-weight:700; color:#94a3b8; display:block; margin-bottom:3px;">No WhatsApp Bengkel:</label>
             <input type="text" id="cfg-wa-num" class="calc-input" value="628123456789" style="font-size:12px;" />
@@ -3503,15 +3468,14 @@
        ======================================================================== -->
   <script>
     // ========================================================================
-    // MESIN MONETISASI AFILIASI & DONASI CUAN MODAL RP 0 (ID RESMI SHOPEE & TIKTOK)
+    // MESIN MONETISASI AFILIASI & DONASI CUAN MODAL RP 0 (ID RESMI SHOPEE)
     // ========================================================================
     const DEFAULT_AFFILIATE_CONFIG = {
       ownerName: "Teguh Rianto",
       shopeeUsername: "teguhusaha",
       shopeeAffiliateId: "11359441225",
       shopeeCustomLink: "https://s.shopee.co.id/2BF5CwWmtP",
-      tiktokUsername: "teguhusaha",
-      saweriaUrl: "https://saweria.co/supportteguhdigital",
+        saweriaUrl: "https://saweria.co/supportteguhdigital",
       trakteerUrl: "https://teer.id/teguhdigital",
       merchantName: "MBL832562*toko teguh",
       nmid: "ID1024362681008",
@@ -3549,21 +3513,12 @@
       return `https://shopee.co.id/search?keyword=${cleanKeyword}&utm_source=an_${cfg.shopeeAffiliateId}&utm_medium=affiliates&mmp_pid=an_${cfg.shopeeAffiliateId}&af_id=${cfg.shopeeAffiliateId}&sub_id=${subId}&utm_campaign=${subId}`;
     }
 
-    // Generator Tautan Afiliasi TikTok Shop Berbasis Keyword
-    function buildTikTokAffiliateUrl(keyword) {
-      const cleanKeyword = encodeURIComponent((keyword || "sparepart motor").trim());
-      return `https://www.tiktok.com/search?q=${cleanKeyword}&t=${Date.now()}`;
-    }
-
     function openShopeeAffiliate(keyword, subId = "tvs_bengkel") {
       const url = buildShopeeAffiliateUrl(keyword, subId);
       window.open(url, "_blank", "noopener,noreferrer");
     }
 
-    function openTikTokAffiliate(keyword) {
-      const url = buildTikTokAffiliateUrl(keyword);
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
+    
 
     function copyPublicAppUrl() {
       const url = PUBLIC_APP_URL;
@@ -3614,7 +3569,6 @@
       const inputId = document.getElementById("cfg-shopee-id");
       const inputShopeeLink = document.getElementById("cfg-shopee-custom-link");
       const testShopeeLink = document.getElementById("test-shopee-link-anchor");
-      const inputTikTok = document.getElementById("cfg-tiktok-user");
       const inputWa = document.getElementById("cfg-wa-num");
       const inputSaweria = document.getElementById("cfg-saweria-url");
       const inputTrakteer = document.getElementById("cfg-trakteer-url");
@@ -3626,7 +3580,6 @@
       if (inputId) inputId.value = cfg.shopeeAffiliateId;
       if (inputShopeeLink) inputShopeeLink.value = cfg.shopeeCustomLink || "https://s.shopee.co.id/2BF5CwWmtP";
       if (testShopeeLink) testShopeeLink.href = cfg.shopeeCustomLink || "https://s.shopee.co.id/2BF5CwWmtP";
-      if (inputTikTok) inputTikTok.value = cfg.tiktokUsername;
       if (inputWa) inputWa.value = cfg.waNumber;
       if (inputSaweria) inputSaweria.value = cfg.saweriaUrl;
       if (inputTrakteer) inputTrakteer.value = cfg.trakteerUrl;
@@ -3695,8 +3648,7 @@
         shopeeUsername: (document.getElementById("cfg-shopee-user") ? document.getElementById("cfg-shopee-user").value.trim() : "") || "teguhusaha",
         shopeeAffiliateId: (document.getElementById("cfg-shopee-id") ? document.getElementById("cfg-shopee-id").value.trim() : "") || "11359441225",
         shopeeCustomLink: (document.getElementById("cfg-shopee-custom-link") ? document.getElementById("cfg-shopee-custom-link").value.trim() : "") || "https://s.shopee.co.id/2BF5CwWmtP",
-        tiktokUsername: (document.getElementById("cfg-tiktok-user") ? document.getElementById("cfg-tiktok-user").value.trim() : "") || "teguhusaha",
-        waNumber: (document.getElementById("cfg-wa-num") ? document.getElementById("cfg-wa-num").value.trim() : "") || "628123456789",
+                waNumber: (document.getElementById("cfg-wa-num") ? document.getElementById("cfg-wa-num").value.trim() : "") || "628123456789",
         saweriaUrl: (document.getElementById("cfg-saweria-url") ? document.getElementById("cfg-saweria-url").value.trim() : "") || "https://saweria.co/supportteguhdigital",
         trakteerUrl: (document.getElementById("cfg-trakteer-url") ? document.getElementById("cfg-trakteer-url").value.trim() : "") || "https://teer.id/teguhdigital",
         merchantName: (document.getElementById("cfg-qris-merchant") ? document.getElementById("cfg-qris-merchant").value.trim() : "") || "MBL832562*toko teguh",
@@ -5211,243 +5163,7 @@
       "youtubeUrl": "https://www.youtube.com/watch?v=5qOz_c_HsI0"
     }
   ],
-  "tiktok": [
-    {
-      "id": "tt-1",
-      "title": "Yaa Thoyba",
-      "tag": "TIKTOK VIRAL",
-      "tagColor": "red",
-      "views": "1.2M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/c0VEO5jTCB0?autoplay=1&rel=0",
-      "videoId": "c0VEO5jTCB0",
-      "thumbnail": "https://i.ytimg.com/vi/c0VEO5jTCB0/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=c0VEO5jTCB0"
-    },
-    {
-      "id": "tt-2",
-      "title": "Habib syech - Ya Thoybah + Qul Ya 'Adzim + Khoiril Bariyyah",
-      "tag": "SANTRI KEREN",
-      "tagColor": "gold",
-      "views": "940K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/YBvylBWzzvU?autoplay=1&rel=0",
-      "videoId": "YBvylBWzzvU",
-      "thumbnail": "https://i.ytimg.com/vi/YBvylBWzzvU/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=YBvylBWzzvU"
-    },
-    {
-      "id": "tt-3",
-      "title": "Habib Syech : Ya toybah - vol8",
-      "tag": "BENGKEL PRO",
-      "tagColor": "cyan",
-      "views": "430K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/C0cCCcOQ1bw?autoplay=1&rel=0",
-      "videoId": "C0cCCcOQ1bw",
-      "thumbnail": "https://i.ytimg.com/vi/C0cCCcOQ1bw/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=C0cCCcOQ1bw"
-    },
-    {
-      "id": "tt-4",
-      "title": "Sholawat Nabi Merdu Habib Syech Spesial Bulan Suci Ramadhan Full No...",
-      "tag": "OOTD SANTRI",
-      "tagColor": "orange",
-      "views": "310K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/AdpKb0gpBqA?autoplay=1&rel=0",
-      "videoId": "AdpKb0gpBqA",
-      "thumbnail": "https://i.ytimg.com/vi/AdpKb0gpBqA/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=AdpKb0gpBqA"
-    },
-    {
-      "id": "tt-5",
-      "title": "Habib Syech Bin 'Abdul Qodir Asseqaf \"Ya Thoybah\" -(lirik & terjema...",
-      "tag": "DRAG CRASH",
-      "tagColor": "red",
-      "views": "2.1M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/pXMOpQdbBuY?autoplay=1&rel=0",
-      "videoId": "pXMOpQdbBuY",
-      "thumbnail": "https://i.ytimg.com/vi/pXMOpQdbBuY/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=pXMOpQdbBuY"
-    },
-    {
-      "id": "tt-6",
-      "title": "Ya thaybah (Ahlussunah) - Habib Syech Bin Abdul Qodir Assegaf",
-      "tag": "PECI SANTRI",
-      "tagColor": "gold",
-      "views": "520K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/nJ3ArqxWkpc?autoplay=1&rel=0",
-      "videoId": "nJ3ArqxWkpc",
-      "thumbnail": "https://i.ytimg.com/vi/nJ3ArqxWkpc/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=nJ3ArqxWkpc"
-    },
-    {
-      "id": "tt-7",
-      "title": "Habib Syech Bin Abdul Qadir Assegaf",
-      "tag": "BEAT HEDON",
-      "tagColor": "cyan",
-      "views": "830K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/HLEq4V0nZFo?autoplay=1&rel=0",
-      "videoId": "HLEq4V0nZFo",
-      "thumbnail": "https://i.ytimg.com/vi/HLEq4V0nZFo/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=HLEq4V0nZFo"
-    },
-    {
-      "id": "tt-8",
-      "title": "Muhammad Hadi Assegaf - Ya Thoybah (Official Music Video)",
-      "tag": "KNALPOT ADEM",
-      "tagColor": "orange",
-      "views": "640K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/MknzYhQPoWo?autoplay=1&rel=0",
-      "videoId": "MknzYhQPoWo",
-      "thumbnail": "https://i.ytimg.com/vi/MknzYhQPoWo/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=MknzYhQPoWo"
-    },
-    {
-      "id": "tt-9",
-      "title": "HABIB SYEKH BIN ABDUL QODIR ASSEGAF full album TERBARU",
-      "tag": "KULTUR SANTRI",
-      "tagColor": "gold",
-      "views": "1.4M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/bqTptmgbHHg?autoplay=1&rel=0",
-      "videoId": "bqTptmgbHHg",
-      "thumbnail": "https://i.ytimg.com/vi/bqTptmgbHHg/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=bqTptmgbHHg"
-    },
-    {
-      "id": "tt-10",
-      "title": "Ya thoybah || Sholawat + Lirik Habib syech bin abdul qodir assegaf",
-      "tag": "TIPS ROLLER",
-      "tagColor": "cyan",
-      "views": "470K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/bOed4GPmLNI?autoplay=1&rel=0",
-      "videoId": "bOed4GPmLNI",
-      "thumbnail": "https://i.ytimg.com/vi/bOed4GPmLNI/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=bOed4GPmLNI"
-    },
-    {
-      "id": "tt-11",
-      "title": "Cara Mengetahui Dan Pengecekan Jalur Kabel Pengisian Aki Honda Tige...",
-      "tag": "HELIKOPTER 2T",
-      "tagColor": "red",
-      "views": "1.1M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/1mDs6QQWNMM?autoplay=1&rel=0",
-      "videoId": "1mDs6QQWNMM",
-      "thumbnail": "https://i.ytimg.com/vi/1mDs6QQWNMM/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=1mDs6QQWNMM"
-    },
-    {
-      "id": "tt-12",
-      "title": "rangkaian kabel kiprok untuk lampu dan pengisian aki Yamaha Jupiter...",
-      "tag": "QORI CILIK",
-      "tagColor": "gold",
-      "views": "980K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/k2aGjgOJu_w?autoplay=1&rel=0",
-      "videoId": "k2aGjgOJu_w",
-      "thumbnail": "https://i.ytimg.com/vi/k2aGjgOJu_w/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=k2aGjgOJu_w"
-    },
-    {
-      "id": "tt-13",
-      "title": "Cara Menguji Stator dan Regulator Rectifier Sepeda Motor Anda | Buk...",
-      "tag": "TOOLKIT MONTIR",
-      "tagColor": "cyan",
-      "views": "360K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/qqSZWaWEe3s?autoplay=1&rel=0",
-      "videoId": "qqSZWaWEe3s",
-      "thumbnail": "https://i.ytimg.com/vi/qqSZWaWEe3s/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=qqSZWaWEe3s"
-    },
-    {
-      "id": "tt-14",
-      "title": "Jalur kabel kiprok lampu dan pengisian aki Revo absolute Blade #ben...",
-      "tag": "KOKO MODERN",
-      "tagColor": "orange",
-      "views": "290K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/k7ACk9N4r7o?autoplay=1&rel=0",
-      "videoId": "k7ACk9N4r7o",
-      "thumbnail": "https://i.ytimg.com/vi/k7ACk9N4r7o/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=k7ACk9N4r7o"
-    },
-    {
-      "id": "tt-15",
-      "title": "Cara Merakit Jalur Kabel Pengisian Aki Dari Spul Kiprok danAki Hond...",
-      "tag": "REACTION DRAG",
-      "tagColor": "red",
-      "views": "1.7M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/3JcRkd1XDjs?autoplay=1&rel=0",
-      "videoId": "3JcRkd1XDjs",
-      "thumbnail": "https://i.ytimg.com/vi/3JcRkd1XDjs/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=3JcRkd1XDjs"
-    },
-    {
-      "id": "tt-16",
-      "title": "Tutorial Cek Kiprok / Spul YAMAHA VIXION old, @BUDIMASMOTOR p.2",
-      "tag": "RANTAI MOTOR",
-      "tagColor": "cyan",
-      "views": "420K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/WyXwvxhbYkU?autoplay=1&rel=0",
-      "videoId": "WyXwvxhbYkU",
-      "thumbnail": "https://i.ytimg.com/vi/WyXwvxhbYkU/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=WyXwvxhbYkU"
-    },
-    {
-      "id": "tt-17",
-      "title": "jalur kiprok pengisian jenis AC#tutorial #mekanik",
-      "tag": "SHOLAWAT AKUSTIK",
-      "tagColor": "gold",
-      "views": "1.3M views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/X1UUo8ixkMQ?autoplay=1&rel=0",
-      "videoId": "X1UUo8ixkMQ",
-      "thumbnail": "https://i.ytimg.com/vi/X1UUo8ixkMQ/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=X1UUo8ixkMQ"
-    },
-    {
-      "id": "tt-18",
-      "title": "Cara cek kiprox & jalur spul megapro/tiger",
-      "tag": "BUBUT BALAP",
-      "tagColor": "orange",
-      "views": "340K views",
-      "ratio": "9-16",
-      "category": "tiktok",
-      "embedUrl": "https://www.youtube-nocookie.com/embed/2Dfum5fTjhs?autoplay=1&rel=0",
-      "videoId": "2Dfum5fTjhs",
-      "thumbnail": "https://i.ytimg.com/vi/2Dfum5fTjhs/hqdefault.jpg",
-      "youtubeUrl": "https://www.youtube.com/watch?v=2Dfum5fTjhs"
-    }
-  ],
-  "drakor": [
+    "drakor": [
     {
       "id": "kd-1",
       "title": "Queen of Tears (Ratu Air Mata)",
@@ -5926,6 +5642,7 @@
     }
 
     function stopAllOtherMedia(incomingType) {
+      if (window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch(e){} }
       try {
         // Hentikan / Jeda Audio Radio jika yang diputar bukan "radio"
         if (incomingType !== "radio") {
@@ -6103,23 +5820,68 @@
       };
     }
 
-    function playInlineVideoCard(id, embedUrl, title) {
+        function playInlineVideoCard(id, embedUrl, title) {
       stopAllOtherMedia("video");
       const container = document.getElementById("card-media-" + id);
       if (!container) return;
+      const cleanTitle = escapeQuotes(title || 'Video');
+      const directYt = (embedUrl || '').replace("/embed/", "/watch?v=").split("?")[0];
+      
       container.innerHTML = `
-        <iframe 
-          src="${embedUrl}" 
-          title="${escapeQuotes(title || 'Video')}" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          allowfullscreen 
-          style="width:100%; height:100%; border:none; border-radius:8px;">
-        </iframe>
+        <div style="position:relative; width:100%; height:100%; background:#121214; border-radius:8px; overflow:hidden;">
+          <iframe 
+            id="iframe-player-${id}"
+            src="${embedUrl}" 
+            title="${cleanTitle}" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen 
+            style="width:100%; height:100%; border:none; display:block;">
+          </iframe>
+          <!-- Premium Bottom Bar & Fallback Control -->
+          <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(18,18,20,0.92); backdrop-filter:blur(6px); border-top:1px solid rgba(0,240,255,0.25); padding:6px 10px; display:flex; justify-content:space-between; align-items:center; z-index:10;">
+            <span style="color:#94a3b8; font-size:10px; font-weight:600;">Layar YouTube Bermasalah?</span>
+            <div style="display:flex; gap:6px;">
+              <button type="button" onclick="playInMasterCinema('${id}')" style="background:var(--neon-cyan); color:#0b1215; border:none; border-radius:4px; padding:3px 8px; font-size:10px; font-weight:900; cursor:pointer;">
+                ▶ Layar Bioskop
+              </button>
+              <button type="button" onclick="showVideoErrorFallback('${id}', '${cleanTitle}', '${directYt}')" style="background:#26262e; color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:4px; padding:3px 8px; font-size:10px; font-weight:700; cursor:pointer;">
+                ⚙️ Opsi Cadangan
+              </button>
+            </div>
+          </div>
+        </div>
       `;
     }
 
+    // Clean Dark Premium Placeholder Card (Menggantikan Layar Hitam Video Unavailable)
+    function showVideoErrorFallback(id, title, directUrl) {
+      const container = document.getElementById("card-media-" + id);
+      if (!container) return;
+      const targetUrl = directUrl || 'https://www.youtube.com';
+      container.innerHTML = `
+        <div class="video-error-placeholder-card" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px 16px; background:linear-gradient(135deg, #121214 0%, #1e1e24 100%); border:1px solid rgba(0,240,255,0.4); border-radius:10px; height:100%; box-shadow:0 8px 24px rgba(0,0,0,0.7);">
+          <div style="width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg, rgba(0,240,255,0.25), rgba(0,240,255,0.05)); border:2px solid var(--neon-cyan); display:flex; align-items:center; justify-content:center; margin-bottom:12px; box-shadow:0 0 16px rgba(0,240,255,0.45); cursor:pointer;" onclick="playInMasterCinema('${id}')">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#00f0ff">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <h4 style="font-size:13px; font-weight:800; color:#ffffff; margin-bottom:4px; line-height:1.3; max-width:90%;">${escapeHtml(title || 'Video Siap Ditonton')}</h4>
+          <p style="font-size:11px; color:#94a3b8; margin-bottom:14px; max-width:260px; line-height:1.4;">Pemutar langsung aman tanpa buffering. Putar di Layar Bioskop Teguh Stream atau buka di YouTube resmi:</p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+            <button type="button" onclick="playInMasterCinema('${id}')" style="background:linear-gradient(135deg, #00f0ff, #0284c7); color:#0b1215; border:none; border-radius:6px; padding:7px 14px; font-size:11px; font-weight:900; cursor:pointer; box-shadow:0 2px 10px rgba(0,240,255,0.3);">
+              ▶ Putar di Bioskop
+            </button>
+            <a href="${targetUrl}" target="_blank" rel="noopener noreferrer" style="background:#26262e; color:#fff; border:1px solid rgba(255,255,255,0.25); border-radius:6px; padding:7px 12px; font-size:11px; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+              <span>↗</span> YouTube Resmi
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+
     function playRandomVideoFromCatalog() {
-      const allCatKeys = ["shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india"];
+      const allCatKeys = ["shorts", "balap", "mekanik", "santri", "drakor", "india"];
       const randomCat = allCatKeys[Math.floor(Math.random() * allCatKeys.length)];
       const list = VIDEO_DATABASE[randomCat] || [];
       if (list.length > 0) {
@@ -6147,7 +5909,7 @@
     let currentSearchQuery = "";
 
     // ========================================================================
-    // DATABASE AFILIASI SHOPEE & TIKTOK PINTAR AI
+    // DATABASE AFILIASI RESMI SHOPEE PINTAR AI
     // ========================================================================
     const AFFILIATE_SMART_DB = [
       {
@@ -6168,8 +5930,8 @@
         keyword: "montir",
         name: "Tool Kit Set Kunci Ring Pas 8-24mm Chrome Vanadium",
         price: "Rp 185.000",
-        platform: "tiktok",
-        url: "https://www.tiktok.com"
+        platform: "shopee",
+        url: "https://shopee.co.id"
       },
       {
         keyword: "sarung",
@@ -6196,8 +5958,8 @@
         keyword: "quran",
         name: "Al-Quran Hafalan Santri Terjemahan Per Kata Tajwid",
         price: "Rp 68.000",
-        platform: "tiktok",
-        url: "https://www.tiktok.com"
+        platform: "shopee",
+        url: "https://shopee.co.id"
       }
     ];
 
@@ -6213,7 +5975,49 @@
     // ========================================================================
     // FUNGSI GANTI RUANG / KAMAR EKOSISTEM TEGUH (PINTU DORAEMON)
     // ========================================================================
+    
+    // ========================================================================
+    // MEDIA CONTROL ENGINE (ANTI-BERTUMPUK LOGIC)
+    // Otomatis jeda/hentikan YouTube iframe & speech synthesis saat pindah tab
+    // ========================================================================
+    function stopAllMediaOnTabShift() {
+      // 1. Matikan Web Speech API seketika jika sedang berbicara
+      if (window.speechSynthesis) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {
+          console.warn("Speech cancel error:", e);
+        }
+      }
+
+      // 2. Pause seluruh pemutar YouTube iframe yang sedang berjalan
+      try {
+        const iframes = document.querySelectorAll("iframe");
+        iframes.forEach(function (ifr) {
+          try {
+            if (ifr.src && (ifr.src.includes("youtube") || ifr.src.includes("youtu.be"))) {
+              ifr.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+              if (ifr.src.includes("autoplay=1")) {
+                ifr.src = ifr.src.replace("autoplay=1", "autoplay=0");
+              }
+            }
+          } catch (err) {}
+        });
+      } catch (err) {
+        console.warn("Media control iframe error:", err);
+      }
+
+      // 3. Jeda video HTML5 lain bila ada
+      try {
+        const videos = document.querySelectorAll("video");
+        videos.forEach(function (v) {
+          try { v.pause(); } catch (e) {}
+        });
+      } catch (e) {}
+    }
+
     function switchRoom(roomName) {
+      stopAllMediaOnTabShift();
       const allRooms = ["beranda", "video", "tilawah", "tuning", "tchat"];
       allRooms.forEach(function (r) {
         const roomEl = document.getElementById("room-" + r);
@@ -7353,8 +7157,9 @@
     }
 
     function switchVideoTab(tabName) {
+      stopAllMediaOnTabShift();
       currentVideoTab = tabName;
-      const allTabs = ["all", "shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india", "unlimited", "myplaylists"];
+      const allTabs = ["all", "shorts", "balap", "mekanik", "santri", "drakor", "india", "unlimited", "myplaylists"];
       allTabs.forEach(function (t) {
         const btn = document.getElementById("tab-btn-" + t);
         if (btn) btn.classList.remove("active");
@@ -7367,7 +7172,7 @@
       const bannerTitle = document.getElementById("tab-info-title");
       if (bannerTitle) {
         if (tabName === "all") {
-          bannerTitle.innerText = "🌟 SEMUA KOLEKSI VIDEO (148+ Video Sample): Balap Drag, Servis Mesin SMK, Santri Tilawah, TikTok, Drakor & Bollywood";
+          bannerTitle.innerText = "🌟 SEMUA KOLEKSI VIDEO (130+ Video Sample): Balap Drag, Servis Mesin SMK, Santri Tilawah, Drakor & Bollywood";
         } else if (tabName === "shorts") {
           bannerTitle.innerText = "⚡ YOUTUBE SHORTS RESMI (28 Video): Garansi Tonton di Tempat Bebas Iklan";
         } else if (tabName === "balap") {
@@ -7376,8 +7181,6 @@
           bannerTitle.innerText = "⚙️ BENGKEL MONTIR & SERVIS MESIN (26 Video): Panduan Praktik SMK & Solusi Montir Mandiri";
         } else if (tabName === "santri") {
           bannerTitle.innerText = "🕌 SANTRI & TILAWAH AL-QUR'AN (22 Video): Murottal Merdu, Surat Pilihan & Sholawat Penyejuk Hati";
-        } else if (tabName === "tiktok") {
-          bannerTitle.innerText = "🎵 TREN TIKTOK VIRAL (18 Video): Klip Otomotif & Santri Ditonton Langsung di Sini";
         } else if (tabName === "drakor") {
           bannerTitle.innerText = "👑 K-DRAMA POPULER (14 Judul): Poster Mewah, Sinopsis & Akses Legal Pintu Doraemon Viu & iQIYI";
         } else if (tabName === "india") {
@@ -7450,8 +7253,7 @@
         function renderSingleVideoCard(v) {
       const authenticUrl = getAuthenticVideoUrl(v);
       const isShorts = v.category === "shorts";
-      const isTikTok = v.category === "tiktok";
-      const isFilm = v.category === "drakor" || v.category === "india";
+            const isFilm = v.category === "drakor" || v.category === "india";
 
       const posterImg = v.poster || v.thumbnail || ('https://i.ytimg.com/vi/' + (v.videoId || 'onjCw72lQ3I') + '/hqdefault.jpg');
       const thumbImg = v.thumbnail || ('https://i.ytimg.com/vi/' + (v.videoId || 'onjCw72lQ3I') + '/hqdefault.jpg');
@@ -7508,8 +7310,8 @@
         `;
       }
 
-      // Kategori Shorts, TikTok, Balap, Mekanik, Santri
-      const ratioClass = (isShorts || isTikTok) ? "ratio-9-16" : "ratio-16-9";
+      // Kategori Shorts, Balap, Mekanik, Santri
+      const ratioClass = isShorts ? "ratio-9-16" : "ratio-16-9";
 
       return `
         <div class="video-card">
@@ -7652,9 +7454,7 @@
               <a href="${buildShopeeAffiliateUrl('oli motul racing motor', 'unlimited_video')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Oli Racing di Shopee
               </a>
-              <a href="${buildTikTokAffiliateUrl('knalpot racing motor')}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Cek Knalpot Racing di TikTok Shop
-              </a>
+              
             </div>
           </div>
         </div>
@@ -7699,7 +7499,7 @@
         });
       } else if (currentVideoTab === "all") {
         // TAMPILKAN SELURUH 148+ VIDEO
-        const allCatKeys = ["shorts", "balap", "mekanik", "santri", "tiktok", "drakor", "india"];
+        const allCatKeys = ["shorts", "balap", "mekanik", "santri", "drakor", "india"];
         allCatKeys.forEach(function (cat) {
           const list = VIDEO_DATABASE[cat] || [];
           list.forEach(function (item) {
@@ -7850,7 +7650,7 @@
     }
 
     // ========================================================================
-    // SEARCH BAR INTERAKTIF AI & REKOMENDASI AFILIASI SHOPEE/TIKTOK
+    // SEARCH BAR INTERAKTIF AI & REKOMENDASI AFILIASI SHOPEE
     // ========================================================================
     let liveSearchDebounceTimer = null;
     let liveSearchResults = [];
@@ -7969,10 +7769,9 @@
 
       let html = "";
       matched.forEach(function (prod) {
-        const isTiktok = prod.platform === "tiktok";
-        const btnClass = isTiktok ? "aff-btn tiktok" : "aff-btn";
-        const btnLabel = isTiktok ? "🎵 TikTok Shop" : "🛍️ Shopee Beli";
-        const targetUrl = isTiktok ? buildTikTokAffiliateUrl(prod.keyword || prod.name) : buildShopeeAffiliateUrl(prod.keyword || prod.name, 'smart_search');
+        const btnClass = "aff-btn";
+        const btnLabel = "🛍️ Shopee Beli";
+        const targetUrl = buildShopeeAffiliateUrl(prod.keyword || prod.name, 'smart_search');
 
         html += `
           <a href="${targetUrl}" target="_blank" rel="noopener noreferrer" class="affiliate-chip" title="Beli ${prod.name}">
@@ -8071,6 +7870,7 @@
     // LOGIKA TUNING PRO & PUSAT SOLUSI BENGKEL SMK (6 SUB-TABS DILENGKAPI AI & NOTA)
     // ========================================================================
     function switchTuningSubtab(tabName) {
+      stopAllMediaOnTabShift();
       const tabs = ["ai", "performance", "dokter", "kuitansi", "mil", "lab", "paket"];
       tabs.forEach(function(t) {
         const btn = document.getElementById("tsub-btn-" + t);
@@ -8130,9 +7930,9 @@
           "Langkah 3: Semprotkan injector cleaner ke throttle body (TB) sambil putar gas perlahan, lalu lakukan reset sensor TP."
         ],
         parts: [
-          { name: "Rotak Dinamo Fuel Pump & Saringan Pampers Matic", price: "Rp 85.000", shopeeKey: "rotak+fuel+pump+beat+vario", tiktokKey: "rotak+fuel+pump" },
-          { name: "Busi Iridium Racing NGK CPR9EAIX / CR7HIX Anti Mati", price: "Rp 45.000", shopeeKey: "busi+ngk+iridium+motor", tiktokKey: "busi+iridium+motor" },
-          { name: "Cairan Pembersih Throttle Body & Injector Cleaner 500ml", price: "Rp 32.000", shopeeKey: "injector+cleaner+motor", tiktokKey: "injector+cleaner" }
+          { name: "Rotak Dinamo Fuel Pump & Saringan Pampers Matic", price: "Rp 85.000", shopeeKey: "rotak+fuel+pump+beat+vario" },
+          { name: "Busi Iridium Racing NGK CPR9EAIX / CR7HIX Anti Mati", price: "Rp 45.000", shopeeKey: "busi+ngk+iridium+motor" },
+          { name: "Cairan Pembersih Throttle Body & Injector Cleaner 500ml", price: "Rp 32.000", shopeeKey: "injector+cleaner+motor" }
         ]
       },
       gredek: {
@@ -8150,9 +7950,9 @@
           "Langkah 3: Ganti mangkok kopling dengan model Custom Berlubang Kartel agar debu otomatis terlempar keluar & kampas menggigit 100%."
         ],
         parts: [
-          { name: "Mangkok CVT Custom Kartel Bolong Anti Gredek Vario/Beat/Nmax", price: "Rp 125.000", shopeeKey: "mangkok+cvt+custom+anti+gredek", tiktokKey: "mangkok+cvt+anti+gredek" },
-          { name: "Kampas Ganda Relining Carbon Kevlar Racing High Grip", price: "Rp 135.000", shopeeKey: "kampas+ganda+carbon+kevlar", tiktokKey: "kampas+ganda+racing" },
-          { name: "Gemuk Grease CVT High Temperature Anti Leleh 10g", price: "Rp 18.000", shopeeKey: "gemuk+grease+cvt+high+temp", tiktokKey: "grease+cvt" }
+          { name: "Mangkok CVT Custom Kartel Bolong Anti Gredek Vario/Beat/Nmax", price: "Rp 125.000", shopeeKey: "mangkok+cvt+custom+anti+gredek" },
+          { name: "Kampas Ganda Relining Carbon Kevlar Racing High Grip", price: "Rp 135.000", shopeeKey: "kampas+ganda+carbon+kevlar" },
+          { name: "Gemuk Grease CVT High Temperature Anti Leleh 10g", price: "Rp 18.000", shopeeKey: "gemuk+grease+cvt+high+temp" }
         ]
       },
       ngebul: {
@@ -8169,9 +7969,9 @@
           "Langkah 3: Korter silinder ke oversize 25/50 (atau ganti satu set blok silinder jika motor berteknologi DiASil / SCEM)."
         ],
         parts: [
-          { name: "Paket Blok Silinder Boring + Piston Kit Komplit Standar Presisi", price: "Rp 280.000", shopeeKey: "blok+seher+piston+kit+motor", tiktokKey: "blok+piston+kit" },
-          { name: "Sil Klep Viton Original Tahan Panas 200°C 1 Set", price: "Rp 25.000", shopeeKey: "sil+klep+viton+motor", tiktokKey: "sil+klep+motor" },
-          { name: "Pasta Amril Skir Klep Halus/Kasar + Selang Pemutar", price: "Rp 15.000", shopeeKey: "amril+skir+klep", tiktokKey: "amril+klep" }
+          { name: "Paket Blok Silinder Boring + Piston Kit Komplit Standar Presisi", price: "Rp 280.000", shopeeKey: "blok+seher+piston+kit+motor" },
+          { name: "Sil Klep Viton Original Tahan Panas 200°C 1 Set", price: "Rp 25.000", shopeeKey: "sil+klep+viton+motor" },
+          { name: "Pasta Amril Skir Klep Halus/Kasar + Selang Pemutar", price: "Rp 15.000", shopeeKey: "amril+skir+klep" }
         ]
       },
       overheat: {
@@ -8189,9 +7989,9 @@
           "Langkah 3: Isi air radiator coolant berkualitas (titik didih >115°C) dan lakukan 'bleeding' buang udara palsu hingga tuntas."
         ],
         parts: [
-          { name: "Radiator Coolant Prestone / AHM Original Titik Didih 118°C 1L", price: "Rp 38.000", shopeeKey: "radiator+coolant+original", tiktokKey: "coolant+radiator" },
-          { name: "Thermostat Radiator & O-Ring Sil Seal Komplit", price: "Rp 65.000", shopeeKey: "thermostat+radiator+motor", tiktokKey: "thermostat+motor" },
-          { name: "Tutup Radiator Tekanan Tinggi 1.1 Bar Anti Meletup", price: "Rp 30.000", shopeeKey: "tutup+radiator+1.1+bar", tiktokKey: "tutup+radiator" }
+          { name: "Radiator Coolant Prestone / AHM Original Titik Didih 118°C 1L", price: "Rp 38.000", shopeeKey: "radiator+coolant+original" },
+          { name: "Thermostat Radiator & O-Ring Sil Seal Komplit", price: "Rp 65.000", shopeeKey: "thermostat+radiator+motor" },
+          { name: "Tutup Radiator Tekanan Tinggi 1.1 Bar Anti Meletup", price: "Rp 30.000", shopeeKey: "tutup+radiator+1.1+bar" }
         ]
       },
       mogok: {
@@ -8208,9 +8008,9 @@
           "Langkah 3: Cek voltase aki dengan multitester digital. Jika di bawah 12.4V, lakukan charge lambat (trickle charge) atau ganti aki gel."
         ],
         parts: [
-          { name: "Aki Motor Kering Bebas Perawatan Gel GTZ5S 12V 4.2Ah", price: "Rp 155.000", shopeeKey: "aki+motor+kering+gtz5s", tiktokKey: "aki+motor+gtz5s" },
-          { name: "Smart Battery Charger Aki Digital Auto Cut-off 12V", price: "Rp 75.000", shopeeKey: "charger+aki+motor+digital", tiktokKey: "charger+aki+motor" },
-          { name: "Digital Multimeter Avometer Pengukur Aki & Voltase Sensor", price: "Rp 45.000", shopeeKey: "multimeter+digital+avometer", tiktokKey: "multimeter+digital" }
+          { name: "Aki Motor Kering Bebas Perawatan Gel GTZ5S 12V 4.2Ah", price: "Rp 155.000", shopeeKey: "aki+motor+kering+gtz5s" },
+          { name: "Smart Battery Charger Aki Digital Auto Cut-off 12V", price: "Rp 75.000", shopeeKey: "charger+aki+motor+digital" },
+          { name: "Digital Multimeter Avometer Pengukur Aki & Voltase Sensor", price: "Rp 45.000", shopeeKey: "multimeter+digital+avometer" }
         ]
       },
       loyo: {
@@ -8228,9 +8028,9 @@
           "Langkah 3: Gunakan per CVT ukuran 1000 - 1500 RPM dan setel celah klep sesuai standar pabrikan menggunakan feeler gauge bilah presisi."
         ],
         parts: [
-          { name: "V-Belt Kevlar Double Teeth High Durability Tahan Putus", price: "Rp 125.000", shopeeKey: "v+belt+kevlar+matic", tiktokKey: "vbelt+kevlar" },
-          { name: "Set Roller CVT Teflon Silang (Kombinasi Akselerasi & Top Speed)", price: "Rp 75.000", shopeeKey: "roller+cvt+teflon", tiktokKey: "roller+cvt" },
-          { name: "Per CVT 1500 RPM & Per Sentri High Torque Racing", price: "Rp 85.000", shopeeKey: "per+cvt+1500+rpm", tiktokKey: "per+cvt+racing" }
+          { name: "V-Belt Kevlar Double Teeth High Durability Tahan Putus", price: "Rp 125.000", shopeeKey: "v+belt+kevlar+matic" },
+          { name: "Set Roller CVT Teflon Silang (Kombinasi Akselerasi & Top Speed)", price: "Rp 75.000", shopeeKey: "roller+cvt+teflon" },
+          { name: "Per CVT 1500 RPM & Per Sentri High Torque Racing", price: "Rp 85.000", shopeeKey: "per+cvt+1500+rpm" }
         ]
       }
     };
@@ -8269,9 +8069,7 @@
               <a href="${buildShopeeAffiliateUrl(item.shopeeKey, 'dokter_motor')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli di Shopee
               </a>
-              <a href="${buildTikTokAffiliateUrl(item.tiktokKey || item.shopeeKey)}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Cek di TikTok Shop
-              </a>
+              
             </div>
           </div>
         `;
@@ -8465,9 +8263,7 @@
               <a href="${buildShopeeAffiliateUrl(item.searchKey, 'mil_sensor')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli Sensor di Shopee
               </a>
-              <a href="${buildTikTokAffiliateUrl(item.searchKey)}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Cek Sensor di TikTok Shop
-              </a>
+              
             </div>
           </div>
         </div>
@@ -8598,9 +8394,7 @@
           <a href="${buildShopeeAffiliateUrl('set pilot jet main jet ' + carb, 'spuyer_karbu')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
             🛒 Beli Box Set Spuyer PJ & MJ di Shopee
           </a>
-          <a href="${buildTikTokAffiliateUrl('pilot jet main jet ' + carb)}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-            🎵 Cek Spuyer Presisi di TikTok Shop
-          </a>
+          
         </div>
       `;
     }
@@ -8669,7 +8463,7 @@
         const botReplies = [
           "Mantap infonya lur! Jangan lupa setel Radio Rodja atau Elshinta di menu header atas biar makin adem.",
           "Siap mas, kalau mau oprek mesin bisa manfaatkan kalkulator di menu [🛠️ Tuning Pro] ya.",
-          "Halo salam santri dan montir se-Indonesia! Konten video shorts dan TikTok terkunci aman di web siap ditonton terus.",
+          "Halo salam santri dan montir se-Indonesia! Konten video shorts terkunci aman di web siap ditonton terus.",
           "Jos gandos mas! Keren ide modifikasinya, tetap utamakan keselamatan berkendara di jalan raya."
         ];
         const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
@@ -9469,7 +9263,7 @@
     }
 
     // ========================================================================
-    // KALKULATOR PAKET OPREK CUAN (AFILIASI SHOPEE & TIKTOK)
+    // KALKULATOR PAKET OPREK CUAN (AFILIASI RESMI SHOPEE)
     // ========================================================================
     const OPREK_PACKAGES = {
       boreup: {
@@ -9543,9 +9337,7 @@
               <a href="${buildShopeeAffiliateUrl(p.name, 'paket_servis')}" target="_blank" rel="noopener noreferrer" class="btn-shopee-cart">
                 🛒 Beli di Shopee
               </a>
-              <a href="${buildTikTokAffiliateUrl(p.name)}" target="_blank" rel="noopener noreferrer" class="btn-tiktok-cart">
-                🎵 Cek di TikTok Shop
-              </a>
+              
             </div>
           </div>
         `;
@@ -9734,18 +9526,42 @@
           .replace(/\*(.*?)\*/g, "<i>$1</i>")
           .replace(/\n/g, "<br/>");
 
-        let partsHtml = "";
+        let partsCarouselHtml = "";
         if (msg.parts && msg.parts.length > 0) {
-          partsHtml += `<div style="margin-top:8px; padding-top:6px; border-top:1px dashed rgba(255,255,255,0.15); display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
-            <span style="font-size:9px; color:var(--gold-accent); font-weight:800;">🛒 REKOMENDASI SPAREPART SHOPEE:</span>`;
+          partsCarouselHtml += `
+            <div style="width:100%; margin-top:10px; margin-bottom:6px;">
+              <div style="font-size:10px; font-weight:800; color:var(--gold-accent); margin-bottom:6px; display:flex; align-items:center; gap:6px; text-transform:uppercase; letter-spacing:0.5px;">
+                <span>🛍️ REKOMENDASI SPAREPART SHOPEE (GESER ➔)</span>
+              </div>
+              <div class="shopee-chat-carousel" style="display:flex; gap:12px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:8px; scroll-snap-type:x mandatory; scrollbar-width:thin;">
+          `;
           msg.parts.forEach(function (part) {
-            const shopeeLink = buildShopeeAffiliateUrl(part.key || part.name, "ai_montir");
-            partsHtml += `<a href="${shopeeLink}" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:3px; background:#f97316; color:#fff; font-size:10px; font-weight:800; padding:3px 7px; border-radius:4px; text-decoration:none; box-shadow:0 0 6px rgba(249,115,22,0.4);">
-              <span>🛍️</span>
-              <span>${escapeHtml(part.name)}</span>
-            </a>`;
+            const shopeeLink = buildShopeeAffiliateUrl(part.key || part.name, "chat_carousel");
+            partsCarouselHtml += `
+              <div style="flex:0 0 190px; max-width:190px; background:#1e1e24; border:1px solid rgba(238,77,45,0.45); border-radius:10px; padding:10px; display:flex; flex-direction:column; justify-content:space-between; gap:8px; scroll-snap-align:start; box-shadow:0 4px 12px rgba(0,0,0,0.5); transition:transform 0.2s ease;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                    <span style="background:rgba(238,77,45,0.18); color:var(--shopee-orange); font-size:9px; font-weight:900; padding:2px 6px; border-radius:4px; border:1px solid rgba(238,77,45,0.4);">SHOPEE ORI</span>
+                    <span style="font-size:10px; color:#f59e0b; font-weight:700;">⭐ 4.9</span>
+                  </div>
+                  <div style="font-size:12px; font-weight:800; color:#ffffff; line-height:1.35; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; min-height:32px;">
+                    ${escapeHtml(part.name)}
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:10px; color:#94a3b8; font-weight:600; margin-bottom:5px;">Garansi Pas & Cepat Kirim</div>
+                  <a href="${shopeeLink}" target="_blank" rel="noopener noreferrer" style="display:flex; align-items:center; justify-content:center; gap:5px; background:linear-gradient(135deg, #ff5722, #ee4d2d); color:#ffffff; font-size:11px; font-weight:900; padding:7px 10px; border-radius:6px; text-decoration:none; box-shadow:0 2px 8px rgba(238,77,45,0.5); text-align:center;">
+                    <span>🛒</span>
+                    <span>Beli di Shopee</span>
+                  </a>
+                </div>
+              </div>
+            `;
           });
-          partsHtml += `</div>`;
+          partsCarouselHtml += `
+              </div>
+            </div>
+          `;
         }
 
         let voiceReadBtn = "";
@@ -9764,8 +9580,8 @@
             </div>
             <div style="background:${bubbleBg}; border:1px solid ${borderCol}; border-radius:${isUser ? "12px 12px 2px 12px" : "12px 12px 12px 2px"}; padding:10px 12px; color:#f1f5f9; font-size:12px; line-height:1.55; word-break:break-word; box-shadow:0 2px 8px rgba(0,0,0,0.3);">
               ${formattedText}
-              ${partsHtml}
             </div>
+            ${partsCarouselHtml}
           </div>
         `;
       });

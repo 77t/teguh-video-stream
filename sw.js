@@ -45,12 +45,11 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(event.request.url);
 
-  // Do not intercept external streaming/API/iframe requests (YouTube, TikTok, Viu, Shopee)
+  // Do not intercept external streaming/API/iframe requests (YouTube, Viu, Shopee)
   if (
     url.origin !== self.location.origin ||
     url.pathname.startsWith('/api/') ||
     url.hostname.includes('youtube.com') ||
-    url.hostname.includes('tiktok.com') ||
     url.hostname.includes('googlesyndication.com')
   ) {
     return;
