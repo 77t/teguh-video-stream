@@ -67,45 +67,62 @@
       background-size: 20px 20px;
       color: var(--text-white);
       line-height: 1.5;
-      padding-bottom: 90px; /* Ruang untuk Navigasi Bawah Melayang */
+      padding-bottom: 84px; /* Ruang untuk Navigasi Bawah Melayang */
       min-height: 100vh;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
 
-    /* Container Utama */
+    /* Container Utama - Responsif Penuh (Full Width di HP, Terpusat di Tablet/Laptop) */
     .app-container {
-      max-width: 1100px;
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 12px 14px;
+      padding: 10px 12px;
+      box-sizing: border-box;
     }
 
-    /* Header Sticky Mewah */
+    @media (min-width: 768px) {
+      .app-container {
+        max-width: 900px;
+        padding: 16px 20px;
+      }
+    }
+
+    /* Header Sticky Mewah & Ramping Ala YouTube & WA */
     header.racing-header {
       position: sticky;
       top: 0;
       z-index: 900;
-      background: rgba(17, 26, 30, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 2px solid var(--neon-cyan);
-      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15), 0 2px 0 var(--gold-accent);
-      padding: 12px 16px;
+      width: 100%;
+      max-width: 100vw;
+      background: rgba(15, 23, 28, 0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid var(--neon-cyan);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+      padding: 8px 12px;
+      box-sizing: border-box;
     }
 
     .header-inner {
+      width: 100%;
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 8px;
+      box-sizing: border-box;
     }
 
     .brand-box {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
       color: var(--text-white);
+      flex-shrink: 0;
     }
 
     .brand-badge {
@@ -1939,69 +1956,38 @@
   <audio id="teguh-audio-engine" preload="none"></audio>
 
   <!-- ========================================================================
-       STICKY HEADER CARBON RACING
+       STICKY HEADER CARBON RACING (BERSIH, RAMPING & RESPONSIF PENUH ALA WA & YOUTUBE)
        ======================================================================== -->
   <header class="racing-header">
     <div class="header-inner">
       <a href="javascript:void(0)" onclick="switchRoom('beranda')" class="brand-box" title="Kembali ke Beranda">
         <div class="brand-badge">🏁 TVS</div>
         <div class="brand-title-wrap">
-          <h1>TEGUH VIDEO STREAM</h1>
-          <p>CENTER • EKOSISTEM DIGITAL</p>
+          <h1 style="font-size:14px; font-weight:900; margin:0; line-height:1.1;">TEGUH STREAM</h1>
+          <p style="font-size:9px; color:var(--gold-accent); margin:0; font-weight:700; letter-spacing:0.5px;">BENGKEL & SANTRI</p>
         </div>
       </a>
 
       <div class="header-actions">
-        <!-- Tombol Buka Simulasi Interaktif & Sensor -->
-        <button class="action-btn" onclick="openSimulatorTab('mil')" title="Buka Simulasi Speedometer & Kode Kedip Sensor Injeksi" style="border-color: #f59e0b; color: #f59e0b; background: rgba(245, 158, 11, 0.15);">
-          <span>💡</span>
-          <span class="btn-text-sm" style="display:inline; font-weight:800;">Simulasi</span>
-        </button>
-
-        <!-- Tombol Asisten AI Montir Pintar 24 Jam -->
-        <button class="action-btn" onclick="openAIMontirTab()" title="Tanya Kang Teguh AI (Montir & Santri 24 Jam)" style="border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0, 240, 255, 0.12);">
-          <span>🤖</span>
-          <span class="btn-text-sm" style="display:inline; font-weight:800;">AI Montir</span>
-        </button>
-
-        <!-- Tombol Pasang APK & Bagikan Web -->
-        <button class="action-btn" onclick="openInstallModal()" title="Pasang ke Layar HP (Model APK) & Bagikan Tautan" style="border-color: #22c55e; color: #22c55e;">
-          <span>📲</span>
-          <span class="btn-text-sm" style="display:inline; font-weight:800;">APK</span>
-        </button>
-
-        <!-- Tombol Traktir Kopi / QRIS -->
-        <button class="action-btn" onclick="openDonationModal()" title="Traktir Kopi Montir & Infaq Santri (QRIS / Saweria)" style="border-color: #f59e0b; color: #f59e0b;">
-          <span>☕</span>
-          <span class="btn-text-sm" style="display:inline; font-weight:800;">QRIS</span>
-        </button>
-
-        <!-- Tombol Pengaturan Akun Afiliasi -->
-        <button class="action-btn" onclick="openAffiliateSettingsModal()" title="Pengaturan ID Afiliasi & QRIS Pemilik" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">
-          <span>⚙️</span>
-          <span class="btn-text-sm" style="display:none;">Akun</span>
-        </button>
-
-        <!-- Tombol TChat Cepat -->
-        <button class="action-btn" onclick="switchRoom('tchat')" title="Buka TChat Ruang Komunitas">
-          <span>💬</span>
-          <span style="display:none;" class="btn-text-sm">TChat</span>
-          <span class="pulse-badge">3</span>
-        </button>
-
         <!-- Tombol Mini Radio Dropdown Multi-Level -->
-        <button id="radio-toggle-btn" class="action-btn" onclick="toggleRadioDropdown()" title="Buka Mini Radio Streaming">
+        <button id="radio-toggle-btn" class="action-btn" onclick="toggleRadioDropdown()" title="Buka Mini Radio Streaming" style="padding:6px 10px; min-height:34px; border-color:rgba(0,240,255,0.4);">
           <div class="eq-bar-wrap">
             <div class="eq-bar"></div>
             <div class="eq-bar"></div>
             <div class="eq-bar"></div>
             <div class="eq-bar"></div>
           </div>
-          <span>📻 Radio</span>
+          <span style="font-size:11px; font-weight:800;">Radio</span>
         </button>
 
-        <!-- DROPDOWN MINI RADIO (ARSITEKTUR FOLDER KOMPUTER) -->
-        <div id="radio-dropdown-menu" class="radio-dropdown">
+        <!-- Tombol Menu Cepat Titik Tiga (Semua Alat Rapi Terhimpun) -->
+        <button type="button" class="action-btn" onclick="openQuickMenuDrawer()" title="Menu Lengkap & Alat" style="padding:6px 12px; min-height:34px; font-size:16px; font-weight:900; border-color:rgba(255,255,255,0.25);">
+          <span>⋮</span>
+        </button>
+      </div>
+
+      <!-- DROPDOWN MINI RADIO (ARSITEKTUR FOLDER KOMPUTER) -->
+      <div id="radio-dropdown-menu" class="radio-dropdown">
           <div class="radio-header-bar">
             <div id="radio-breadcrumb-text" class="radio-breadcrumb">
               <span>📁</span>
@@ -2073,20 +2059,69 @@
          KAMAR 1: BERANDA INDUK [🏠 Beranda Induk]
          ====================================================================== -->
     <section id="room-beranda" class="room-view">
-      <div class="hero-banner">
-        <h2>Selamat Datang di Teguh Video Stream</h2>
-        <p>Ekosistem hiburan, edukasi otomotif, spiritual tilawah santri, dan komunitas montir racing Indonesia. Dibangun dengan performa tinggi & hemat kuota.</p>
-        <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="tab-btn active" onclick="switchRoom('video')">🎥 Buka Video Stream</button>
-          <button class="tab-btn" onclick="openSimulatorTab('mil')" style="border-color: #f59e0b; color: #f59e0b; font-weight: 800; background: rgba(245, 158, 11, 0.15);">💡 Buka Simulator Speedometer MIL</button>
-          <button class="tab-btn" onclick="switchRoom('tuning')">🛠️ Buka Tuning Pro</button>
-          <button class="tab-btn" onclick="switchRoom('tilawah')">📖 Buka Tilawah Quran</button>
-          <button class="tab-btn" onclick="openDonationModal()" style="border-color: #f59e0b; color: #f59e0b; font-weight: 800;">☕ Traktir Kopi / QRIS</button>
-          <button class="tab-btn" onclick="openAffiliateSettingsModal()" style="border-color: var(--neon-cyan); color: var(--neon-cyan);">⚙️ Pengaturan ID Cuan</button>
-          <button class="tab-btn" onclick="toggleFavoritesView()" style="border-color: var(--gold-accent); color: var(--gold-accent);">⭐ Favorit Saya</button>
-          <button class="tab-btn" onclick="openInstallModal()" style="border-color: #22c55e; color: #22c55e;">📲 Pasang di HP</button>
-          <button class="tab-btn" onclick="shareToWhatsApp()" style="border-color: #25d366; color: #25d366;">💬 Share ke WA</button>
+      <!-- HERO GREETING (BERSIH & MODEREN ALA GOJEK / DANA) -->
+      <div style="background: linear-gradient(135deg, #13222a 0%, #0d161a 100%); border: 1px solid rgba(0, 240, 255, 0.25); border-radius: 14px; padding: 16px; margin-bottom: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);">
+        <div>
+          <div style="font-size:10px; font-weight:800; color:var(--gold-accent); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">
+            🏁 EKOSISTEM DIGITAL INDONESIA
+          </div>
+          <h2 style="font-size:17px; font-weight:900; color:#fff; margin:0 0 4px 0; line-height:1.2;">
+            Assalamu'alaikum & Salam Satu Aspal!
+          </h2>
+          <p style="font-size:12px; color:#94a3b8; margin:0; line-height:1.4;">
+            Pusat streaming balap, simulasi sensor injeksi, tilawah 30 juz & komunitas montir santri.
+          </p>
         </div>
+
+        <!-- 4 GRID MENU UTAMA (ALA GOJEK: BERSIH, LEGA & JELAS) -->
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; margin-top:14px;">
+          <button type="button" onclick="switchRoom('video')" style="background:#17252d; border:1px solid rgba(0,240,255,0.3); border-radius:12px; padding:12px 4px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;">
+            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg, #00f0ff, #0284c7); display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 0 10px rgba(0,240,255,0.35);">🎥</div>
+            <span style="color:#fff; font-size:11px; font-weight:800;">Video</span>
+          </button>
+          <button type="button" onclick="switchRoom('tuning')" style="background:#17252d; border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px 4px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;">
+            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg, #f59e0b, #d97706); display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 0 10px rgba(245,158,11,0.35);">🛠️</div>
+            <span style="color:#fff; font-size:11px; font-weight:800;">Tuning</span>
+          </button>
+          <button type="button" onclick="switchRoom('tilawah')" style="background:#17252d; border:1px solid rgba(34,197,94,0.3); border-radius:12px; padding:12px 4px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;">
+            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg, #10b981, #059669); display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 0 10px rgba(34,197,94,0.35);">📖</div>
+            <span style="color:#fff; font-size:11px; font-weight:800;">Tilawah</span>
+          </button>
+          <button type="button" onclick="switchRoom('tchat')" style="background:#17252d; border:1px solid rgba(56,189,248,0.3); border-radius:12px; padding:12px 4px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;">
+            <div style="width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg, #38bdf8, #2563eb); display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 0 10px rgba(56,189,248,0.35);">💬</div>
+            <span style="color:#fff; font-size:11px; font-weight:800;">TChat</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KARTU BANTUAN DARURAT MOTOR MOGOK DI JALAN (SOS) -->
+      <div style="background: linear-gradient(135deg, #2b1114, #1b0e10); border: 1px solid rgba(239,68,68,0.45); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">🚨</span>
+          <div>
+            <div style="font-weight:900; color:#fff; font-size:13px;">Motor Mogok di Jalan?</div>
+            <div style="font-size:11px; color:#fca5a5;">Minta bantuan dorong (step) atau servis di tempat</div>
+          </div>
+        </div>
+        <button type="button" onclick="switchRoom('tchat'); setTimeout(() => window.tchatEngine && window.tchatEngine.triggerEmergencyMogokSOS(), 300);" style="background:#ef4444; color:#fff; border:none; border-radius:8px; padding:8px 14px; font-size:11px; font-weight:900; cursor:pointer; white-space:nowrap; box-shadow:0 0 10px rgba(239,68,68,0.4);">
+          🆘 Minta Bantuan
+        </button>
+      </div>
+
+      <!-- SHORTCUT FITUR CEPAT (PILIHAN POPULER) -->
+      <div style="display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:14px; -webkit-overflow-scrolling:touch;">
+        <button type="button" class="tab-btn" onclick="openSimulatorTab('mil')" style="white-space:nowrap; font-size:11px; padding:7px 12px; border-color:#f59e0b; color:#f59e0b; background:rgba(245,158,11,0.12); font-weight:800;">
+          💡 Simulator MIL
+        </button>
+        <button type="button" class="tab-btn" onclick="openAIMontirTab()" style="white-space:nowrap; font-size:11px; padding:7px 12px; border-color:var(--neon-cyan); color:var(--neon-cyan); background:rgba(0,240,255,0.12); font-weight:800;">
+          🤖 Tanya AI Montir
+        </button>
+        <button type="button" class="tab-btn" onclick="openDonationModal()" style="white-space:nowrap; font-size:11px; padding:7px 12px; border-color:#cbd5e1; color:#cbd5e1; font-weight:700;">
+          ☕ Traktir Kopi / QRIS
+        </button>
+        <button type="button" class="tab-btn" onclick="openInstallModal()" style="white-space:nowrap; font-size:11px; padding:7px 12px; border-color:#22c55e; color:#22c55e; font-weight:700;">
+          📲 Pasang Aplikasi (APK)
+        </button>
       </div>
 
       <!-- KARTU STATUS MONETISASI TERHUBUNG (SHOPEE AFILIASI & QRIS AKTIF) -->
@@ -2196,86 +2231,58 @@
 
 
     <!-- ======================================================================
-         KAMAR 2: VIDEO STREAM CENTER [🎥 Video Stream]
+         KAMAR 2: VIDEO STREAM CENTER [🎥 Video Stream - Gaya YouTube Mobile]
          ====================================================================== -->
     <section id="room-video" class="room-view active">
 
-      <!-- SEARCH BAR INTERAKTIF AI (MONETISASI AFILIASI) -->
-      <div class="search-section">
+      <!-- SEARCH BAR BERSIH ALA YOUTUBE -->
+      <div class="search-section" style="margin-bottom:10px;">
         <div class="search-box-wrap" style="position:relative; display:flex; align-items:center;">
           <span class="search-icon-prefix">🔍</span>
           <input 
             type="text" 
             id="video-search-input" 
             class="search-input" 
-            placeholder="Cari lagu, film, tilawah: Bon Jovi, Bollywood Telugu, Drag Ninja, Al-Waqiah..." 
+            placeholder="Cari video: Drag Ninja, Servis CVT, Tilawah, Bon Jovi..." 
             oninput="handleSearchInput(this.value)"
             onkeydown="if(event.key==='Enter'){event.preventDefault(); executeLiveVideoSearch(this.value);}"
-            style="padding-right:70px;"
+            style="padding-right:72px; height:42px; font-size:13px; border-radius:10px;"
           />
           <button id="clear-search-btn" class="clear-search-btn" onclick="clearSearchInput()" style="right:60px;">✕</button>
-          <button type="button" onclick="executeLiveVideoSearch(document.getElementById('video-search-input').value)" style="position:absolute; right:6px; top:50%; transform:translateY(-50%); background:linear-gradient(135deg, #00f0ff, #0284c7); color:#081216; border:none; border-radius:6px; padding:6px 12px; font-size:11px; font-weight:900; cursor:pointer;">
+          <button type="button" onclick="executeLiveVideoSearch(document.getElementById('video-search-input').value)" style="position:absolute; right:6px; top:50%; transform:translateY(-50%); background:linear-gradient(135deg, #00f0ff, #0284c7); color:#081216; border:none; border-radius:8px; padding:6px 12px; font-size:11px; font-weight:900; cursor:pointer;">
             Cari
           </button>
         </div>
-
-        <!-- Tag Pencarian Cepat Populer (148+ Koleksi Video + Pencarian Bebas) -->
-        <div class="quick-chips-wrapper">
-          <span style="font-size:11px; color:#94a3b8; font-weight:700;">🔥 Populer:</span>
-          <button type="button" class="quick-chip" onclick="openSimulatorTab('mil')" style="background:rgba(245,158,11,0.2); border:1px solid #f59e0b; color:#f59e0b; font-weight:800;">💡 Buka Simulator Speedometer MIL</button>
-          <button type="button" class="quick-chip" onclick="switchVideoTab('balap')" style="background:rgba(0,240,255,0.2); border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-weight:800;">🏁 Video Drag & Dyno Test</button>
-          <button type="button" class="quick-chip" onclick="switchVideoTab('mekanik')" style="background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#22c55e; font-weight:800;">⚙️ Video Servis & Bongkar CVT</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('lagu bon jovi')">🎸 Lagu Bon Jovi</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('film india telugu')">🇮🇳 Film India Telugu</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('surah al waqiah')">🕌 Surah Al-Waqi'ah</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('drag ninja')">⚡ Drag Ninja</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('servis cvt')">🛵 Servis CVT</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('bore up')">🔥 Bore Up</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('rx king')">💨 RX King 2T</button>
-          <button type="button" class="quick-chip" onclick="quickSearchTag('drakor')">👑 Drakor</button>
-        </div>
-
-        <!-- REKOMENDASI PINTAR AI AFILIASI RESMI SHOPEE -->
-        <div id="ai-affiliate-banner" class="ai-affiliate-banner" style="margin-top:10px;">
-          <div class="ai-affiliate-head">
-            <span class="ai-affiliate-title">🤖 Rekomendasi Pintar AI Teguh Stream: Produk Terkait</span>
-            <span style="font-size: 10px; color: var(--gold-accent); font-weight: bold;">AFILIASI RESMI</span>
-          </div>
-          <div id="ai-affiliate-chips" class="ai-affiliate-grid">
-            <!-- Chips Rekomendasi Diisi Otomatis Berdasarkan Pencarian -->
-          </div>
-        </div>
       </div>
 
-      <!-- TABS KATEGORI KONTEN VIDEO AGGREGATOR -->
-      <div class="tabs-container">
+      <!-- TABS KATEGORI SINGLE-ROW SCROLLABLE ALA YOUTUBE -->
+      <div class="tabs-container" style="display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:10px; -webkit-overflow-scrolling:touch; white-space:nowrap;">
         <button class="tab-btn active" id="tab-btn-all" onclick="switchVideoTab('all')">
-          <span>🌟 Semua (148+)</span>
+          🌟 Semua (148+)
         </button>
         <button class="tab-btn" id="tab-btn-shorts" onclick="switchVideoTab('shorts')">
-          <span>⚡ Shorts (28)</span>
+          ⚡ Shorts (28)
         </button>
         <button class="tab-btn" id="tab-btn-balap" onclick="switchVideoTab('balap')">
-          <span>🏁 Drag & Balap (26)</span>
+          🏁 Drag & Balap (26)
         </button>
         <button class="tab-btn" id="tab-btn-mekanik" onclick="switchVideoTab('mekanik')">
-          <span>⚙️ Servis Mesin (26)</span>
+          ⚙️ Servis Mesin (26)
         </button>
         <button class="tab-btn" id="tab-btn-santri" onclick="switchVideoTab('santri')">
-          <span>🕌 Santri & Tilawah (22)</span>
+          🕌 Santri & Tilawah (22)
         </button>
-
         <button class="tab-btn" id="tab-btn-drakor" onclick="switchVideoTab('drakor')">
-          <span>👑 Drakor (14)</span>
+          👑 Drakor (14)
         </button>
         <button class="tab-btn" id="tab-btn-india" onclick="switchVideoTab('india')">
-          <span>🕌 Sinema India (14)</span>
+          🕌 Sinema India (14)
         </button>
         <button class="tab-btn" id="tab-btn-unlimited" onclick="switchVideoTab('unlimited')">
-          <span>♾️ Putar Bebas</span>
+          ♾️ Putar Bebas
         </button>
         <button class="tab-btn" id="tab-btn-myplaylists" onclick="switchVideoTab('myplaylists')">
-          <span>📑 Playlist Saya</span>
+          📑 Playlist Saya
         </button>
       </div>
 
@@ -2545,28 +2552,28 @@
         </div>
       </div>
 
-      <!-- SUB-NAVIGASI KAMAR TUNING -->
-      <div class="tuning-subtabs">
+      <!-- SUB-NAVIGASI KAMAR TUNING (BERSIH & MODEREN) -->
+      <div class="tuning-subtabs" style="display:flex; gap:6px; overflow-x:auto; padding-bottom:6px; margin-bottom:12px; -webkit-overflow-scrolling:touch; white-space:nowrap;">
         <button type="button" class="tuning-subtab-btn active" id="tsub-btn-ai" onclick="switchTuningSubtab('ai')">
-          🤖 Tanya Kang Teguh AI (Montir & Santri)
-        </button>
-        <button type="button" class="tuning-subtab-btn" id="tsub-btn-performance" onclick="switchTuningSubtab('performance')">
-          📊 Monthly Performance (BBM & HP Dyno)
-        </button>
-        <button type="button" class="tuning-subtab-btn" id="tsub-btn-dokter" onclick="switchTuningSubtab('dokter')">
-          🩺 Dokter Motor (Solusi Masalah)
-        </button>
-        <button type="button" class="tuning-subtab-btn" id="tsub-btn-kuitansi" onclick="switchTuningSubtab('kuitansi')">
-          🧾 Kuitansi Servis Digital WA
+          🤖 Tanya AI
         </button>
         <button type="button" class="tuning-subtab-btn" id="tsub-btn-mil" onclick="switchTuningSubtab('mil')">
-          💡 Simulator Kode Kedip MIL Injeksi
+          💡 Simulator MIL
+        </button>
+        <button type="button" class="tuning-subtab-btn" id="tsub-btn-dokter" onclick="switchTuningSubtab('dokter')">
+          🩺 Dokter Motor
+        </button>
+        <button type="button" class="tuning-subtab-btn" id="tsub-btn-performance" onclick="switchTuningSubtab('performance')">
+          📊 Dyno & BBM
         </button>
         <button type="button" class="tuning-subtab-btn" id="tsub-btn-lab" onclick="switchTuningSubtab('lab')">
-          🧮 Lab Mesin CR & Spuyer Karbu
+          🧮 Lab Mesin
+        </button>
+        <button type="button" class="tuning-subtab-btn" id="tsub-btn-kuitansi" onclick="switchTuningSubtab('kuitansi')">
+          🧾 Kuitansi WA
         </button>
         <button type="button" class="tuning-subtab-btn" id="tsub-btn-paket" onclick="switchTuningSubtab('paket')">
-          💰 Paket Servis & Tabel Torsi
+          💰 Paket Servis
         </button>
       </div>
 
