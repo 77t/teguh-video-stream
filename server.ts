@@ -82,6 +82,71 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
+// ============================================================================
+// WEBRTC SIGNALING JEMBATAN RINGAN (IN-MEMORY ONLY, 0 MB DISK STORAGE)
+// Server hanya sebagai perantara jabat tangan (handshake) P2P video/voice call & chat
+// Semua file foto/dokumen/rekaman suara disimpan di HP masing-masing pengguna
+// ============================================================================
+interface SignalMessage {
+  id: string;
+  from: string;
+  to?: string;
+  room?: string;
+  type: string;
+  payload: any;
+  timestamp: number;
+}
+const signalQueue: Map<string, SignalMessage[]> = new Map();
+
+// Kirim sinyal (Call request, Offer, Answer, ICE Candidate, Chat broadcast)
+app.post("/api/tchat/signal", (req, res) => {
+  const { from, to, room, type, payload } = req.body;
+  if (!from || !type) {
+    res.status(400).json({ error: "Data sinyal tidak lengkap" });
+    return;
+  }
+  const targetKey = to || room || "global";
+  if (!signalQueue.has(targetKey)) {
+    signalQueue.set(targetKey, []);
+  }
+  const queue = signalQueue.get(targetKey)!;
+  const msgId = "sig_" + Math.random().toString(36).substring(2, 9) + "_" + Date.now();
+  queue.push({ id: msgId, from, to, room, type, payload, timestamp: Date.now() });
+
+  // Batasi antrean agar hemat RAM (maksimal 50 pesan terakhir per kamar/target)
+  if (queue.length > 50) queue.shift();
+  res.json({ success: true, id: msgId });
+});
+
+// Ambil sinyal baru untuk Peer ID, Username, atau Room tertentu
+app.get("/api/tchat/poll", (req, res) => {
+  const peerId = (req.query.peerId as string) || "global";
+  const username = (req.query.username as string) || "";
+  const since = parseInt((req.query.since as string) || "0", 10);
+  const now = Date.now();
+
+  const directQueue = signalQueue.get(peerId) || [];
+  const usernameQueue = username ? (signalQueue.get(username) || []) : [];
+  const globalQueue = peerId !== "global" ? (signalQueue.get("global") || []) : [];
+
+  const combined = [...directQueue, ...usernameQueue, ...globalQueue];
+
+  // Filter pesan baru yang bukan dikirim oleh diri sendiri
+  const messages = combined.filter(m => m.timestamp > since && m.from !== peerId && (!username || m.from !== username));
+
+  // Bersihkan sinyal usang (> 90 detik) agar RAM server tetap sangat ringan
+  signalQueue.set(peerId, directQueue.filter(m => now - m.timestamp < 90000));
+  if (username) {
+    signalQueue.set(username, usernameQueue.filter(m => now - m.timestamp < 90000));
+  }
+  if (peerId !== "global") {
+    signalQueue.set("global", globalQueue.filter(m => now - m.timestamp < 90000));
+  }
+
+  res.json({ messages, serverTime: now });
+});
+
+
 // PWA Manifest & Service Worker Endpoints (MIME-Type Presisi)
 app.get(["/manifest.json", "/manifest.webmanifest"], (_req, res) => {
   res.setHeader("Content-Type", "application/manifest+json; charset=utf-8");

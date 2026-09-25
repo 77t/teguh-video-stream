@@ -1470,12 +1470,47 @@
       margin-bottom: 2px;
     }
 
+    .tchat-profile-bar {
+      background: #0d161a;
+      border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 8px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .tchat-tool-btn {
+      background: #17242a;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: #cbd5e1;
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .tchat-tool-btn:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      transform: scale(1.05);
+    }
+
     .tchat-input-bar {
+      position: relative;
       background: #111a1e;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 10px 12px;
+      padding: 8px 10px;
       display: flex;
-      gap: 8px;
+      align-items: center;
+      gap: 6px;
     }
 
     .tchat-input {
@@ -1486,7 +1521,13 @@
       color: #fff;
       font-size: 13px;
       padding: 8px 12px;
+      height: 38px;
       outline: none;
+      box-sizing: border-box;
+    }
+    .tchat-input:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
     }
 
     .tchat-send-btn {
@@ -1494,10 +1535,74 @@
       color: #0b1215;
       border: none;
       border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 13px;
+      padding: 0 14px;
+      height: 38px;
+      font-size: 12px;
       font-weight: 900;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .tchat-send-btn:hover {
+      transform: scale(1.03);
+    }
+
+    .tchat-emoji-picker {
+      position: absolute;
+      bottom: 54px;
+      left: 10px;
+      background: #101c22;
+      border: 1.5px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 10px;
+      width: 290px;
+      max-width: 90vw;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8), 0 0 16px rgba(0, 240, 255, 0.3);
+      z-index: 10000;
+      display: none;
+    }
+    .tchat-emoji-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 6px;
+    }
+    .tchat-emoji-tab {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .tchat-emoji-tab.active {
+      color: var(--neon-cyan);
+      background: rgba(0, 240, 255, 0.15);
+    }
+    .tchat-emoji-list {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .tchat-vn-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: #181318;
+      border: 1px solid #ef4444;
+      border-radius: 8px;
+      padding: 6px 12px;
+      box-sizing: border-box;
     }
 
     /* ==========================================================================
@@ -1847,6 +1952,12 @@
       </a>
 
       <div class="header-actions">
+        <!-- Tombol Buka Simulasi Interaktif & Sensor -->
+        <button class="action-btn" onclick="openSimulatorTab('mil')" title="Buka Simulasi Speedometer & Kode Kedip Sensor Injeksi" style="border-color: #f59e0b; color: #f59e0b; background: rgba(245, 158, 11, 0.15);">
+          <span>💡</span>
+          <span class="btn-text-sm" style="display:inline; font-weight:800;">Simulasi</span>
+        </button>
+
         <!-- Tombol Asisten AI Montir Pintar 24 Jam -->
         <button class="action-btn" onclick="openAIMontirTab()" title="Tanya Kang Teguh AI (Montir & Santri 24 Jam)" style="border-color: var(--neon-cyan); color: var(--neon-cyan); background: rgba(0, 240, 255, 0.12);">
           <span>🤖</span>
@@ -1967,6 +2078,7 @@
         <p>Ekosistem hiburan, edukasi otomotif, spiritual tilawah santri, dan komunitas montir racing Indonesia. Dibangun dengan performa tinggi & hemat kuota.</p>
         <div style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
           <button class="tab-btn active" onclick="switchRoom('video')">🎥 Buka Video Stream</button>
+          <button class="tab-btn" onclick="openSimulatorTab('mil')" style="border-color: #f59e0b; color: #f59e0b; font-weight: 800; background: rgba(245, 158, 11, 0.15);">💡 Buka Simulator Speedometer MIL</button>
           <button class="tab-btn" onclick="switchRoom('tuning')">🛠️ Buka Tuning Pro</button>
           <button class="tab-btn" onclick="switchRoom('tilawah')">📖 Buka Tilawah Quran</button>
           <button class="tab-btn" onclick="openDonationModal()" style="border-color: #f59e0b; color: #f59e0b; font-weight: 800;">☕ Traktir Kopi / QRIS</button>
@@ -2110,6 +2222,9 @@
         <!-- Tag Pencarian Cepat Populer (148+ Koleksi Video + Pencarian Bebas) -->
         <div class="quick-chips-wrapper">
           <span style="font-size:11px; color:#94a3b8; font-weight:700;">🔥 Populer:</span>
+          <button type="button" class="quick-chip" onclick="openSimulatorTab('mil')" style="background:rgba(245,158,11,0.2); border:1px solid #f59e0b; color:#f59e0b; font-weight:800;">💡 Buka Simulator Speedometer MIL</button>
+          <button type="button" class="quick-chip" onclick="switchVideoTab('balap')" style="background:rgba(0,240,255,0.2); border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-weight:800;">🏁 Video Drag & Dyno Test</button>
+          <button type="button" class="quick-chip" onclick="switchVideoTab('mekanik')" style="background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#22c55e; font-weight:800;">⚙️ Video Servis & Bongkar CVT</button>
           <button type="button" class="quick-chip" onclick="quickSearchTag('lagu bon jovi')">🎸 Lagu Bon Jovi</button>
           <button type="button" class="quick-chip" onclick="quickSearchTag('film india telugu')">🇮🇳 Film India Telugu</button>
           <button type="button" class="quick-chip" onclick="quickSearchTag('surah al waqiah')">🕌 Surah Al-Waqi'ah</button>
@@ -2470,6 +2585,12 @@
             </div>
             <div style="display:flex; align-items:center; gap:6px;">
               <span class="tag-pill cyan" style="font-size:9px; font-weight:800;">● SERVER GEMINI AKTIF</span>
+              <button type="button" id="ai-tts-toggle-btn" onclick="toggleAIMontirAutoSpeak()" title="Bicara otomatis dengan suara robot saat Kang Teguh AI menjawab (Agar tak capek membaca)" style="background:rgba(0,240,255,0.18); border:1px solid var(--neon-cyan); color:var(--neon-cyan); border-radius:6px; padding:4px 8px; font-size:10px; font-weight:800; cursor:pointer; display:flex; align-items:center; gap:3px;">
+                <span>🔊 Bicara: ON</span>
+              </button>
+              <button type="button" id="ai-tts-stop-all-btn" onclick="stopAIMontirVoice()" title="Hentikan suara yang sedang membaca" style="display:none; background:#ef4444; border:none; color:#fff; border-radius:6px; padding:4px 8px; font-size:10px; font-weight:800; cursor:pointer;">
+                <span>⏹️ Stop Suara</span>
+              </button>
               <button type="button" onclick="clearAIMontirChat()" title="Hapus riwayat obrolan" style="background:#152227; border:1px solid rgba(255,255,255,0.2); color:#94a3b8; border-radius:6px; padding:4px 8px; font-size:10px; cursor:pointer;">
                 🗑️ Bersihkan
               </button>
@@ -2957,46 +3078,202 @@
 
 
     <!-- ======================================================================
-         KAMAR 5: TCHAT [💬 TChat]
+         KAMAR 5: TCHAT [💬 TChat Pro: P2P Call, Voice Note, Share Lokasi & Chat WA]
          ====================================================================== -->
     <section id="room-tchat" class="room-view">
-      <div class="tchat-box">
+      <div class="tchat-box" style="height: 74vh;">
+        <!-- HEADER UTAMA TCHAT -->
         <div class="tchat-header">
           <div style="display: flex; align-items: center; gap: 8px;">
-            <div style="width: 10px; height: 10px; background: var(--success-green); border-radius: 50%;"></div>
+            <div style="width: 10px; height: 10px; background: var(--success-green); border-radius: 50%; box-shadow:0 0 8px var(--success-green);"></div>
             <div>
-              <h3 style="font-size: 14px; font-weight: 800; color: #fff;">TChat Community Stream</h3>
-              <p style="font-size: 10px; color: var(--neon-cyan);">148 Anggota Montir & Santri Online</p>
+              <h3 style="font-size: 14px; font-weight: 900; color: #fff; margin:0;">💬 TChat Pro: Bengkel & Santri Meet</h3>
+              <p style="font-size: 10px; color: var(--neon-cyan); margin:2px 0 0 0;">P2P Call & Chat • Beban HP Lokal 0 MB Server</p>
             </div>
           </div>
-          <span class="tag-pill cyan">GRUP AKTIF</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <button type="button" onclick="promptStartCall(false)" class="action-btn" title="Panggilan Suara Ala WA (Gratis P2P)" style="background:rgba(34,197,94,0.18); border:1px solid #22c55e; color:#22c55e; padding:5px 9px; font-size:11px; font-weight:800; border-radius:6px;">
+              📞 Telp
+            </button>
+            <button type="button" onclick="promptStartCall(true)" class="action-btn" title="Video Call Tatap Muka P2P" style="background:rgba(0,240,255,0.18); border:1px solid var(--neon-cyan); color:var(--neon-cyan); padding:5px 9px; font-size:11px; font-weight:800; border-radius:6px;">
+              📹 Video
+            </button>
+            <button type="button" onclick="requestTchatNotificationPermission()" class="action-btn" title="Aktifkan Nada Dering & Notifikasi Masuk" style="background:rgba(245,158,11,0.18); border:1px solid #f59e0b; color:#f59e0b; padding:5px 9px; font-size:11px; font-weight:800; border-radius:6px;">
+              🔔 Notif
+            </button>
+            <button type="button" onclick="window.tchatEngine && window.tchatEngine.clearLocalChatDB()" class="action-btn" title="Bersihkan Memori Chat di HP" style="background:#1e293b; border:1px solid rgba(255,255,255,0.2); color:#94a3b8; padding:5px 8px; font-size:10px; border-radius:6px;">
+              🗑️
+            </button>
+          </div>
         </div>
 
+        <!-- TAB NAVIGASI RUANG: GLOBAL VS JAPRI PRIBADI -->
+        <div style="background:#091216; border-bottom:1px solid rgba(0,240,255,0.2); padding:6px 10px; display:flex; gap:6px; align-items:center; justify-content:space-between;">
+          <div style="display:flex; gap:6px;">
+            <button type="button" id="tchat-tab-btn-global" class="tab-btn active" onclick="window.tchatEngine.switchChatChannel('global')" style="font-size:11px; padding:6px 12px; margin:0; border-radius:6px;">
+              🌐 Grup Global & Bantuan Mogok
+            </button>
+            <button type="button" id="tchat-tab-btn-private" class="tab-btn" onclick="window.tchatEngine.switchChatChannel('private')" style="font-size:11px; padding:6px 12px; margin:0; border-radius:6px;">
+              🔒 Obrolan Pribadi (Japri)
+            </button>
+          </div>
+          <button type="button" onclick="window.tchatEngine.promptStartNewPrivateChat()" style="background:#16252d; border:1px solid var(--neon-cyan); color:var(--neon-cyan); font-size:10px; font-weight:800; border-radius:6px; padding:5px 10px; cursor:pointer; white-space:nowrap;">
+            ➕ Japri Baru
+          </button>
+        </div>
+
+        <!-- PROFILE, CUSTOM USERNAME & ID USER BAR -->
+        <div class="tchat-profile-bar">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span style="font-size:13px;">👤</span>
+              <span style="color:#fff; font-weight:800;" id="tchat-my-name-display">Montir Teguh</span>
+              <button type="button" onclick="editMyTChatProfileName()" title="Ganti Nama Profil" style="background:transparent; border:none; color:var(--neon-cyan); cursor:pointer; font-size:11px; padding:0 2px;">✏️</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span style="color:#64748b;">•</span>
+              <span style="color:var(--neon-cyan); font-weight:800;" id="tchat-my-username-display">@teguh_bengkel</span>
+              <button type="button" onclick="editMyTChatUsername()" title="Ubah atau Buat @Username Pribadi Anda Sendiri" style="background:transparent; border:none; color:var(--gold-accent); cursor:pointer; font-size:11px; padding:0 2px;">✏️</button>
+            </div>
+            <div style="display:flex; align-items:center; gap:4px;">
+              <span style="color:#64748b;">• ID:</span>
+              <span style="color:var(--gold-accent); font-weight:900;" id="tchat-my-id-display">MTR-7789</span>
+            </div>
+          </div>
+          <button type="button" onclick="copyMyCallLink()" style="background:#16252d; border:1px solid rgba(0,240,255,0.3); color:var(--neon-cyan); font-size:10px; font-weight:800; border-radius:6px; padding:3px 8px; cursor:pointer; display:flex; align-items:center; gap:3px;">
+            <span>📋</span>
+            <span>Salin ID Panggil</span>
+          </button>
+        </div>
+
+        <!-- BAR DARURAT MOTOR MOGOK DI GRUP GLOBAL -->
+        <div id="tchat-global-controls-bar" style="background:linear-gradient(135deg, #2a1114, #1b0e10); border-bottom:1px solid rgba(239,68,68,0.4); padding:6px 12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+          <div style="font-size:11px; color:#fca5a5; display:flex; align-items:center; gap:6px;">
+            <span style="animation:pulse 0.8s infinite;">🚨</span>
+            <span><b>Motor Mogok di Jalan?</b> Minta bantuan sesama user / montir terdekat:</span>
+          </div>
+          <button type="button" onclick="window.tchatEngine.triggerEmergencyMogokSOS()" style="background:#ef4444; color:#fff; border:none; border-radius:6px; font-weight:900; font-size:11px; padding:5px 12px; cursor:pointer; box-shadow:0 0 10px rgba(239,68,68,0.5); display:flex; align-items:center; gap:4px;">
+            <span>🆘</span>
+            <span>Minta Bantuan Mogok (Kirim Lokasi)</span>
+          </button>
+        </div>
+
+        <!-- BAR NAVIGASI SAAT JAPRI PRIBADI AKTIF -->
+        <div id="tchat-private-controls-bar" style="display:none; background:#10222a; border-bottom:1px solid var(--neon-cyan); padding:8px 12px; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" onclick="window.tchatEngine.switchChatChannel('private')" style="background:#1c2d35; border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:6px; padding:4px 8px; font-size:11px; font-weight:800; cursor:pointer;">
+              ⬅️ Kontak
+            </button>
+            <div>
+              <div style="font-weight:900; color:#fff; font-size:13px;" id="tchat-private-target-name">Teman Montir</div>
+              <div style="font-size:10px; color:var(--neon-cyan);" id="tchat-private-target-handle">@username</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" onclick="window.tchatEngine.startCall(window.tchatEngine.getActiveChannel(), false)" style="background:#22c55e; color:#fff; border:none; padding:6px 12px; border-radius:6px; font-size:11px; font-weight:800; cursor:pointer;">
+              📞 Telp
+            </button>
+            <button type="button" onclick="window.tchatEngine.startCall(window.tchatEngine.getActiveChannel(), true)" style="background:var(--neon-cyan); color:#0b1215; border:none; padding:6px 12px; border-radius:6px; font-size:11px; font-weight:900; cursor:pointer;">
+              📹 Video
+            </button>
+          </div>
+        </div>
+
+        <!-- VIEW DAFTAR KONTAK JAPRI (MUNCUL JIKA TAB JAPRI DIPILIH) -->
+        <div id="tchat-contacts-view" style="display:none; flex:1; padding:12px; overflow-y:auto;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h4 style="margin:0; color:#fff; font-size:13px; font-weight:900;">Daftar Kontak Obrolan Pribadi (Japri)</h4>
+            <span style="font-size:10px; color:#94a3b8;">Tersimpan di HP Anda</span>
+          </div>
+          <div id="tchat-contacts-list">
+            <!-- Diisi otomatis dari JS -->
+          </div>
+        </div>
+
+        <!-- LIST PESAN CHAT, GAMBAR, DOKUMEN & VOICE NOTE -->
         <div id="tchat-messages" class="tchat-messages">
           <div class="chat-bubble in">
-            <div class="chat-sender">🛠️ Kang Asep Montir Sleman</div>
-            Halo mas bro sekalian, rasio gir buat harian Jupiter z enaknya pakai 14-38 apa 14-36?
+            <div class="chat-sender" style="color:var(--gold-accent);">
+              <span style="cursor:pointer; text-decoration:underline;" onclick="window.tchatEngine.openUserProfileActions('Kang Asep Montir Sleman', 'MTR-1024', 'asep_slemn')">
+                👤 Kang Asep Montir Sleman <span style="color:var(--neon-cyan);">• @asep_slemn</span>
+              </span>
+            </div>
+            <div>Assalamu'alaikum lur! Sekarang bisa bikin <b>@username sendiri</b> biar gampang di-add teman. Kalau ada yang motornya mogok di jalan atau butuh di-step, tinggal klik tombol <b>🆘 Minta Bantuan Mogok</b> di atas untuk siarkan lokasi ke grup global! Mau lanjut obrolan pribadi tinggal klik nama anggota untuk langsung Japri.</div>
           </div>
           <div class="chat-bubble in">
-            <div class="chat-sender">🕌 Gus Ilham Santri Jombang</div>
-            Wa'alaikumsalam mas Asep, kalau jalur datar pakai 14-36 nafasnya panjang. Sambil nunggu servis monggo mampir dengerin Radio Rodja di header.
-          </div>
-          <div class="chat-bubble in">
-            <div class="chat-sender">⚡ Admin Teguh Stream</div>
-            Selamat datang di TEGUH VIDEO STREAM CENTER! Tab shorts dan video tren sudah update ya lur, bisa langsung ditonton di tempat tanpa lempar aplikasi.
+            <div class="chat-sender" style="color:#38bdf8;">
+              <span style="cursor:pointer; text-decoration:underline;" onclick="window.tchatEngine.openUserProfileActions('Gus Ilham Santri Jombang', 'MTR-2048', 'ilham_santri')">
+                👤 Gus Ilham Santri Jombang <span style="color:var(--neon-cyan);">• @ilham_santri</span>
+              </span>
+            </div>
+            <div>Wa'alaikumsalam mas Asep, alhamdulillah barokah sekali solusinya. Jadi sesama montir dan santri bisa saling tolong menolong saat ada kendala darurat di jalanan.</div>
           </div>
         </div>
 
-        <form class="tchat-input-bar" onsubmit="handleSendTChat(event)">
+        <!-- POPUP EMOJI PICKER LUCU NATIVE (0 BYTE SERVER LOAD) -->
+        <div id="tchat-emoji-picker" class="tchat-emoji-picker">
+          <div class="tchat-emoji-tabs">
+            <button type="button" class="tchat-emoji-tab active" onclick="this.parentElement.querySelectorAll('.tchat-emoji-tab').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.tchatEngine.renderEmojiCategory('reaksi');">😃 Reaksi Lucu</button>
+            <button type="button" class="tchat-emoji-tab" onclick="this.parentElement.querySelectorAll('.tchat-emoji-tab').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.tchatEngine.renderEmojiCategory('otomotif');">🏍️ Otomotif</button>
+            <button type="button" class="tchat-emoji-tab" onclick="this.parentElement.querySelectorAll('.tchat-emoji-tab').forEach(b => b.classList.remove('active')); this.classList.add('active'); window.tchatEngine.renderEmojiCategory('santri');">🕌 Santri</button>
+          </div>
+          <div id="tchat-emoji-list" class="tchat-emoji-list"></div>
+        </div>
+
+        <!-- VOICE NOTE RECORDING BAR (MUNCUL SAAT MIKROFON AKTIF) -->
+        <div id="tchat-vn-bar" class="tchat-vn-bar">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:16px; animation:pulse 0.8s infinite;">🔴</span>
+            <span style="color:#ef4444; font-weight:800; font-size:12px;">Merekam Suara:</span>
+            <span id="tchat-vn-timer" style="color:#ffffff; font-weight:900; font-size:12px;">00:00</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" onclick="window.tchatEngine.cancelRecordingVoiceNote()" style="background:#334155; color:#fff; border:none; border-radius:6px; padding:6px 12px; font-size:11px; font-weight:800; cursor:pointer;">
+              ✕ Batal
+            </button>
+            <button type="button" onclick="window.tchatEngine.finishAndSendVoiceNote()" style="background:#22c55e; color:#fff; border:none; border-radius:6px; padding:6px 14px; font-size:11px; font-weight:900; cursor:pointer; box-shadow:0 0 8px rgba(34,197,94,0.4);">
+              🚀 Kirim Suara
+            </button>
+          </div>
+        </div>
+
+        <!-- INPUT BAR STANDAR (EMOJI, ATTACHMENT, SHARE LOKASI, VOICE NOTE, TEKS) -->
+        <form id="tchat-standard-input-bar" class="tchat-input-bar" onsubmit="handleSendTChat(event)">
+          <!-- Tombol Emoji -->
+          <button type="button" class="tchat-tool-btn" onclick="window.tchatEngine.toggleEmojiPicker()" title="Pilih Emoji Lucu & Reaksi">
+            😊
+          </button>
+
+          <!-- Tombol Lampirkan File / Foto (Hidden Input) -->
+          <input type="file" id="tchat-file-input" style="display:none;" onchange="window.tchatEngine.handleFileInputChange(event)" accept="image/*,application/pdf,.doc,.docx,.zip,.txt" />
+          <button type="button" class="tchat-tool-btn" onclick="document.getElementById('tchat-file-input').click()" title="Kirim Foto, Dokumen PDF, Nota Estimasi">
+            📎
+          </button>
+
+          <!-- Tombol Share Lokasi Google Maps -->
+          <button type="button" class="tchat-tool-btn" onclick="window.tchatEngine.shareCurrentLocation()" title="Bagikan Titik Lokasi GPS ke Teman">
+            📍
+          </button>
+
+          <!-- Kolom Input Teks -->
           <input 
             type="text" 
             id="tchat-input-text" 
             class="tchat-input" 
-            placeholder="Tulis pesan Anda untuk komunitas..." 
+            placeholder="Tulis pesan, klik 📎 kirim foto, atau 🎙️ pesan suara..." 
             autocomplete="off"
-            required 
           />
-          <button type="submit" class="tchat-send-btn">KIRIM 🚀</button>
+
+          <!-- Tombol Rekam Voice Note -->
+          <button type="button" class="tchat-tool-btn" onclick="window.tchatEngine.startRecordingVoiceNote()" title="Tahan / Klik untuk Rekam Pesan Suara" style="color:#ef4444; border-color:rgba(239,68,68,0.4);">
+            🎙️
+          </button>
+
+          <!-- Tombol Kirim Teks -->
+          <button type="submit" class="tchat-send-btn">
+            <span>KIRIM</span>
+            <span>🚀</span>
+          </button>
         </form>
       </div>
     </section>
@@ -7911,6 +8188,15 @@
       }
     }
 
+    function openSimulatorTab(subtab) {
+      switchRoom('tuning');
+      switchTuningSubtab(subtab || 'mil');
+      const milPanel = document.getElementById('tpanel-mil');
+      if (milPanel) {
+        milPanel.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     // ------------------------------------------------------------------------
     // DATABASE & LOGIKA DOKTER MOTOR (PEMECAH MASALAH HARIAN)
     // ------------------------------------------------------------------------
@@ -8434,47 +8720,69 @@
     }
 
     // ========================================================================
-    // TCHAT COMMUNITY CHAT INTERAKTIF
+    // TCHAT COMMUNITY CHAT INTERAKTIF (P2P CHAT ALA WA)
     // ========================================================================
     function handleSendTChat(event) {
-      event.preventDefault();
+      if (event && event.preventDefault) event.preventDefault();
       const input = document.getElementById("tchat-input-text");
+      if (!input) return;
       const messageText = input.value.trim();
       if (!messageText) return;
 
-      const chatContainer = document.getElementById("tchat-messages");
+      const userName = localStorage.getItem("tvs_tchat_user_name") || "Anda";
+      const customUsername = localStorage.getItem("tvs_tchat_custom_username") || "";
+      const myPeerId = localStorage.getItem("tvs_tchat_peer_id") || "guest";
+      const currentChannel = (window.tchatEngine && window.tchatEngine.getActiveChannel) ? window.tchatEngine.getActiveChannel() : "global";
+      const timeStr = new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+
+      const msg = {
+        id: "msg_" + Date.now(),
+        type: "text",
+        text: messageText,
+        channel: currentChannel,
+        senderName: userName,
+        senderUsername: customUsername,
+        senderId: myPeerId,
+        time: timeStr,
+        timestamp: Date.now()
+      };
+
+      input.value = "";
+
+      // Tutup emoji picker jika terbuka
+      const emojiPicker = document.getElementById("tchat-emoji-picker");
+      if (emojiPicker) emojiPicker.style.display = "none";
 
       // Tambahkan gelembung chat pengguna
-      const userBubble = document.createElement("div");
-      userBubble.className = "chat-bubble out";
-      userBubble.innerHTML = `
-        <div class="chat-sender" style="color:var(--neon-cyan);">👤 Anda (Member Teguh Stream)</div>
-        ${escapeHTML(messageText)}
-      `;
-      chatContainer.appendChild(userBubble);
-      input.value = "";
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-
-      // Balasan otomatis cerdas dari simulasi komunitas Teguh Digital
-      setTimeout(function () {
-        const botBubble = document.createElement("div");
-        botBubble.className = "chat-bubble in";
-
-        const botReplies = [
-          "Mantap infonya lur! Jangan lupa setel Radio Rodja atau Elshinta di menu header atas biar makin adem.",
-          "Siap mas, kalau mau oprek mesin bisa manfaatkan kalkulator di menu [🛠️ Tuning Pro] ya.",
-          "Halo salam santri dan montir se-Indonesia! Konten video shorts terkunci aman di web siap ditonton terus.",
-          "Jos gandos mas! Keren ide modifikasinya, tetap utamakan keselamatan berkendara di jalan raya."
-        ];
-        const randomReply = botReplies[Math.floor(Math.random() * botReplies.length)];
-
-        botBubble.innerHTML = `
-          <div class="chat-sender">⚡ Bot Komunitas Teguh</div>
-          ${randomReply}
+      const chatContainer = document.getElementById("tchat-messages");
+      if (chatContainer) {
+        const userBubble = document.createElement("div");
+        userBubble.className = "chat-bubble out";
+        const handleSuffix = customUsername ? ` • @${escapeHTML(customUsername)}` : "";
+        userBubble.innerHTML = `
+          <div class="chat-sender" style="color:var(--neon-cyan); display:flex; justify-content:space-between; align-items:center;">
+            <span>👤 Anda (${escapeHTML(userName)}${handleSuffix})</span>
+            <span style="font-size:9px; color:#64748b;">${timeStr} ✔️✔️</span>
+          </div>
+          <div>${escapeHTML(messageText)}</div>
         `;
-        chatContainer.appendChild(botBubble);
+        chatContainer.appendChild(userBubble);
         chatContainer.scrollTop = chatContainer.scrollHeight;
-      }, 1000);
+      }
+
+      // Siarkan via signaling ringan (0 MB beban disk server)
+      fetch("/api/tchat/signal", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          room: currentChannel === "global" ? "global" : undefined,
+          to: currentChannel !== "global" ? currentChannel : undefined,
+          type: "chat-message",
+          payload: msg,
+          from: myPeerId,
+          senderUsername: customUsername
+        })
+      }).catch(function () {});
     }
 
     // Sanitasi teks input pengguna
@@ -9459,6 +9767,8 @@
     let aiChatHistory = [];
     let aiSpeechRecognition = null;
     let isSpeechActive = false;
+    let isAIMontirAutoSpeakActive = true;
+    let activeSpeakingIndex = -1;
 
     const AI_DEFAULT_WELCOME = {
       sender: "ai",
@@ -9566,9 +9876,16 @@
 
         let voiceReadBtn = "";
         if (!isUser) {
-          voiceReadBtn = `<button type="button" onclick="speakAIMontirReply(${idx})" title="Dengarkan suara Kang Teguh AI" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:11px; padding:0 4px; display:inline-flex; align-items:center; gap:2px;">
-            <span>🔊 Dengar Suara</span>
-          </button>`;
+          const isCurrentlyReading = (activeSpeakingIndex === idx);
+          if (isCurrentlyReading) {
+            voiceReadBtn = `<button type="button" onclick="stopAIMontirVoice()" title="Hentikan suara ini" style="background:#ef4444; border:none; color:#ffffff; cursor:pointer; font-size:10px; font-weight:800; padding:2px 8px; border-radius:4px; display:inline-flex; align-items:center; gap:4px; box-shadow:0 0 8px rgba(239,68,68,0.6);">
+              <span>⏹️ Sedang Bicara (Stop)</span>
+            </button>`;
+          } else {
+            voiceReadBtn = `<button type="button" onclick="speakAIMontirReply(${idx})" title="Dengarkan suara Kang Teguh AI (Text-to-Speech)" style="background:rgba(0,240,255,0.18); border:1px solid rgba(0,240,255,0.4); color:var(--neon-cyan); cursor:pointer; font-size:10px; font-weight:700; padding:2px 8px; border-radius:4px; display:inline-flex; align-items:center; gap:4px;">
+              <span>🔊 Dengar Suara</span>
+            </button>`;
+          }
         }
 
         html += `
@@ -9671,6 +9988,13 @@
       aiChatHistory.push(aiMsg);
       saveAIMontirHistory();
       renderAIMontirChat();
+
+      // FITUR BICARA OTOMATIS TEKS-TO-SPEECH (Agar pengguna tidak capek membaca)
+      if (isAIMontirAutoSpeakActive) {
+        setTimeout(function () {
+          speakAIMontirReply(aiChatHistory.length - 1);
+        }, 200);
+      }
     }
 
     function extractSparepartsFromContext(text) {
@@ -9809,17 +10133,69 @@
       }
     }
 
+    function toggleAIMontirAutoSpeak() {
+      isAIMontirAutoSpeakActive = !isAIMontirAutoSpeakActive;
+      const btn = document.getElementById("ai-tts-toggle-btn");
+      if (btn) {
+        if (isAIMontirAutoSpeakActive) {
+          btn.style.background = "rgba(0,240,255,0.18)";
+          btn.style.borderColor = "var(--neon-cyan)";
+          btn.style.color = "var(--neon-cyan)";
+          btn.innerHTML = "<span>🔊 Bicara: ON</span>";
+          btn.title = "Bicara otomatis dengan suara robot TTS aktif";
+          showToastNotification("🔊 Fitur Bicara Otomatis Kang Teguh AI DIAKTIFKAN!");
+        } else {
+          btn.style.background = "#26262e";
+          btn.style.borderColor = "rgba(255,255,255,0.2)";
+          btn.style.color = "#94a3b8";
+          btn.innerHTML = "<span>🔈 Bicara: OFF</span>";
+          btn.title = "Bicara otomatis dinonaktifkan (Klik untuk aktifkan)";
+          showToastNotification("🔈 Fitur Bicara Otomatis dinonaktifkan.");
+          stopAIMontirVoice();
+        }
+      }
+    }
+
+    function stopAIMontirVoice() {
+      if (window.speechSynthesis) {
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {}
+      }
+      activeSpeakingIndex = -1;
+      const stopAllBtn = document.getElementById("ai-tts-stop-all-btn");
+      if (stopAllBtn) stopAllBtn.style.display = "none";
+      renderAIMontirChat();
+    }
+
     function speakAIMontirReply(idx) {
       if (!window.speechSynthesis) {
-        alert("Fitur suara tidak didukung browser ini.");
+        alert("Fitur suara robot Text-to-Speech tidak didukung di browser ini.");
         return;
       }
       const msg = aiChatHistory[idx];
       if (!msg || !msg.text) return;
 
-      window.speechSynthesis.cancel();
-      const cleanText = msg.text
-        .replace(/[*#_~`-]/g, " ")
+      if (window.speechSynthesis) {
+        try { window.speechSynthesis.cancel(); } catch (e) {}
+      }
+      activeSpeakingIndex = idx;
+
+      const stopAllBtn = document.getElementById("ai-tts-stop-all-btn");
+      if (stopAllBtn) stopAllBtn.style.display = "inline-flex";
+
+      // Bersihkan teks agar terdengar alami, santun dan nyaman bagi montir & santri
+      let cleanText = msg.text
+        .replace(/[*#_~`]/g, " ")
+        .replace(/https?:\/\/\S+/g, "")
+        .replace(/\bPSI\b/gi, "P S I")
+        .replace(/\bCVT\b/gi, "C V T")
+        .replace(/\bECU\b/gi, "E C U")
+        .replace(/\bTPS\b/gi, "T P S")
+        .replace(/\bTB\b/gi, "Throttle Body")
+        .replace(/\bMIL\b/gi, "M I L")
+        .replace(/\bKM\b/gi, "kilometer")
+        .replace(/\bRPM\b/gi, "R P M")
         .replace(/\n+/g, ". ");
 
       const utter = new SpeechSynthesisUtterance(cleanText);
@@ -9831,7 +10207,20 @@
       const idVoice = voices.find(v => v.lang.includes("id") || v.lang.includes("ID"));
       if (idVoice) utter.voice = idVoice;
 
+      utter.onend = function () {
+        activeSpeakingIndex = -1;
+        if (stopAllBtn) stopAllBtn.style.display = "none";
+        renderAIMontirChat();
+      };
+
+      utter.onerror = function () {
+        activeSpeakingIndex = -1;
+        if (stopAllBtn) stopAllBtn.style.display = "none";
+        renderAIMontirChat();
+      };
+
       window.speechSynthesis.speak(utter);
+      renderAIMontirChat();
     }
 
     // ========================================================================
@@ -10054,6 +10443,7 @@ _Matur nuwun atas kepercayaan Anda! Semoga motor awet, tarikan enteng, dan selam
       simulateCarbJetting();
     });
   </script>
+  <script src="/tchat-wa-engine.js"></script>
   <script type="module" src="./src/mountChart.tsx"></script>
 </body>
 </html>
